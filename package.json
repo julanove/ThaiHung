@@ -1,0 +1,20 @@
+{
+  "name": "thai-hung",
+  "version": "0.0.0",
+  "description": "ThaiHung",
+  "main": "server.js",
+  "author": {
+    "name": ""
+  },
+  "dependencies": {
+    "@coreui/coreui": "^3.2.0",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "express-formidable": "^1.2.0",
+    "express-handlebars": "^4.0.4",
+    "express-session": "^1.17.1",
+    "handlebars": "^4.7.6",
+    "moment": "^2.26.0",
+    "mysql": "^2.18.1"
+  }
+}

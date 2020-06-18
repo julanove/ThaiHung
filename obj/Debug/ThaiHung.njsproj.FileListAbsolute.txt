@@ -1,0 +1,3 @@
+C:\NgocTools\NodeJS\ThaiHung\ThaiHung\obj\Debug\ThaiHung.njsprojAssemblyReference.cache
+C:\NgocTools\NodeJS\ThaiHung\ThaiHung\obj\Debug\ThaiHung.njsproj.CoreCompileInputs.cache
+C:\NgocTools\NodeJS\ThaiHung\ThaiHung\bin\Microsoft.NodejsTools.WebRole.dll

@@ -1,0 +1,60 @@
+
+.card {
+    margin: auto;
+    border-radius: 15px;
+    margin-bottom: 50px
+}
+
+fieldset.active {
+    display: block !important
+}
+
+fieldset {
+    display: none
+}
+
+.pic0 {
+    width: 100%;
+    margin-right: 16px;
+    display: block
+}
+
+.product-pic {
+    padding-left: auto;
+    padding-right: auto;
+    width: 100%
+}
+
+.fit-image {
+    width: 100%;
+    object-fit: cover
+}
+
+.tb {
+    width: 100%;
+    border: 1px solid grey;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    opacity: 0.4;
+    cursor: pointer
+}
+
+.tb-active {
+    opacity: 1
+}
+
+.thumbnail-img {
+    width: calc(100%-8);
+}
+.product-thumb {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    width: 100%;
+    grid-gap: 16px;
+}
+@media screen and (max-width: 768px) {
+/*    .pic0 {
+        width: 250px;
+        height: 350px
+    }*/
+}
