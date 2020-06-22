@@ -63,8 +63,8 @@ module.exports = {
     newsPagingFunction: function (req, res) {
 
         var index = req.params.index;
-        var max = index * 2; 
-        var start = max - 2; 
+        var max = index * 5; 
+        var start = max - 5; 
 
         //console.log('start:');
         //console.log(start);
@@ -72,7 +72,7 @@ module.exports = {
         //console.log('max:');
         //console.log(max);
 
-        db.query('SELECT * FROM news order by newID desc limit ' + start + ', 2 ; select count(*) as count from news;' ,
+        db.query('SELECT * FROM news order by newID desc limit ' + start + ', 5 ; select count(*) as count from news;' ,
             function (err, results) {
                 //console.log(results[1]);
                 res.render('news', {
@@ -80,7 +80,7 @@ module.exports = {
                     data: {
                         news: results[0],
                         count: results[1][0].count,
-                        offset: 2,
+                        offset: 5,
                         current: index,
                         type: "news"
                     }
