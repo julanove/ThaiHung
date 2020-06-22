@@ -79,7 +79,7 @@ async function executeQuery(query, params) {
 module.exports = {
     getHomePage: (req, res) => {
 
-        db.query('SELECT * FROM media where mediaTypeID = 1 limit 8; SELECT * FROM news order by newID desc limit 3;',
+        db.query('SELECT * FROM media where mediaTypeID = 1 limit 8; SELECT * FROM news order by newID desc limit 4;',
             function (err, results) {
                 //connection.release();
                 res.render('home', {

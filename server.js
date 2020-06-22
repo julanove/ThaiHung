@@ -7,21 +7,25 @@ var session = require('express-session');
 var path = require('path');
 var app = express();
 
-// ------------------------
+// 0. Setting environment
+var env = process.env.NODE_ENV || 'local';
+var config = require('./config/config')[env];
 
+global.websiteURL = config.url;
+console.log("----");
+console.log(websiteURL);
 // create connection to database
 // the mysql.createConnection function takes in a configuration object which contains host, user, 
 // password and the database name.
 // 1.  MYSQL 
 const db = mysql.createConnection({
-    host: '18.178.72.199',
-    user: 'yukina',
-    password: 'yukina@123',
-    database: 'yukina',
-    multipleStatements: true
+    host: config.database.host,
+    user: config.database.user,
+    password: config.database.password,
+    database: config.database.database,
+    multipleStatements: config.database.multipleStatements
 });
 
-// connect to database
 db.connect((err) => {
     if (err) {
         throw err;
@@ -40,12 +44,9 @@ global.db = db;
 
 var handlebars = require('express-handlebars').create({
     defaultLayout: 'main',
-    helpers: {
-        formatDate: require('./routes/dateformat') 
-    }
 });
 
-
+require("./routes/helper").register(handlebars.handlebars);
 
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
@@ -55,7 +56,8 @@ app.set('view engine', 'handlebars');
 
 
 app.set('port', process.env.PORT || 3000);
-app.use(express.static(__dirname + '/public'));
+//app.use(express.static(__dirname + './public/'));
+app.use('/static', express.static('public'))
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(session({
@@ -66,55 +68,28 @@ app.use(session({
 
 //var index = require('./routes/routes');
 //app.use('/', index);
-
 // Format
-const { getHomePage } = require('./routes/home');
+//const { getHomePage } = require('./routes/home');
 
-
+var allRouteFunction = require('./routes/routes');
 
 // Client Page
-app.get('/', getHomePage);
-
-app.post("/", function (req, res) {
-
-    var status = JSON.stringify({
-        status: req.body.status,
-        userObject: req.body.userObject
-    })
-
-    console.log("status: " + req.body.company);
-
-    let insertQuery = 'INSERT INTO contact (company, content, country, date, isRead, name) VALUES(?, ?, ?, now(), 0, ?)';
-    let query = mysql.format(insertQuery, [req.body.company, req.body.content, req.body.country, req.body.name]);
-    db.query(query, (err, response) => {
-        if (err) {
-            console.error(err);
-            return;
-        }
-    });
-
-    console.log(req.body.status);
-    res.status(200).send(JSON.stringify({ status: "OK" }));
-})
-
+app.get('/', allRouteFunction.homePageFunction);
+app.post('/', allRouteFunction.contactFunction);
+app.get('/news', allRouteFunction.newsFunction);
+app.get('/news/:index', allRouteFunction.newsPagingFunction);
+app.get('/news-details/:id', allRouteFunction.newsDetailsFunction);
+app.get('/product/:type/:index', allRouteFunction.productFunction);
 
 app.get('/about', function (req, res, next) {
     res.render('about');
-});
-
-app.get('/product', function (req, res, next) {
-    res.render('product');
 });
 
 app.get('/facility', function (req, res, next) {
     res.render('facility');
 });
 
-app.get('/news', function (req, res, next) {
-    res.render('news');
-});
-
-app.post('/contact')
+app.get('/product-details/:id', allRouteFunction.productDetailsFunction);
 
 
 // Admin Page

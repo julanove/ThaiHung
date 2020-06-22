@@ -1,7 +1,7 @@
 ﻿<div class="head-slide">
-    <img class="w-100 slide" src="images/page/slide-1.png">
+    <img class="w-100 slide" src="/static/images/page/slide-1.png">
     <div class="logo">
-        <img src="images/page/logo.png">
+        <img src="/static/images/page/logo.png">
     </div>
 </div>
 <div class="about-us">
@@ -16,14 +16,14 @@
         </div>
     </div>
     <div class="side-item">
-        <img src="images/page/image-1.png">
+        <img src="/static/images/page/image-1.png">
     </div>
 </div>
 
 <div class="strong-point">
     <div class="side-item">
-        <img class="background" src="images/page/image-2.png">
-        <img class="inside-strong-point" src="images/page/image-3.png">
+        <img class="background" src="/static/images/page/image-2.png">
+        <img class="inside-strong-point" src="/static/images/page/image-3.png">
     </div>
     <div class="text-container">
         <div class="title">
@@ -38,7 +38,7 @@
     </div>
 </div>
 <div class="our-service">
-    <img class="w-100" src="images/page/image-4.png">
+    <img class="w-100" src="/static/images/page/image-4.png">
     <div class="text-container">
         <div class="title">
             <h1>私たちのサービス</h1>
@@ -66,27 +66,27 @@
     <div class="container">
         <div class="product-container">
             <div class="product-item">
-                <img src="images/product/plastic-bag.png">
+                <img src="/static/images/product/plastic-bag.png">
                 <div class="product-name">ビニール袋</div>
             </div>
             <div class="product-item">
-                <img src="images/product/PE-film.png">
+                <img src="/static/images/product/PE-film.png">
                 <div class="product-name">PEフィルム</div>
             </div>
             <div class="product-item">
-                <img src="images/product/PVC-film.png">
+                <img src="/static/images/product/PVC-film.png">
                 <div class="product-name">PVCフィルム</div>
             </div>
             <div class="product-item">
-                <img src="images/product/zipper-bag.png">
+                <img src="/static/images/product/zipper-bag.png">
                 <div class="product-name">ジッパーバッグ</div>
             </div>
             <div class="product-item">
-                <img src="images/product/plastic-tie-straps.png">
+                <img src="/static/images/product/plastic-tie-straps.png">
                 <div class="product-name">プラスチック製タイストラップ</div>
             </div>
             <div class="product-item">
-                <img src="images/product/PVC-film-2.png">
+                <img src="/static/images/product/PVC-film-2.png">
                 <div class="product-name">PVCフィルム</div>
             </div>
         </div>
@@ -112,39 +112,16 @@
 
         {{#each data.media}}
         <div class="">
-            <a href=""><img class="w-100" src="{{this.source}}"></a>
+            <a href=""><img class="w-100" src="/static/{{this.source}}"></a>
         </div>
         {{/each}}
-        <!--<div class="">
-        <a href=""><img class="w-100" src="images/gallery/gallery-1.png"></a>
-        </div>
-        <div class="">
-            <a href=""><img class="w-100" src="images/gallery/gallery-2.png"></a>
-        </div>
-        <div class="">
-            <a href=""><img class="w-100" src="images/gallery/gallery-3.png"></a>
-        </div>
-        <div class="">
-            <a href=""><img class="w-100" src="images/gallery/gallery-4.png"></a>
-        </div>
-        <div class="">
-            <a href=""><img class="w-100" src="images/gallery/gallery-5.png"></a>
-        </div>
-        <div class="">
-            <a href=""><img class="w-100" src="images/gallery/gallery-6.png"></a>
-        </div>
-        <div class="">
-            <a href=""><img class="w-100" src="images/gallery/gallery-7.png"></a>
-        </div>
-        <div class="">
-            <a href=""><img class="w-100" src="images/gallery/gallery-8.png"></a>
-        </div>-->
+
     </div>
     <div class="product-button">
         <button class="home-button">詳細を見る</button>
     </div>
     <div class="full-width-gallery-cover-image">
-        <img class="w-100" src="images/page/image-6.png">
+        <img class="w-100" src="/static/images/page/image-6.png">
     </div>
 </div>
 <div class="news">
@@ -163,113 +140,13 @@
     <div class="container">
         <div class="grid-2">
 
-            <div class="highlight-news">
-                <img class="w-100" src="images/news/news-1.png">
-                <div class="des">
-                    <h4>PEフィルムについて知っておくべきこと</h4>
-                    <div class="news-date">29/02/2020</div>
-                    <div class="readmore">続きを読む<svg width="20" height="20"><path d="M2,10 L17,10 L10,5 M17,10 L10,15" stroke-width="1" fill="none" stroke="var(--blue)"></svg></div>
-                </div>
-            </div>
-            <div class="other-news">
-                {{#each data.news}}
-                <div class="small-news">
-                    <img class="w-100" src="{{this.image}}">
-                    <div class="des">
-                        <h5>{{this.title}}</h5>
-                        <span class="news-date">{{formatDate this.date "short"}}</span>
-                        <div class="readmore">続きを読む<svg width="20" height="20"><path d="M2,10 L17,10 L10,5 M17,10 L10,15" stroke-width="1" fill="none" stroke="var(--blue)"></svg></div>
-                    </div>
-                </div>
-                {{/each}}
-            </div>
+            {{homeNews data.news}}
+
         </div>
     </div>
     <div class="product-button">
         <button class="home-button">詳細を見る</button>
     </div>
 </div>
-<div class="contact-us text-center">
-    <div class="text-container container text-center">
-        <div class="title">
-            <h1>お問い合わせ</h1>
-            <hr class="line">
-            <h3>CONTACT US</h3>
-        </div>
-        <div class="content">
-            ThaiHungProからの質問およびサポートリクエストについては、ここに情報を残してください。 できるだけ早く確認して対応いたします。 よろしくお願いします！
-        </div>
-    </div>
-    <div class="container">
-        <div class="contact-box">
-            <span class="tel">TEL.04 2240 2689</span>
-            <span class="tel">HOTLINE.0986 019 870</span>
-            <span class="working-hour">［受付時間］ 08:00～17:00</span>
-        </div>
-    </div>
-    <div class="container">
-            <div class="contact-form">
-                <div class="firstname">
-                    <div class="form-label"><span class="">社名<span class="required">*</span></span></div>
-                    <div class=""><input id="company" name="company" type="text"></div>
-                </div>
-                <div class="lastname">
-                    <div class="form-label"><span class="form-label">氏名<span class="required">*</span></span></div>
-                    <div class=""><input id="name" name="name" type="text"></div>
-                </div>
-                <div class="address">
-                    <div class="form-label"><span class="form-label">居住地（日本・ベトナム・その他）<span class="required">*</span></span></div>
-                    <div class=""><input id="country" name="country" type="text"></div>
-                </div>
-                <div class="contentmess">
-                    <div class="form-label"><span class="form-label">問い合わせ内容（ベトナム国内調達・日本への輸出・その他） <span class="required">*</span></span></div>
-                    <div class=""><textarea id="content" name="content"></textarea></div>
-                </div>
-                <div class="submit"><button class="toiawase"> 送る</button></div>
-            </div>
-    </div>
-</div>
-<div class="map">
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d84272.44478428304!2d105.79558250141893!3d21.01863420403147!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135aba15ec15d17%3A0x620e85c2cfe14d4c!2sHo%20Chi%20Minh%20Mausoleum!5e0!3m2!1sen!2s!4v1591702736982!5m2!1sen!2s" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0" class="w-100"></iframe>
-</div>
-<div class="social text-center">
-    <div class="social-container">
-        <div class="fb"><a href="#"><img src="images/page/facebook.png"></a></div>
-        <div class="fb"><a href="#"><img src="images/page/twitter.png"></a></div>
-        <div class="fb"><a href="#"><img src="images/page/linkedin.png"></a></div>
-        <div class="fb"><a href="#"><img src="images/page/youtube.png"></a></div>
-    </div>
-</div>
 
-<script type="text/javascript">
 
-    $(document).on("click", ".toiawase", function () {
-
-        var company = $('#company').val();
-        var name = $('#name').val();
-        var country = $('#country').val();
-        var content = $('#content').val();
-        debugger;
-        console.log("call ajax");
-
-        $.ajax({
-            url: "http://localhost:1337/",
-            type: "POST",
-            data: JSON.stringify({ company: company, name: name, country: country, content: content }),
-            dataType: "json",
-            contentType: "application/json",
-            success: function (result) {
-                alert("OK");
-                $('#company').val("");
-                $('#name').val("");
-                $('#country').val("");
-                $('#content').val("");
-            },
-            error: function (result) {
-                alert("error");
-            }
-        })
-        
-    });
-
-</script>

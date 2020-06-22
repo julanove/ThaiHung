@@ -1,7 +1,7 @@
 ﻿<div class="main news-detail">
     <div class="banner">
         <div class="banner-img">
-            <img class="w-100" src="images/page/slide-1.png">
+            <img class="w-100" src="/static/images/page/slide-1.png">
             <div class="page-title"><span>ニュース</span></div>
         </div>
     </div>
@@ -13,107 +13,63 @@
                         <a class="nav-link" data-toggle="tab" href="#news0" role="tab" aria-selected="false">ニュース</a>
                     </li>
                     <li class="nav-item d-inline-block border-0">
-                        <a class="nav-link" data-toggle="tab" href="#news1" role="tab" aria-selected="true">ホーチミン市は学生寮を検疫エリアとして借りたい</a>
+                        <a class="nav-link" data-toggle="tab" href="#news1" role="tab" aria-selected="true">{{data.news.title}}</a>
                     </li>
                 </ul>
             </div>
             <div class="tab-content container p-0">
                 <div class="tab-pane fade container active in" id="news0" role="tabpanel">
-                    <h3 class="news__title">ホーチミン市は学生寮を検疫エリアとして借りたい</h3>
-                    <div class="news__date">30/06/2019</div>
+                    <h3 class="news__title">{{data.news.title}}</h3>
+                    <div class="news__date">{{formatDate data.news.date}}</div>
                     <div class="content">
-                        <img class="news-cover w-100" src="images/news/news-5.jpg">
-                        <h4 class="news__excerpt">ホーチミン市外国語大学-情報技術および地域政治学院2（ホーチミン国立政治学院）は、ベトナム人を海外から隔離するために歓迎するために施設と寮を譲歩しています。</h4>
+                        <img class="news-cover w-100" src="/static/{{data.news.image}}">
+
+
+                        <!--<h4 class="news__excerpt">ホーチミン市外国語大学-情報技術および地域政治学院2（ホーチミン国立政治学院）は、ベトナム人を海外から隔離するために歓迎するために施設と寮を譲歩しています。</h4>-->
                         <div class="news__descibe">
-                            <p>3月24日の夕方、ホーチミン市の情報通信省の副局長であるトゥルオン氏は、Zing.vnと話し合い、近い将来、ホーチミン市は外国語大学のホックモン地区にある施設を使用する予定であると述べました-第2政治学院（ホーチミン国立政治学院）の9区にあるホーチミン市コンピュータおよび寮。</p>
+                            {{data.news.content}}
+                            <!--<p>3月24日の夕方、ホーチミン市の情報通信省の副局長であるトゥルオン氏は、Zing.vnと話し合い、近い将来、ホーチミン市は外国語大学のホックモン地区にある施設を使用する予定であると述べました-第2政治学院（ホーチミン国立政治学院）の9区にあるホーチミン市コンピュータおよび寮。</p>
                             <p>「緊急事態では、これら2つの部署が検疫に利用できる施設を市内に積極的に貸与することを提案しました。3月26日、これら2つの場所は検疫された人々の受け入れを開始します。リージョン2政治アカデミー（ホーチミン国立政治アカデミー）の寮は、1,000議席を提供すると予想されています。</p>
                             <p>一方、3月24日の午後には、ホーチミン市国立大学の寮と国防教育安全保障センターが5,000人の孤立した人々を受け入れました。近い将来、この場所はこれ以上受け取ることができません。</p>
                             <div class="news-content-img">
-                                <img class="w-100" src="images/news/news-6.jpg">
+                                <img class="w-100" src="/static/images/news/news-6.jpg">
                                 <div class="img-name">24/3の午後、当局はHUFLITの寮に行き、孤立した人々を迎えるための設備を準備しました。</div>
                             </div>
                             <p>3月24日午後のホーチミン市Covid-19疾患予防運営委員会の会議で、保健省の局長であるグエンタンビン氏はまた、地域の大学に生徒と学生の移動を依頼しました。 感染の可能性を制限するために、この期間中もホステルに滞在します。</p>
                             <p>同氏は、ホーチミン市国立大学の寮に加えて、同市は近い将来、隔離地域として他の多くの大学の寮も要求し続けると語った。</p>
-                            <p>以前、3月20日、教育訓練省は、大学、大学、研究所、および教育カレッジのリーダーに、まだ集中的に入学するために組織されていない場合でも、調整するよう書面で要請しました。 地域でのCovid-19流行の防止のための運営委員会は、寮を集中隔離施設として使用しました。</p>
+                            <p>以前、3月20日、教育訓練省は、大学、大学、研究所、および教育カレッジのリーダーに、まだ集中的に入学するために組織されていない場合でも、調整するよう書面で要請しました。 地域でのCovid-19流行の防止のための運営委員会は、寮を集中隔離施設として使用しました。</p>-->
                         </div>
+
+
                     </div>
-                    <div class="news-detail__related">
+
+                    <!--<div class="news-detail__related">
                         <h3 class="text-center">関連ニュース</h3>
                         <hr>
                         <div class="news-detail__related__container">
                             <div class="product-item">
-                                <img src="images/product/plastic-bag.png">
+                                <img src="/static/images/product/plastic-bag.png">
                                 <div class="product-name">ビニール袋</div>
                                 <div class="date">30/06/2019</div>
                             </div>
                             <div class="product-item">
-                                <img src="images/product/PE-film.png">
+                                <img src="/static/images/product/PE-film.png">
                                 <div class="product-name">PEフィルム</div>
                                 <div class="date">30/06/2019</div>
                             </div>
                             <div class="product-item">
-                                <img src="images/product/PVC-film.png">
+                                <img src="/static/images/product/PVC-film.png">
                                 <div class="product-name">PVCフィルム</div>
                                 <div class="date">30/06/2019</div>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
+
                 </div>
                 <div class="tab-pane fade container in" id="news1" role="tabpanel">
                     news 2
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="contact-us text-center">
-        <div class="text-container container text-center">
-            <div class="title">
-                <h1>お問い合わせ</h1>
-                <hr class="line">
-                <h3>CONTACT US</h3>
-            </div>
-            <div class="content">
-                ThaiHungProからの質問およびサポートリクエストについては、ここに情報を残してください。 できるだけ早く確認して対応いたします。 よろしくお願いします！
-            </div>
-        </div>
-        <div class="container">
-            <div class="contact-box">
-                <span class="tel">TEL.04 2240 2689</span>
-                <span class="tel">HOTLINE.0986 019 870</span>
-                <span class="working-hour">［受付時間］ 08:00～17:00</span>
-            </div>
-        </div>
-        <div class="container">
-            <div class="contact-form">
-                <div class="firstname">
-                    <div class="form-label"><span class="">社名<span class="required">*</span></span></div>
-                    <div class=""><input type="text"></div>
-                </div>
-                <div class="lastname">
-                    <div class="form-label"><span class="form-label">氏名<span class="required">*</span></span></div>
-                    <div class=""><input type="text"></div>
-                </div>
-                <div class="address">
-                    <div class="form-label"><span class="form-label">居住地（日本・ベトナム・その他）<span class="required">*</span></span></div>
-                    <div class=""><input type="text"></div>
-                </div>
-                <div class="contentmess">
-                    <div class="form-label"><span class="form-label">問い合わせ内容（ベトナム国内調達・日本への輸出・その他） <span class="required">*</span></span></div>
-                    <div class=""><textarea></textarea></div>
-                </div>
-                <div class="submit"><button>送る</button></div>
-            </div>
-        </div>
-    </div>
-    <div class="map">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d84272.44478428304!2d105.79558250141893!3d21.01863420403147!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135aba15ec15d17%3A0x620e85c2cfe14d4c!2sHo%20Chi%20Minh%20Mausoleum!5e0!3m2!1sen!2s!4v1591702736982!5m2!1sen!2s" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0" class="w-100"></iframe>
-    </div>
-    <div class="social text-center">
-        <div class="social-container">
-            <div class="fb"><a href="#"><img src="images/page/facebook.png"></a></div>
-            <div class="fb"><a href="#"><img src="images/page/twitter.png"></a></div>
-            <div class="fb"><a href="#"><img src="images/page/linkedin.png"></a></div>
-            <div class="fb"><a href="#"><img src="images/page/youtube.png"></a></div>
         </div>
     </div>
 </div>

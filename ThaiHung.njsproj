@@ -29,7 +29,7 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="config\default.json" />
+    <Compile Include="config\config.js" />
     <Compile Include="admin.js" />
     <Compile Include="controller\product.js" />
     <Compile Include="controller\home.js">
@@ -41,7 +41,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="models\mysqlconnection.js" />
-    <Compile Include="func\server.js" />
+    <Compile Include="routes\routes.js" />
     <Compile Include="public\dist\js\adminlte.js" />
     <Compile Include="public\dist\js\adminlte.min.js" />
     <Compile Include="public\dist\js\demo.js" />
@@ -49,6 +49,7 @@
     <Compile Include="public\dist\js\pages\dashboard2.js" />
     <Compile Include="public\dist\js\pages\dashboard3.js" />
     <Compile Include="public\js\jquery-2.1.3.min.js" />
+    <Compile Include="public\js\contact.js" />
     <Compile Include="public\js\script.js" />
     <Compile Include="public\js\smoothproducts.min.js" />
     <Compile Include="public\plugins\bootstrap-colorpicker\js\bootstrap-colorpicker.js" />
@@ -822,6 +823,7 @@
     <Compile Include="public\plugins\toastr\toastr.min.js" />
     <Compile Include="routes\contact.js" />
     <Compile Include="routes\auth.js" />
+    <Compile Include="routes\helper.js" />
     <Compile Include="routes\dateformat.js" />
     <Compile Include="routes\home.js">
       <SubType>Code</SubType>
@@ -927,6 +929,9 @@
     <Content Include="public\images\page\image-12.png" />
     <Content Include="public\images\page\image-13.png" />
     <Content Include="public\images\page\image-14.png" />
+    <Content Include="public\images\page\image-15.png" />
+    <Content Include="public\images\page\image-16.png" />
+    <Content Include="public\images\page\image-17.png" />
     <Content Include="public\images\page\image-2-backup.png" />
     <Content Include="public\images\page\image-2.png" />
     <Content Include="public\images\page\image-3.png" />
@@ -1976,15 +1981,14 @@
     <Content Include="views\admin\login.html">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="views\contact.handlebars">
-      <SubType>Code</SubType>
-    </Content>
     <Content Include="views\about.handlebars" />
     <Content Include="views\facility.handlebars" />
+    <Content Include="views\map.handlebars" />
     <Content Include="views\layouts\admin-main.handlebars" />
     <Content Include="views\news-details.handlebars" />
     <Content Include="views\partials\admin-header.handlebars" />
     <Content Include="views\partials\admin-nav.handlebars" />
+    <Content Include="views\partials\renraku.handlebars" />
     <Content Include="views\partials\nav.handlebars">
       <SubType>Code</SubType>
     </Content>
@@ -2006,7 +2010,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="models\" />
-    <Folder Include="func\" />
     <Folder Include="controller\" />
     <Folder Include="config\" />
     <Folder Include="public\css\" />
