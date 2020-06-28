@@ -7,13 +7,15 @@ var session = require('express-session');
 var path = require('path');
 var app = express();
 
+//var busboyBodyParse = require('busboy-body-parser');
+//var busboy = require('busboy');
+
 // 0. Setting environment
 var env = process.env.NODE_ENV || 'local';
 var config = require('./config/config')[env];
 
-global.websiteURL = config.url;
 console.log("----");
-console.log(websiteURL);
+global.websiteURL = config.url;
 // create connection to database
 // the mysql.createConnection function takes in a configuration object which contains host, user, 
 // password and the database name.
@@ -25,6 +27,7 @@ const db = mysql.createConnection({
     database: config.database.database,
     multipleStatements: config.database.multipleStatements
 });
+
 
 db.connect((err) => {
     if (err) {
@@ -58,8 +61,12 @@ app.set('view engine', 'handlebars');
 app.set('port', process.env.PORT || 3000);
 //app.use(express.static(__dirname + './public/'));
 app.use('/static', express.static('public'))
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
+app.use(bodyParser.json({ limit: '50mb' }));
+
+//app.use(busboyBodyParse());
+//app.use(busboy);
+
 app.use(session({
     secret: 'yukina',
     resave: true,
@@ -73,27 +80,33 @@ app.use(session({
 
 var allRouteFunction = require('./routes/routes');
 
-// Client Page
-app.get('/', allRouteFunction.homePageFunction);
+//---------------------------------------------------------- Client Page
+
+//app.get('/', allRouteFunction.homePageFunction);
 app.post('/', allRouteFunction.contactFunction);
 app.get('/news', allRouteFunction.newsFunction);
 app.get('/news/:index', allRouteFunction.newsPagingFunction);
 app.get('/news-details/:id', allRouteFunction.newsDetailsFunction);
 app.get('/product/:type/:index', allRouteFunction.productFunction);
+app.get('/product-details/:id', allRouteFunction.productDetailsFunction);
 
 app.get('/about', function (req, res, next) {
-    res.render('about');
+    res.render('about', {
+        layout: 'main',
+        websiteURL: websiteURL
+    });
 });
 
 app.get('/facility', function (req, res, next) {
-    res.render('facility');
+    res.render('facility', {
+        layout: 'main',
+        websiteURL: websiteURL
+    });
 });
 
-app.get('/product-details/:id', allRouteFunction.productDetailsFunction);
+//---------------------------------------------------------- Admin Page
 
-
-// Admin Page
-const { adminAuthenticate } = require('./routes/auth');
+//const { adminAuthenticate } = require('./routes/auth');
 
 app.get('/admin_login', function (request, response) {
     console.log('admin');
@@ -102,20 +115,83 @@ app.get('/admin_login', function (request, response) {
 
 app.get('/admin', function (request, response, next) {
     if (request.session.loggedin) {
-        response.render('admin/admin-home', { layout: 'admin-main.handlebars' });
+        response.render('admin/admin-home', {
+            layout: 'admin-main',
+            websiteURL: websiteURL
+        });
     } else {
-        response.send('Please login to view this page!');
+        response.sendFile(path.join(__dirname + '/views/admin/login.html'));
     }
-    //response.end();
 });
 
-app.post('/auth', adminAuthenticate);
+app.post('/auth', allRouteFunction.authen);
+
+app.post('/changePass', allRouteFunction.changePass); 
+
+app.get('/admin/news', allRouteFunction.adminNews);
+
+app.get('/admin/newsadd', allRouteFunction.adminNewsAdd);
+
+app.get('/admin/newsdetails/:newid', allRouteFunction.adminNewsDetails);
+
+app.post('/newsInsert', allRouteFunction.newsInsert);
+
+app.post('/newsUpdate', allRouteFunction.newsUpdate);
+
+app.post('/newsDelete', allRouteFunction.newsDelete);
+
+// ---------------------------------------------------- TEST PAGE
+
+var multer = require('multer');
+const filehelpers = require('./routes/filehelper');
+
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './public/images/');
+    },
+
+    // By default, multer removes file extensions so let's add them back
+    filename: function (req, file, cb) {
+        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+    }
+});
 
 
+app.get('/', allRouteFunction.newsFunction);
 
-// ----------------------------------------------------
+app.post('/imageUpload', allRouteFunction.imageUpload);
 
+app.post('/imageInsert',  (req, res) => {
 
+    //console.log('?? v?o');
+    //console.log(req.file);
+
+    let upload = multer({ storage: storage, fileFilter: filehelpers.imageFilter }).single('profile_pic');
+
+    upload(req, res, function (err) {
+        // req.file contains information of uploaded file
+        // req.body contains information of text fields, if there were any
+
+        if (req.fileValidationError) {
+            return res.send(req.fileValidationError);
+        }
+        else if (!req.file) {
+            return res.send('Please select an image to upload');
+        }
+        else if (err instanceof multer.MulterError) {
+            return res.send(err);
+        }
+        else if (err) {
+            return res.send(err);
+        }
+
+        console.log('Image Upload Result:');
+        console.log(req.file.filename);
+        // Display uploaded image for user validation
+        res.send(JSON.stringify({ status: "OK", filename: req.file.filename }));
+    });
+
+});
 
 app.use(function (req, res) {
 
@@ -133,5 +209,5 @@ app.use(function (err,req, res, next) {
 });
 
 app.listen(app.get('port'), function () {
-    console.log('Express started on http://localhost:' + app.get('port'));
+    console.log('Express started on ' + websiteURL +':' + app.get('port'));
 })

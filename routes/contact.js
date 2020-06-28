@@ -1,5 +1,6 @@
 ﻿module.exports = {
-    contact: (request, response) => {
+    contact: (request, response) =>
+    {
         var status = JSON.stringify({
             status: req.body.status,
             userObject: req.body.userObject
@@ -16,7 +17,7 @@
             }
         });
 
-        console.log(req.body.status);
+        
         res.status(200).send(JSON.stringify({ status: "OK" }));
     },
 };

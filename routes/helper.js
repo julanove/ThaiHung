@@ -4,6 +4,12 @@ var register = function (Handlebars) {
 
     var helpers = {
 
+        contact: function (content) {
+
+            
+
+        },
+
         homeNews: function (content) {
 
             var highlight = '';
@@ -45,15 +51,19 @@ var register = function (Handlebars) {
             var smallnews = '';
             var y = 0;
 
+            //console.log(content);
+
             for (const key of content) {
                 if (y == 0) {
+                    console.log('go');
+                    console.log(key.description.substring(30));
                     highlight += '<div class="highlight-news">';
                     highlight += '<div class="new-image"><a href="/news-details/'+key.newid+'"><img class="w-100" src="/static/'+ key.image +'"></a></div>';
                     highlight += '<div class="news-des">';
                     highlight += '<h3>'+key.title+'</h3>';
                     highlight += '<span class="date">' + formatDate(key.datetime) +'</span>';
                     highlight += '<hr>';
-                    highlight += '<div class="">' + key.content+'</div>';
+                    highlight += '<div class="">' + key.description + '...</div>';
                     highlight += '<div class="readmore">続きを読む<svg width="20" height="20"><path d="M2,10 L17,10 L10,5 M17,10 L10,15" ';
                     highlight += 'stroke-width="1" fill="none" stroke="var(--white)"></svg></div>';
                     highlight += '</div></div>';
@@ -64,7 +74,7 @@ var register = function (Handlebars) {
                      '<div class="news-des">' + 
                     '<h4>' + key.title +'</h4>' + 
                     '<span class="date">' + formatDate(key.datetime) +'</span>' + 
-                    '<div class="">' + key.content.substring(30) + '...</div>' + 
+                    '<div class="">' + key.description + '...</div>' + 
                          '<div class="readmore">続きを読む<svg width="20" height="20"><path d="M2,10 L17,10 L10,5 M17,10 L10,15" stroke-width="1" fill="none" stroke="var(--white)"></svg></div>' + 
                           '</div>' + 
                         '</div>';
@@ -86,7 +96,7 @@ var register = function (Handlebars) {
             console.log('' + category);
             var cate = category == 0 ? '' : (category + '/');
 
-            var maxPage = count / offset;
+            var maxPage = Math.floor( count / offset);
 
             //if (current == 1)
             result += '<div class="paginator-container">' +
@@ -146,7 +156,19 @@ var register = function (Handlebars) {
 
             return new Handlebars.SafeString(result);
         },
-        
+
+        convertJson: function (content) {
+            //console.log(JSON.stringify(content));
+            return new Handlebars.SafeString(JSON.stringify(content));
+
+        },
+
+        safeString: function (content) {
+            //console.log(JSON.stringify(content));
+            return new Handlebars.SafeString(content.trim());
+
+        },
+         
     };
 
     if (Handlebars && typeof Handlebars.registerHelper === "function") {

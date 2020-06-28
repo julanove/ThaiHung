@@ -7,18 +7,22 @@ $(document).on("click", ".toiawase", function () {
 
     console.log("----2");
 
-        $.ajax({
-        url: 'https://thaihung.herokuapp.com/',
+    var websiteURL = $('#websiteURL').val();
+    $('#gif').css('visibility', 'visible');
+
+    $.ajax({
+        url: websiteURL,
         type: "POST",
         data: JSON.stringify({company: company, name: name, country: country, content: content }),
         dataType: "json",
         contentType: "application/json",
         success: function (result) {
-        alert("OK");
-        $('#company').val("");
-        $('#name').val("");
-        $('#country').val("");
-        $('#content').val("");
+            alert("OK");
+            $('#company').val("");
+            $('#name').val("");
+            $('#country').val("");
+            $('#content').val("");
+            $('#gif').css('visibility', 'hidden');
         },
             error: function (result) {
             alert("error");

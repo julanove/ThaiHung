@@ -41,6 +41,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="models\mysqlconnection.js" />
+    <Compile Include="public\js\db.js" />
+    <Compile Include="routes\filehelper.js" />
     <Compile Include="routes\routes.js" />
     <Compile Include="public\dist\js\adminlte.js" />
     <Compile Include="public\dist\js\adminlte.min.js" />
@@ -822,12 +824,8 @@
     <Compile Include="public\plugins\tempusdominus-bootstrap-4\js\tempusdominus-bootstrap-4.min.js" />
     <Compile Include="public\plugins\toastr\toastr.min.js" />
     <Compile Include="routes\contact.js" />
-    <Compile Include="routes\auth.js" />
     <Compile Include="routes\helper.js" />
     <Compile Include="routes\dateformat.js" />
-    <Compile Include="routes\home.js">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="server.js" />
     <Content Include="package.json" />
     <Content Include="public\css\responsive.css" />
@@ -1978,6 +1976,9 @@
     <Content Include="public\scss\style.scss" />
     <Content Include="README.md" />
     <Content Include="views\admin\admin-home.handlebars" />
+    <Content Include="views\admin\admin-newsadd.handlebars" />
+    <Content Include="views\admin\admin-newsdetails.handlebars" />
+    <Content Include="views\admin\admin-news.handlebars" />
     <Content Include="views\admin\login.html">
       <SubType>Code</SubType>
     </Content>
