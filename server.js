@@ -82,21 +82,18 @@ var allRouteFunction = require('./routes/routes');
 
 //---------------------------------------------------------- Client Page
 
-//app.get('/', allRouteFunction.homePageFunction);
 app.post('/', allRouteFunction.contactFunction);
 app.get('/news', allRouteFunction.newsFunction);
 app.get('/news/:index', allRouteFunction.newsPagingFunction);
-app.get('/news-details/:id', allRouteFunction.newsDetailsFunction);
+app.get('/news-details/:newid', allRouteFunction.newsDetailsFunction);
 app.get('/product/:type/:index', allRouteFunction.productFunction);
 app.get('/product-details/:id', allRouteFunction.productDetailsFunction);
-
 app.get('/about', function (req, res, next) {
     res.render('about', {
         layout: 'main',
         websiteURL: websiteURL
     });
 });
-
 app.get('/facility', function (req, res, next) {
     res.render('facility', {
         layout: 'main',
@@ -104,9 +101,7 @@ app.get('/facility', function (req, res, next) {
     });
 });
 
-//---------------------------------------------------------- Admin Page
-
-//const { adminAuthenticate } = require('./routes/auth');
+//---------------------------------------------------------- Admin ROUTE 
 
 app.get('/admin_login', function (request, response) {
     console.log('admin');
@@ -124,21 +119,40 @@ app.get('/admin', function (request, response, next) {
     }
 });
 
-app.post('/auth', allRouteFunction.authen);
-
-app.post('/changePass', allRouteFunction.changePass); 
-
 app.get('/admin/news', allRouteFunction.adminNews);
 
 app.get('/admin/newsadd', allRouteFunction.adminNewsAdd);
 
 app.get('/admin/newsdetails/:newid', allRouteFunction.adminNewsDetails);
 
+app.get('/admin/type', allRouteFunction.adminType);
+
+app.get('/admin/product', allRouteFunction.adminProduct);
+
+//---------------------------------------------------------- Admin API
+
+app.post('/auth', allRouteFunction.authen);
+
+app.post('/changePass', allRouteFunction.changePass); 
+
 app.post('/newsInsert', allRouteFunction.newsInsert);
 
 app.post('/newsUpdate', allRouteFunction.newsUpdate);
 
 app.post('/newsDelete', allRouteFunction.newsDelete);
+
+app.post('/typeInsert', allRouteFunction.typeInsert);
+
+app.post('/typeUpdate', allRouteFunction.typeUpdate);
+
+app.post('/typeDelete', allRouteFunction.typeDelete);
+
+app.post('/productInsert', allRouteFunction.productInsert);
+
+//app.post('/productUpdate', allRouteFunction.producteUpdate);
+
+//app.post('/productDelete', allRouteFunction.productDelete);
+
 
 // ---------------------------------------------------- TEST PAGE
 
@@ -156,15 +170,9 @@ var storage = multer.diskStorage({
     }
 });
 
+app.get('/', allRouteFunction.adminProduct);
 
-app.get('/', allRouteFunction.newsFunction);
-
-app.post('/imageUpload', allRouteFunction.imageUpload);
-
-app.post('/imageInsert',  (req, res) => {
-
-    //console.log('?? v?o');
-    //console.log(req.file);
+app.post('/imageInsert',  (req, res) => {x
 
     let upload = multer({ storage: storage, fileFilter: filehelpers.imageFilter }).single('profile_pic');
 

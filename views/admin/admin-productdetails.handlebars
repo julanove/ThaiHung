@@ -1,0 +1,219 @@
+﻿<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>News Editors</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Text Editors</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-outline card-info">
+
+                <!--<form action="newsInsert" method="post" enctype="multipart/form-data">-->
+                <div class="card-header">
+                    ニュースリスト
+                </div>
+                        <!-- tools box -->
+                <div class="card-body">
+                    <input type="hidden" id="newid" name="newid" value="{{data.news.newid}}">
+                    <div class="form-group">
+                        <label>タイトル</label>
+                        <input type="text" id="title" name="title" value="{{data.news.title}}" class="form-control" placeholder="Enter ...">
+                    </div>
+
+                    <div class="form-group">
+                        <label>記述</label>
+                        <input type="text" id="description" name="description" value="{{data.news.description}}" class="form-control" placeholder="Enter ...">
+                    </div>
+
+                    <div class="form-group">
+                        <label>サムネ</label>
+                        <div>
+                            <input type="file" id="imageFile" name="profile_pic">
+                            <input type="hidden" value="{{data.news.image}}" id="imageURL" />
+                        </div>
+                        <img src="/static/{{data.news.image}}" id="imagePreview" style="width:277px;" />
+                    </div>
+
+                    <!-- input states -->
+                    <!--<div class="form-group">
+    <label class="col-form-label" for="inputSuccess">
+        <i class="fas fa-check"></i> Input with success
+    </label>
+    <input type="text" class="form-control is-valid" id="inputSuccess" placeholder="Enter ...">
+    </div>-->
+
+                    <div class="form-group">
+                        <label>内容</label>
+                        <textarea id="content" class="textarea" name="content" placeholder="Place some text here"
+                                  style="width: 100%; height: 500px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
+                        
+                        </textarea>
+                    </div>
+
+                </div>
+                <div class="card-footer">
+                    <button id="updateNews" class="btn btn-primary">Submit</button>
+                </div>
+
+                        <!-- /.card-body -->
+                        <!--<div class="card-tools">
+                <button type="button" class="btn btn-tool btn-sm" data-card-widget="collapse" data-toggle="tooltip"
+                        title="Collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool btn-sm" data-card-widget="remove" data-toggle="tooltip"
+                        title="Remove">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>-->
+                        <!-- /. tools -->
+                    
+                <!--</form>-->
+                <!-- /.card-header -->
+                <div class="card-body pad">
+                    <div class="mb-3">
+
+                    </div>
+                    <p class="text-sm mb-0">
+                        Editor <a href="https://github.com/summernote/summernote">
+                            Documentation and license information.
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!-- /.col-->
+    </div>
+    <!-- ./row -->
+    <input type="hidden" value="{{websiteURL}}" id="websiteURL" />
+</section>
+
+<script src="/static/plugins/summernote/summernote-bs4.min.js"></script>
+<!--<script src="/static/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>-->
+<link rel="stylesheet" href="/static/plugins/jsgrid/jsgrid.min.css">
+<link rel="stylesheet" href="/static/plugins/jsgrid/jsgrid-theme.min.css">
+<link rel="stylesheet" href="/static/plugins/summernote/summernote-bs4.css">
+
+<script>
+
+    $(document).ready(function () {
+
+        $('.textarea').summernote({
+            height: 500,
+            callbacks: {
+                onImageUpload: function (files, editor, welEditable) {
+                    sendFile(files[0], editor, welEditable);
+                }
+            }
+        });
+
+        function sendFile(file, editor, welEditable) {
+            data = new FormData();
+            data.append("profile_pic", file);
+            $.ajax({
+                data: data,
+                type: "POST",
+                url: "/imageInsert",
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (url) {
+                    console.log(url);
+                    var result = JSON.parse(url);
+                    if (result.status == "OK") {
+                        $('.textarea').summernote('insertImage', '/static/images/' + result.filename)
+                    }
+                }
+            });
+        }
+
+        $('.textarea').summernote('pasteHTML', '{{safeString data.news.content}}');
+
+        $('#imageFile').on('change', function () {
+
+            if (this.files && this.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#imagePreview').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(this.files[0]); // convert to base64 string
+            }
+
+            console.log($('#imageFile').val());
+
+            // -----------------------
+
+            //const websiteURL = $('#websiteURL').val();
+            //var apiURL = websiteURL + 'newsInsert';
+            var data = new FormData();
+            //jQuery.each(jQuery('#imageFile')[0].files, function (i, file) {
+            //    data.append('file-' + i, file);
+            //});
+            data.append('profile_pic', $('#imageFile')[0].files[0]); 
+            //console.log('READY TO SEND');
+            //console.log(data);
+
+            $.ajax({
+                url: "/imageInsert",
+                type: "POST",
+                method: "POST",
+                data: data,
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function (msg) {
+                    console.log(msg);
+
+                    var result = jQuery.parseJSON(msg);
+
+                    if (result.status == "OK") {
+                        console.log(result.filename);
+                        $('#imageURL').val(result.filename);
+                    }
+                    else {
+                        //document.getElementById("imagePreview").src = '';
+                    }
+                }
+            });
+
+        })
+
+        $('#updateNews').on('click', function () {
+
+            var title = $('#title').val();
+            var image = $('#imageURL').val().startsWith('images/') ? $('#imageURL').val() : ('images/' + $('#imageURL').val());
+            var content = $('#content').val();
+            var description = $('#description').val();
+            var newid = $('#newid').val();
+
+            $.ajax({
+                url: "/newsUpdate",
+                type: "POST",
+                data: JSON.stringify({ title: title, image: image, content: content, description: description, newid: newid }),
+                dataType: "json",
+                contentType: "application/json",
+                success: function (msg) {
+                    console.log(msg);
+                    location.href = '/admin/news';
+                },
+                error: function () {
+
+                }
+            });
+
+        })
+    });
+</script>

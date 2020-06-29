@@ -60,7 +60,7 @@ var register = function (Handlebars) {
                     highlight += '<div class="highlight-news">';
                     highlight += '<div class="new-image"><a href="/news-details/'+key.newid+'"><img class="w-100" src="/static/'+ key.image +'"></a></div>';
                     highlight += '<div class="news-des">';
-                    highlight += '<h3>'+key.title+'</h3>';
+                    highlight += '<h3><a href="/news-details/' + key.newid +'">'+key.title+'</a></h3>';
                     highlight += '<span class="date">' + formatDate(key.datetime) +'</span>';
                     highlight += '<hr>';
                     highlight += '<div class="">' + key.description + '...</div>';
@@ -72,7 +72,7 @@ var register = function (Handlebars) {
                 smallnews += '<div class="new-item">' + 
                     '<div class="new-image"><a href="/news-details/' + key.newid +'"><img class="w-100" src="/static/'+key.image+'"></a></div>' + 
                      '<div class="news-des">' + 
-                    '<h4>' + key.title +'</h4>' + 
+                    '<h4><a href="/news-details/' + key.newid +'">' + key.title +'</a></h4>' + 
                     '<span class="date">' + formatDate(key.datetime) +'</span>' + 
                     '<div class="">' + key.description + '...</div>' + 
                          '<div class="readmore">続きを読む<svg width="20" height="20"><path d="M2,10 L17,10 L10,5 M17,10 L10,15" stroke-width="1" fill="none" stroke="var(--white)"></svg></div>' + 

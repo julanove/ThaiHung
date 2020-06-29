@@ -178,6 +178,138 @@ module.exports = {
 
     // SERVER
 
+    adminNews: function (req, res) {
+
+        db.query('SELECT newid, title, description, DATE_FORMAT(date, "%d/%m/%Y %h:%i %p") as date FROM news order by newid desc;',
+            function (err, results) {
+                //console.log(results[1]);
+                res.render('admin/admin-news', {
+                    layout: 'admin-main',
+                    data: {
+                        product: results,
+                    },
+                    websiteURL: websiteURL
+                });
+                if (err) console.log(err);
+            }
+        );
+
+    },
+
+    adminNewsAdd: function (req, res) {
+
+        res.render('admin/admin-newsadd', {
+            layout: 'admin-main',
+            websiteURL: websiteURL
+        });
+
+    },
+
+    adminNewsDetails: function (req, res) {
+
+        //console.log("vao day");
+        //console.log(req.params.newid);
+        let select = 'select * from news where newid = ?';
+        let query = mysql.format(select, [req.params.newid]);
+        db.query(query, (err, result) => {
+
+            //if (err) {
+            //}
+            //else {
+                console.log(result);
+                res.render('admin/admin-newsdetails', {
+                layout: 'admin-main',
+                data: {
+                    news: result[0]
+                },
+                    websiteURL: websiteURL
+                });
+            //}
+        });
+
+    },
+
+    adminType: function (req, res) {
+
+        db.query('SELECT * FROM producttype;',
+            function (err, results) {
+                res.render('admin/admin-type', {
+                    layout: 'admin-main',
+                    data: {
+                        type: results,
+                    },
+                    websiteURL: websiteURL
+                });
+                if (err) console.log(err);
+            }
+        );
+
+    },
+
+    adminProduct: function (req, res) {
+
+        db.query('SELECT * FROM product;',
+            function (err, results) {
+                res.render('admin/admin-product', {
+                    layout: 'admin-main',
+                    data: {
+                        product: results,
+                    },
+                    websiteURL: websiteURL
+                });
+                if (err) console.log(err);
+            }
+        );
+
+    },
+
+    // API
+
+    newsInsert: function (req, res) {
+
+        let insertQuery = 'INSERT INTO news (title, content, date, image, description) VALUES(?, ?, now(), ?, ?)';
+        let query = mysql.format(insertQuery, [req.body.title, req.body.content, req.body.image, req.body.description]);
+        db.query(query, (err, response) => {
+            if (err) {
+                console.error(err);
+                return;
+            }
+        });
+
+        res.status(200).send(JSON.stringify({ status: "OK" }));
+    },
+
+    newsUpdate: function (req, res) {
+
+        let updateQuery = 'update news set title = ?, content = ?, date = now(), image = ?, description = ? where newid = ?';
+        let query = mysql.format(updateQuery, [req.body.title, req.body.content, req.body.image, req.body.description, req.body.newid]);
+        db.query(query, (err, response) => {
+            if (err) {
+                console.error(err);
+                return;
+            }
+        });
+
+        res.status(200).send(JSON.stringify({ status: "OK" }));
+    },
+
+    newsDelete: function (req, res) {
+        //console.log('Q Delete');
+        //console.log(req.body);
+
+        let deleteQuery = 'DELETE FROM news WHERE newid = ?';
+        let query = mysql.format(deleteQuery, [req.body.newid]);
+        db.query(query, (err, response) => {
+            if (err) {
+                console.error(err);
+                return;
+            }
+        });
+
+        res.status(200).send(JSON.stringify({ status: "OK" }));
+
+    },
+
     authen: function (request, response) {
         var username = request.body.username;
         var password = request.body.password;
@@ -234,87 +366,10 @@ module.exports = {
 
     },
 
-    imageUpload: function (req, res) {
+    typeInsert: function (req, res) {
 
-        //console.log(req.body);
-        //console.log('IMAGE IN');
-        //console.log(req.body.imageFile);
-
-        //console.log(req.files.imageFile.path);
-        //console.log(req.files.imageFile.type);
-
-        //var file = __dirname + "/" + req.files.file.name;
-        //fs.readFile(req.files.file.path, function (err, data) {
-        //    fs.writeFile(file, data, function (err) {
-        //        if (err) {
-        //            console.log(err);
-        //        } else {
-        //            response = {
-        //                message: 'File uploaded successfully',
-        //                filename: req.files.file.name
-        //            };
-        //        }
-        //        console.log(response);
-        //        res.end(JSON.stringify(response));
-        //    });
-        //});
-    },
-
-    adminNews: function (req, res) {
-
-        db.query('SELECT newid, title, description, DATE_FORMAT(date, "%d/%m/%Y %h:%i %p") as date FROM news order by newid desc;',
-            function (err, results) {
-                //console.log(results[1]);
-                res.render('admin/admin-news', {
-                    layout: 'admin-main',
-                    data: {
-                        product: results,
-                    },
-                    websiteURL: websiteURL
-                });
-                if (err) console.log(err);
-            }
-        );
-
-    },
-
-    adminNewsAdd: function (req, res) {
-
-        res.render('admin/admin-newsadd', {
-            layout: 'admin-main',
-            websiteURL: websiteURL
-        });
-
-    },
-
-    adminNewsDetails: function (req, res) {
-
-        //console.log("vao day");
-        //console.log(req.params.newid);
-        let select = 'select * from news where newid = ?';
-        let query = mysql.format(select, [req.params.newid]);
-        db.query(query, (err, result) => {
-
-            //if (err) {
-            //}
-            //else {
-                console.log(result);
-                res.render('admin/admin-newsdetails', {
-                layout: 'admin-main',
-                data: {
-                    news: result[0]
-                },
-                    websiteURL: websiteURL
-                });
-            //}
-        });
-
-    },
-
-    newsInsert: function (req, res) {
-
-        let insertQuery = 'INSERT INTO news (title, content, date, image, description) VALUES(?, ?, now(), ?, ?)';
-        let query = mysql.format(insertQuery, [req.body.title, req.body.content, req.body.image, req.body.description]);
+        let insertQuery = 'INSERT INTO productType (name) VALUES(?)';
+        let query = mysql.format(insertQuery, [req.body.name]);
         db.query(query, (err, response) => {
             if (err) {
                 console.error(err);
@@ -325,10 +380,12 @@ module.exports = {
         res.status(200).send(JSON.stringify({ status: "OK" }));
     },
 
-    newsUpdate: function (req, res) {
+    typeUpdate: function (req, res) {
 
-        let updateQuery = 'update news set title = ?, content = ?, date = now(), image = ?, description = ? where newid = ?';
-        let query = mysql.format(updateQuery, [req.body.title, req.body.content, req.body.image, req.body.description, req.body.newid]);
+        console.log('da vao update');
+
+        let updateQuery = 'update productType set name = ? where productTypeID = ?';
+        let query = mysql.format(updateQuery, [req.body.name, req.body.productTypeID]);
         db.query(query, (err, response) => {
             if (err) {
                 console.error(err);
@@ -339,12 +396,10 @@ module.exports = {
         res.status(200).send(JSON.stringify({ status: "OK" }));
     },
 
-    newsDelete: function (req, res) {
-        //console.log('Q Delete');
-        //console.log(req.body);
+    typeDelete: function (req, res) {
 
-        let deleteQuery = 'DELETE FROM news WHERE newid = ?';
-        let query = mysql.format(deleteQuery, [req.body.newid]);
+        let deleteQuery = 'DELETE FROM productType where productTypeID = ?';
+        let query = mysql.format(deleteQuery, [req.body.typeid]);
         db.query(query, (err, response) => {
             if (err) {
                 console.error(err);
@@ -354,5 +409,50 @@ module.exports = {
 
         res.status(200).send(JSON.stringify({ status: "OK" }));
 
-    }
+    },
+
+    productInsert: function (req, res) {
+
+        let insertQuery = 'INSERT INTO productType (name) VALUES(?)';
+        let query = mysql.format(insertQuery, [req.body.name]);
+        db.query(query, (err, response) => {
+            if (err) {
+                console.error(err);
+                return;
+            }
+        });
+
+        res.status(200).send(JSON.stringify({ status: "OK" }));
+    },
+
+    productUpdate: function (req, res) {
+
+        console.log('da vao update');
+
+        let updateQuery = 'update productType set name = ? where productTypeID = ?';
+        let query = mysql.format(updateQuery, [req.body.name, req.body.productTypeID]);
+        db.query(query, (err, response) => {
+            if (err) {
+                console.error(err);
+                return;
+            }
+        });
+
+        res.status(200).send(JSON.stringify({ status: "OK" }));
+    },
+
+    productDelete: function (req, res) {
+
+        let deleteQuery = 'DELETE FROM productType where productTypeID = ?';
+        let query = mysql.format(deleteQuery, [req.body.typeid]);
+        db.query(query, (err, response) => {
+            if (err) {
+                console.error(err);
+                return;
+            }
+        });
+
+        res.status(200).send(JSON.stringify({ status: "OK" }));
+
+    },
 }

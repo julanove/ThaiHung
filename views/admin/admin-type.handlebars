@@ -1,0 +1,120 @@
+﻿<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>>商品タイプリスト</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <!--<li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">jsGrid</li>-->
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+<!-- Main content -->
+<section class="content">
+    <div class="card card-primary">
+        <div class="card-header">
+            <h3 class="card-title">商品タイプ</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+            <div id="jsGrid1"></div>
+        </div>
+        <div class="card-footer">
+            <!--<button type="button" onclick="location.href='/admin/newsadd'" class="btn btn-primary insert">追加</button>
+            <button type="button" class="btn btn-primary update">削除</button>-->
+        </div>
+    </div>
+    <!-- /.card -->
+</section>
+<!-- /.content -->
+
+<script defer src="/static/js/db.js"></script>
+<script defer src="/static/plugins/jsgrid/jsgrid.min.js"></script>
+<link rel="stylesheet" href="/static/plugins/jsgrid/jsgrid.min.css">
+<link rel="stylesheet" href="/static/plugins/jsgrid/jsgrid-theme.min.css">
+
+<script>
+
+    $(document).ready(function () {
+
+        var dbx = {{ convertJson data.type }} ;
+        console.log(dbx);
+
+    //$("#jsGrid1").jsGrid("editItem", item);
+
+    $("#jsGrid1").jsGrid({
+        height: "100%",
+        width: "100%",
+        sorting: true,
+        paging: false,
+        editing: true,
+        data: dbx,
+        pageSize: 20,
+        editing: true,
+        inserting: true,
+
+        deleteConfirm: "Do you really want to delete this record ?",
+
+        fields: [
+            //{ name: "productTypeID", type: "text", width: 50, title: "ID" },
+            { name: "name", type: "text", width: 300, title: "商品タイプ" },
+            { type: "control", title: "Edit/ Delete" }],
+            rowClick: function (idx) {
+                //var url = "/admin/newsdetails/" + idx.item.newid;
+                console.log(idx.item.productTypeID);
+                //window.location = "/admin/newsdetails/" + idx.item.newid;
+                
+            },
+            onItemDeleting: function (args) {
+                //console.log(args.item.productTypeID);
+                $.ajax({
+                    url: "/typeDelete",
+                    type: "POST",
+                    dataType: "json",
+                    contentType: "application/json",
+                    data: JSON.stringify({ typeid: args.item.productTypeID }),
+                    success: function (msg) {
+
+                    }
+                });
+            },
+            onItemDeleted: function (args) {
+                alert('Deleted');
+            },
+            onItemInserting: function (args) {
+                console.log(args);
+                console.log(args.item);
+                //console.log(args.item.productTypeID);
+                console.log(args.item.name);
+                $.ajax({
+                    url: "/typeInsert",
+                    type: "POST",
+                    dataType: "json",
+                    contentType: "application/json",
+                    data: JSON.stringify({ name: args.item.name }),
+                    success: function (msg) {
+
+                    }
+                });
+            },
+            onItemUpdating: function (args) {
+                console.log(args);
+                $.ajax({
+                    url: "/typeUpdate",
+                    type: "POST",
+                    dataType: "json",
+                    contentType: "application/json",
+                    data: JSON.stringify({ productTypeID: args.item.productTypeID, name: args.item.name }),
+                    success: function (msg) {
+
+                    }
+                });
+            }
+        });
+    });
+</script>

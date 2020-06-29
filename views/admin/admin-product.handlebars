@@ -22,10 +22,19 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body">
+            <div class="form-group">
+                <select class="form-control">
+                    <option>option 1</option>
+                    <option>option 2</option>
+                    <option>option 3</option>
+                    <option>option 4</option>
+                    <option>option 5</option>
+                </select>
+            </div>
             <div id="jsGrid1"></div>
         </div>
         <div class="card-footer">
-            <button type="button" onclick="location.href='/admin/newsadd'" class="btn btn-primary insert">追加</button>
+            <button type="button" onclick="location.href='/admin/productadd'" class="btn btn-primary insert">追加</button>
             <button type="button" class="btn btn-primary update">削除</button>
         </div>
     </div>
@@ -54,7 +63,8 @@
         paging: true,
         editing: false,
         data: dbx,
-        filtering: true,
+
+        //filtering: true,
         //---------------
         //filtering: true,
         //editing: true,
@@ -64,14 +74,10 @@
         deleteConfirm: "Do you really want to delete this record?",
 
         fields: [
-            { name: "newid", type: "text", width: 50, title: "ID" },
-            //{ name: "image", type: "text", width: 200, title: "Thumbnail" },
-            { name: "title", type: "text", width: 200, title: "タイトル" },
+            { name: "productID", type: "text", width: 50, title: "ID" },
+            { name: "name", type: "text", width: 180, title: "Name" },
             { name: "description", type: "text", width: 300, title: "記述" },
-            { name: "date", type: "datetime", width: 150, title: "Date" } ,
-                //{ name: "Age2", type: "number", width: 50 },
-                //{ name: "Country2", type: "select", items: db.countries, valueField: "Id", textField: "Name" },
-                //{ name: "Married2", type: "checkbox", title: "Is Married" }
+            //{ name: "type", type: "text", width: 100, title: "type" },
             { type: "control", editButton: false, title: "Delete" }
             ],
             rowClick: function (idx) {
