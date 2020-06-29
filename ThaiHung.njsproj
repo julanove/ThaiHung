@@ -1976,6 +1976,8 @@
     <Content Include="public\scss\style.scss" />
     <Content Include="README.md" />
     <Content Include="views\admin\admin-home.handlebars" />
+    <Content Include="views\admin\admin-contact.handlebars" />
+    <Content Include="views\admin\admin-contactdetails.handlebars" />
     <Content Include="views\admin\admin-productdetails.handlebars" />
     <Content Include="views\admin\admin-productadd.handlebars" />
     <Content Include="views\admin\admin-product.handlebars" />

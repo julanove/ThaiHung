@@ -82,7 +82,7 @@ var allRouteFunction = require('./routes/routes');
 
 //---------------------------------------------------------- Client Page
 
-app.post('/', allRouteFunction.contactFunction);
+app.post('/contact', allRouteFunction.contactFunction);
 app.get('/news', allRouteFunction.newsFunction);
 app.get('/news/:index', allRouteFunction.newsPagingFunction);
 app.get('/news-details/:newid', allRouteFunction.newsDetailsFunction);
@@ -129,6 +129,10 @@ app.get('/admin/type', allRouteFunction.adminType);
 
 app.get('/admin/product', allRouteFunction.adminProduct);
 
+app.get('/admin/contact', allRouteFunction.adminContact);
+
+app.get('/admin/contactdetails/:contactID', allRouteFunction.adminContactDetails);
+
 //---------------------------------------------------------- Admin API
 
 app.post('/auth', allRouteFunction.authen);
@@ -149,10 +153,15 @@ app.post('/typeDelete', allRouteFunction.typeDelete);
 
 app.post('/productInsert', allRouteFunction.productInsert);
 
+app.post('/productSelect', allRouteFunction.productSelect);
+
 //app.post('/productUpdate', allRouteFunction.producteUpdate);
 
 //app.post('/productDelete', allRouteFunction.productDelete);
 
+app.post('/contactDelete', allRouteFunction.contactDelete);
+
+app.post('/contactRead', allRouteFunction.contactRead);
 
 // ---------------------------------------------------- TEST PAGE
 

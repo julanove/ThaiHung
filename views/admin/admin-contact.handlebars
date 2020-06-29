@@ -3,7 +3,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>ニュースリスト</h1>
+                <h1>問い合わせリスト</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -18,14 +18,14 @@
 <section class="content">
     <div class="card card-primary">
         <div class="card-header">
-            <h3 class="card-title">ニュース</h3>
+            <h3 class="card-title">問い合わせ</h3>
         </div>
         <!-- /.card-header -->
         <div class="card-body">
             <div id="jsGrid1"></div>
         </div>
         <div class="card-footer">
-            <button type="button" onclick="location.href='/admin/newsadd'" class="btn btn-primary insert">追加</button>
+            <!--<button type="button" onclick="location.href='/admin/newsadd'" class="btn btn-primary insert">追加</button>-->
             <!--<button type="button" class="btn btn-primary update">削除</button>-->
         </div>
     </div>
@@ -42,7 +42,7 @@
 
     $(document).ready(function () {
 
-        var dbx =  {{ convertJson data.product }} ;
+        var dbx =  {{ convertJson data.contact }} ;
         console.log(dbx);
 
     //$("#jsGrid1").jsGrid("editItem", item);
@@ -54,41 +54,41 @@
         paging: true,
         editing: false,
         data: dbx,
-        //filtering: true,
-        //---------------
-        //filtering: true,
-        //editing: true,
-        pageSize: 7,
-        //pageButtonCount: 7,
+        pageSize: 10,
 
         deleteConfirm: "Do you really want to delete this record?",
 
         fields: [
-            { name: "newid", type: "text", width: 50, title: "ID" },
-            //{ name: "image", type: "text", width: 200, title: "Thumbnail" },
-            { name: "title", type: "text", width: 200, title: "タイトル" },
-            { name: "description", type: "text", width: 300, title: "記述" },
-            { name: "date", type: "datetime", width: 150, title: "Date" } ,
-                //{ name: "Age2", type: "number", width: 50 },
-                //{ name: "Country2", type: "select", items: db.countries, valueField: "Id", textField: "Name" },
-                //{ name: "Married2", type: "checkbox", title: "Is Married" }
-            { type: "control", editButton: false, title: "Delete" }
-            ],
+            //{ name: "contactID", type: "text", width: 50, title: "ID" },
+            { name: "company", type: "text", width: 150, title: "会社" },
+            { name: "country", type: "text", width: 150, title: "国" },
+            { name: "name", type: "datetime", width: 200, title: "名前" },
+            { name: "date", type: "datetime", width: 200, title: "Date" },
+            { name: "isRead", type: "checkbox", width: 100, title: "読み済み" },
+            { type: "control", editButton: false, title: "Delete" }],
             rowClick: function (idx) {
-                var url = "/admin/newsdetails/" + idx.item.newid;
-                console.log(url);
-                window.location = "/admin/newsdetails/" + idx.item.newid;
-                
-            },
-            onItemDeleting: function (args) {
 
-                console.log(args.item.newid);
+                console.log(idx.item.contactID);
                 $.ajax({
-                    url: "/newsDelete",
+                    url: "/contactRead",
                     type: "POST",
                     dataType: "json",
                     contentType: "application/json",
-                    data: JSON.stringify({ newid: args.item.newid }),
+                    data: JSON.stringify({ contactID: idx.item.contactID }),
+                    success: function (msg) {
+                        window.location = "/admin/contactdetails/" + idx.item.contactID;
+                    }
+                })
+            },
+            onItemDeleting: function (args) {
+
+                console.log(args.item.contactID);
+                $.ajax({
+                    url: "/contactDelete",
+                    type: "POST",
+                    dataType: "json",
+                    contentType: "application/json",
+                    data: JSON.stringify({ contactID: args.item.contactID }),
                     success: function (msg) {
 
                     }

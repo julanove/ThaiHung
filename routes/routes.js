@@ -248,12 +248,12 @@ module.exports = {
 
     adminProduct: function (req, res) {
 
-        db.query('SELECT * FROM product;',
+        db.query('SELECT * FROM productType;',
             function (err, results) {
                 res.render('admin/admin-product', {
                     layout: 'admin-main',
                     data: {
-                        product: results,
+                        type: results,
                     },
                     websiteURL: websiteURL
                 });
@@ -262,6 +262,48 @@ module.exports = {
         );
 
     },
+
+    adminContact: function (req, res) {
+
+        db.query('SELECT contactID, company, country, name, DATE_FORMAT(date, "%d/%m/%Y %h:%i %p") as date, isRead FROM contact order by contactID desc;',
+            function (err, results) {
+                res.render('admin/admin-contact', {
+                    layout: 'admin-main',
+                    data: {
+                        contact: results,
+                    },
+                    websiteURL: websiteURL
+                });
+                if (err) console.log(err);
+            }
+        );
+
+    },
+
+    adminContactDetails: function (req, res) {
+
+        //console.log("vao day");
+        //console.log(req.params.newid);
+        let select = 'select * from contact where contactID = ?';
+        let query = mysql.format(select, [req.params.contactID]);
+        db.query(query, (err, result) => {
+
+            //if (err) {
+            //}
+            //else {
+            console.log(result);
+            res.render('admin/admin-contactdetails', {
+                layout: 'admin-main',
+                data: {
+                    contact: result[0]
+                },
+                websiteURL: websiteURL
+            });
+            //}
+        });
+
+    },
+
 
     // API
 
@@ -425,6 +467,21 @@ module.exports = {
         res.status(200).send(JSON.stringify({ status: "OK" }));
     },
 
+    productSelect: function (req, res) {
+
+        let selectQuery = 'select productID, name, description from product where type = ? order by productID desc';
+        let query = mysql.format(selectQuery, [req.body.type]);
+        db.query(query, (err, result) => {
+            if (err) {
+                console.error(err);
+                return;
+            }
+            res.status(200).send(JSON.stringify({ product: result }));
+        });
+
+        
+    },
+
     productUpdate: function (req, res) {
 
         console.log('da vao update');
@@ -445,6 +502,36 @@ module.exports = {
 
         let deleteQuery = 'DELETE FROM productType where productTypeID = ?';
         let query = mysql.format(deleteQuery, [req.body.typeid]);
+        db.query(query, (err, response) => {
+            if (err) {
+                console.error(err);
+                return;
+            }
+        });
+
+        res.status(200).send(JSON.stringify({ status: "OK" }));
+
+    },
+
+    contactDelete: function (req, res) {
+
+        let deleteQuery = 'DELETE FROM contact where contactID = ?';
+        let query = mysql.format(deleteQuery, [req.body.contactID]);
+        db.query(query, (err, response) => {
+            if (err) {
+                console.error(err);
+                return;
+            }
+        });
+
+        res.status(200).send(JSON.stringify({ status: "OK" }));
+
+    },
+
+    contactRead: function (req, res) {
+
+        let deleteQuery = 'update contact set isRead = 1 where contactID = ?';
+        let query = mysql.format(deleteQuery, [req.body.contactID]);
         db.query(query, (err, response) => {
             if (err) {
                 console.error(err);

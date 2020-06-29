@@ -3,7 +3,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>ニュースリスト</h1>
+                <h1>商品リスト</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -18,24 +18,21 @@
 <section class="content">
     <div class="card card-primary">
         <div class="card-header">
-            <h3 class="card-title">ニュース</h3>
+            <h3 class="card-title">商品</h3>
         </div>
         <!-- /.card-header -->
         <div class="card-body">
             <div class="form-group">
-                <select class="form-control">
-                    <option>option 1</option>
-                    <option>option 2</option>
-                    <option>option 3</option>
-                    <option>option 4</option>
-                    <option>option 5</option>
+                <select class="form-control" style="width:300px;" id="type">
+                    {{#each data.type}}
+                    <option value="{{productTypeID}}">{{name}}</option>
+                    {{/each}}
                 </select>
             </div>
             <div id="jsGrid1"></div>
         </div>
         <div class="card-footer">
             <button type="button" onclick="location.href='/admin/productadd'" class="btn btn-primary insert">追加</button>
-            <button type="button" class="btn btn-primary update">削除</button>
         </div>
     </div>
     <!-- /.card -->
@@ -49,42 +46,68 @@
 
 <script>
 
+    var dbx = null;
+
     $(document).ready(function () {
+        var selectedType = $('#type option:selected').val();
+        loadDBX(selectedType);
+    });
 
-        var dbx =  {{ convertJson data.product }} ;
-        console.log(dbx);
+    $('select').on('change', function () {
+        var selectedType = $('#type option:selected').val();
+        console.log(selectedType);
+        $.ajax({
+            url: "/productSelect",
+            type: "POST",
+            dataType: "json",
+            contentType: "application/json",
+            data: JSON.stringify({ type: selectedType }),
+            success: function (msg) {
+                console.log(msg);
+                dbx = msg.product;
+                loadGrid();
+            }
+        });
 
-    //$("#jsGrid1").jsGrid("editItem", item);
+    });
 
-    $("#jsGrid1").jsGrid({
-        height: "100%",
-        width: "100%",
-        sorting: true,
-        paging: true,
-        editing: false,
-        data: dbx,
+    function loadDBX(selectedType) {
+        $.ajax({
+            url: "/productSelect",
+            type: "POST",
+            dataType: "json",
+            contentType: "application/json",
+            data: JSON.stringify({ type: selectedType }),
+            success: function (msg) {
+                dbx = msg.product;
+                loadGrid();
+            }
+        });
+    }
 
-        //filtering: true,
-        //---------------
-        //filtering: true,
-        //editing: true,
-        pageSize: 7,
-        //pageButtonCount: 7,
+    function loadGrid() {
+        $("#jsGrid1").jsGrid({
+            height: "100%",
+            width: "100%",
+            sorting: true,
+            paging: true,
+            editing: false,
+            data: dbx,
+            pageSize: 10,
 
-        deleteConfirm: "Do you really want to delete this record?",
+            deleteConfirm: "Do you really want to delete this record?",
 
-        fields: [
-            { name: "productID", type: "text", width: 50, title: "ID" },
-            { name: "name", type: "text", width: 180, title: "Name" },
-            { name: "description", type: "text", width: 300, title: "記述" },
-            //{ name: "type", type: "text", width: 100, title: "type" },
-            { type: "control", editButton: false, title: "Delete" }
+            fields: [
+                { name: "productID", type: "text", width: 50, title: "ID" },
+                { name: "name", type: "text", width: 180, title: "Name" },
+                { name: "description", type: "text", width: 300, title: "記述" },
+                { type: "control", editButton: false, title: "Delete" }
             ],
             rowClick: function (idx) {
                 var url = "/admin/newsdetails/" + idx.item.newid;
                 console.log(url);
                 window.location = "/admin/newsdetails/" + idx.item.newid;
-                
+
             },
             onItemDeleting: function (args) {
 
@@ -104,5 +127,6 @@
                 alert('Deleted');
             }
         });
-    });
+    }
+
 </script>

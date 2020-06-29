@@ -1,0 +1,86 @@
+﻿<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>News Editors</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Text Editors</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-outline card-info">
+
+                <!--<form action="newsInsert" method="post" enctype="multipart/form-data">-->
+                <div class="card-header">
+                    ニュースリスト
+                </div>
+                        <!-- tools box -->
+                <div class="card-body">
+
+                    <div class="form-group">
+                        <label>会社</label>
+                        <input type="text" id="title" name="title" value="{{data.contact.company}}" class="form-control" placeholder="Enter ..." disabled>
+                    </div>
+
+                    <div class="form-group">
+                        <label>国</label>
+                        <input type="text" id="country" name="country" value="{{data.contact.country}}" class="form-control" placeholder="Enter ..." disabled>
+                    </div>
+
+                    <div class="form-group">
+                        <label>名前</label>
+                        <input type="text" id="name" name="name" value="{{data.contact.name}}" class="form-control" placeholder="Enter ..." disabled>
+                    </div>
+
+                    <div class="form-group">
+                        <label>内容</label>
+                        <textarea class="form-control" rows="3"　value="{{data.contact.content}}" placeholder="Enter ..." disabled></textarea>
+                    </div>
+
+                </div>
+                <div class="card-footer">
+                    <button id="back" class="btn btn-primary" onclick="location.href='/admin/contact'">Back</button>
+                </div>
+
+                    
+                <!--</form>-->
+                <!-- /.card-header -->
+                <div class="card-body pad">
+                    <div class="mb-3">
+
+                    </div>
+                    <p class="text-sm mb-0">
+                        Editor <a href="https://github.com/summernote/summernote">
+                            Documentation and license information.
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!-- /.col-->
+    </div>
+    <!-- ./row -->
+    <input type="hidden" value="{{websiteURL}}" id="websiteURL" />
+</section>
+
+<script src="/static/plugins/summernote/summernote-bs4.min.js"></script>
+<!--<script src="/static/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>-->
+<link rel="stylesheet" href="/static/plugins/jsgrid/jsgrid.min.css">
+<link rel="stylesheet" href="/static/plugins/jsgrid/jsgrid-theme.min.css">
+<link rel="stylesheet" href="/static/plugins/summernote/summernote-bs4.css">
+
+<script>
+
+    $(document).ready(function () {
+        
+    });
+</script>
