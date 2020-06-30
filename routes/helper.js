@@ -19,20 +19,20 @@ var register = function (Handlebars) {
             for (const key of content) {
                 if (i == 0) {
                     highlight += '<div class="highlight-news">';
-                    highlight += '<img class="w-100" src="/static/' + key.image + '">';
+                    highlight += '<a href="/news-details/' + key.newid +'"><img class="w-100" src="/static/' + key.image + '"></a>';
                     highlight += '<div class="des">';
                     highlight += '<h4>' + key.title + '</h4>';
                     highlight += '<div class="news-date">' + formatDate(key.datetime) + '</div>';
-                    highlight += '<div class="readmore">続きを読む<svg width="20" height="20"><path d="M2,10 L17,10 L10,5 M17,10 L10,15" stroke-width="1" fill="none" stroke="var(--blue)"></svg></div>';
+                    highlight += '<div class="readmore"><a href="/news-details/' + key.newid +'">続きを読む</a><svg width="20" height="20"><path d="M2,10 L17,10 L10,5 M17,10 L10,15" stroke-width="1" fill="none" stroke="var(--blue)"></svg></div>';
                     highlight += '</div></div>';
                 }
                 else {
                     smallnews += '<div class="small-news">';
-                    smallnews += '<img class="w-100" src="/static/'+ key.image + '">';
+                    smallnews += '<a href="/news-details/' + key.newid +'"><img class="w-100" src="/static/'+ key.image + '"></a>';
                     smallnews += '<div class="des">';
                     smallnews += '<h5>' + key.title + '</h5>';
                     smallnews += '<span class="news-date">' + formatDate(key.datetime) + '</span>';
-                    smallnews += '<div class="readmore">続きを読む<svg width="20" height="20"><path d="M2,10 L17,10 L10,5 M17,10 L10,15" stroke-width="1" fill="none" stroke="var(--blue)"></svg></div>';
+                    smallnews += '<div class="readmore"><a href="/news-details/' + key.newid +'">続きを読む</a><svg width="20" height="20"><path d="M2,10 L17,10 L10,5 M17,10 L10,15" stroke-width="1" fill="none" stroke="var(--blue)"></svg></div>';
                     smallnews += '</div></div>';
                 }
                 i++;
@@ -64,7 +64,7 @@ var register = function (Handlebars) {
                     highlight += '<span class="date">' + formatDate(key.datetime) +'</span>';
                     highlight += '<hr>';
                     highlight += '<div class="">' + key.description + '...</div>';
-                    highlight += '<div class="readmore">続きを読む<svg width="20" height="20"><path d="M2,10 L17,10 L10,5 M17,10 L10,15" ';
+                    highlight += '<div class="readmore"><a href="/news-details/' + key.newid +'">続きを読む</a><svg width="20" height="20"><path d="M2,10 L17,10 L10,5 M17,10 L10,15" ';
                     highlight += 'stroke-width="1" fill="none" stroke="var(--white)"></svg></div>';
                     highlight += '</div></div>';
                 }
@@ -75,7 +75,7 @@ var register = function (Handlebars) {
                     '<h4><a href="/news-details/' + key.newid +'">' + key.title +'</a></h4>' + 
                     '<span class="date">' + formatDate(key.datetime) +'</span>' + 
                     '<div class="">' + key.description + '...</div>' + 
-                         '<div class="readmore">続きを読む<svg width="20" height="20"><path d="M2,10 L17,10 L10,5 M17,10 L10,15" stroke-width="1" fill="none" stroke="var(--white)"></svg></div>' + 
+                    '<div class="readmore"><a href="/news-details/' + key.newid +'">続きを読む</a><svg width="20" height="20"><path d="M2,10 L17,10 L10,5 M17,10 L10,15" stroke-width="1" fill="none" stroke="var(--white)"></svg></div>' + 
                           '</div>' + 
                         '</div>';
                 }
