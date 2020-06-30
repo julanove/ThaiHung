@@ -1,7 +1,7 @@
 ﻿<div class="main product-page product-detail">
     <div class="banner">
         <div class="banner-img">
-            <img class="w-100" src="images/page/slide-1.png">
+            <img class="w-100" src="/static/images/page/slide-1.png">
             <div class="page-title"><span>取扱商品</span></div>
         </div>
     </div>
@@ -18,28 +18,6 @@
         </div>
         <div class="product">
             <div class="product__tab w-100 active">
-                <!--<div class="container product__tab__container text-center" style="visibility: visible; animation-name: fadeInUp;">
-                    <ul class="nav nav-tabs border-0 d-inline-block" role="tablist">
-                        <li class="nav-item d-inline-block border-0 active">
-                            <a class="nav-link" data-toggle="tab" href="#product__tab0" role="tab" aria-selected="false">ビニール袋</a>
-                        </li>
-                        <li class="nav-item d-inline-block border-0">
-                            <a class="nav-link" data-toggle="tab" href="#product__tab1" role="tab" aria-selected="true">PEフィルム</a>
-                        </li>
-                        <li class="nav-item d-inline-block border-0">
-                            <a class="nav-link" data-toggle="tab" href="#product__tab2" role="tab" aria-selected="true">PVCフィルム</a>
-                        </li>
-                        <li class="nav-item d-inline-block border-0">
-                            <a class="nav-link" data-toggle="tab" href="#product__tab3" role="tab" aria-selected="true">ジッパーバッグ</a>
-                        </li>
-                        <li class="nav-item d-inline-block border-0">
-                            <a class="nav-link" data-toggle="tab" href="#product__tab4" role="tab" aria-selected="true">プラスチック製タイストラップ</a>
-                        </li>
-                        <li class="nav-item d-inline-block border-0">
-                            <a class="nav-link" data-toggle="tab" href="#product__tab5" role="tab" aria-selected="true">PVCフィルム</a>
-                        </li>
-                    </ul>
-                </div>-->
                 <div class="tab-content container">
                     <div class="tab-pane fade active in" id="product__tab0" role="tabpanel">
                         <div class="product__detail w-75">
@@ -51,22 +29,22 @@
                                             <div class="d-flex">
                                                 <div class="card">
                                                     <fieldset id="f11" class="active">
-                                                        <div class="product-pic"> <img class="pic0" src="images/product/product-images-1.png"> </div>
+                                                        <div class="product-pic"> <img class="pic0 productImage" src="/static/{{data.product.image}}"> </div>
                                                     </fieldset>
                                                     <fieldset id="f21" class="">
-                                                        <div class="product-pic"> <img class="pic0" src="images/product/PE-film.png"> </div>
+                                                        <div class="product-pic"> <img class="pic0 productImage" src="/static/{{data.product.thumb1}}"> </div>
                                                     </fieldset>
                                                     <fieldset id="f31" class="">
-                                                        <div class="product-pic"> <img class="pic0" src="images/product/plastic-bag.png"> </div>
+                                                        <div class="product-pic"> <img class="pic0 productImage" src="/static/{{data.product.thumb2}}"> </div>
                                                     </fieldset>
                                                     <fieldset id="f41" class="">
-                                                        <div class="product-pic"> <img class="pic0" src="images/product/PVC-film.png"> </div>
+                                                        <div class="product-pic"> <img class="pic0 productImage" src="/static/{{data.product.thumb3}}"> </div>
                                                     </fieldset>
                                                     <div class="product-thumb thumbnails">
-                                                        <div id="f1" class="tb tb-active"> <img class="thumbnail-img fit-image" src="images/product/product-images-1.png"> </div>
-                                                        <div id="f2" class="tb"> <img class="thumbnail-img fit-image" src="images/product/PE-film.png"> </div>
-                                                        <div id="f3" class="tb"> <img class="thumbnail-img fit-image" src="images/product/plastic-bag.png"> </div>
-                                                        <div id="f4" class="tb"> <img class="thumbnail-img fit-image" src="images/product/PVC-film.png"> </div>
+                                                        <div id="f1" class="tb tb-active"> <img class="thumbnail-img fit-image" src="/static/{{data.product.image}}"> </div>
+                                                        <div id="f2" class="tb"> <img class="thumbnail-img fit-image" src="/static/{{data.product.thumb1}}"> </div>
+                                                        <div id="f3" class="tb"> <img class="thumbnail-img fit-image" src="/static/{{data.product.thumb2}}"> </div>
+                                                        <div id="f4" class="tb"> <img class="thumbnail-img fit-image" src="/static/{{data.product.thumb3}}"> </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -80,7 +58,7 @@
                             </div>
                         </div>
                         <div class="product__more-info w-75">
-                            {{data.product.content}}
+                            {{safeString data.product.content}}
                         </div>
                         <div class="product__related-product">
                             <h3 class="text-center">同じタイプの製品</h3>
@@ -114,3 +92,35 @@
     <input type="hidden" value="{{websiteURL}}" id="websiteURL" />
 
 </div>
+
+<link rel="stylesheet" href="/static/css/smoothproducts.css">
+<script type="text/javascript" src="/static/js/smoothproducts.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.tb').hover(function () {
+            $('.tb').removeClass('tb-active');
+            $(this).addClass('tb-active');
+
+            current_fs = $('.active');
+
+            next_fs = $(this).attr('id');
+            next_fs = '#' + next_fs + '1';
+
+            $('fieldset').removeClass('active');
+            $(next_fs).addClass('active');
+
+            current_fs.animate({}, {
+                step: function () {
+                    current_fs.css({
+                        'display': 'none',
+                        'position': 'relative'
+                    });
+                    next_fs.css({
+                        'display': 'block'
+                    });
+                }
+            });
+        });
+    });
+</script>

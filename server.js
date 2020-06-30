@@ -129,6 +129,8 @@ app.get('/admin/type', allRouteFunction.adminType);
 
 app.get('/admin/product', allRouteFunction.adminProduct);
 
+app.get('/admin/productdetails/:productID', allRouteFunction.adminProductDetails);
+
 app.get('/admin/contact', allRouteFunction.adminContact);
 
 app.get('/admin/contactdetails/:contactID', allRouteFunction.adminContactDetails);
@@ -155,9 +157,9 @@ app.post('/productInsert', allRouteFunction.productInsert);
 
 app.post('/productSelect', allRouteFunction.productSelect);
 
-//app.post('/productUpdate', allRouteFunction.producteUpdate);
+app.post('/productUpdate', allRouteFunction.productUpdate);
 
-//app.post('/productDelete', allRouteFunction.productDelete);
+app.post('/productDelete', allRouteFunction.productDelete);
 
 app.post('/contactDelete', allRouteFunction.contactDelete);
 
@@ -179,9 +181,9 @@ var storage = multer.diskStorage({
     }
 });
 
-app.get('/', allRouteFunction.adminProduct);
+app.get('/', allRouteFunction.homePageFunction);
 
-app.post('/imageInsert',  (req, res) => {x
+app.post('/imageInsert',  (req, res) => {
 
     let upload = multer({ storage: storage, fileFilter: filehelpers.imageFilter }).single('profile_pic');
 

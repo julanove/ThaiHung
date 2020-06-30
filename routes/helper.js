@@ -96,7 +96,7 @@ var register = function (Handlebars) {
             console.log('' + category);
             var cate = category == 0 ? '' : (category + '/');
 
-            var maxPage = Math.floor( count / offset);
+            var maxPage = Math.ceil( count / offset);
 
             //if (current == 1)
             result += '<div class="paginator-container">' +
@@ -105,10 +105,7 @@ var register = function (Handlebars) {
                 '<a class="skip" href="/' + type + '/' + cate + (current - 1) +'"> &lt; </a>' +
                 '<a class="active" href="/' + type + '/' + cate + current+'">' + current+'</a>' +
                     //'<a href="/news/2">2</a>' +
-                    //'<a href="/news/3">3</a>' +
-                    //'<a href="#">4</a>' +
-                    //'<a href="#">5</a>' +
-                '<a href="/'+type+ '/' + cate + maxPage +'">' + maxPage+'</a>' +
+                (maxPage == current ? '' : ('<a href="/'+type+ '/' + cate + maxPage +'">' + maxPage+'</a>')) +
                 '<a class="skip" href="/' + type + '/' + cate + (parseInt(current) + 1) + '"> &gt; </a>' +
                 '<a class="skip" href="/' + type + '/' + cate + maxPage +'"> &gt;&gt; </a>' +
                     '</div >' +
@@ -165,8 +162,12 @@ var register = function (Handlebars) {
 
         safeString: function (content) {
             //console.log(JSON.stringify(content));
-            return new Handlebars.SafeString(content.trim());
-
+            if (content) {
+                return new Handlebars.SafeString(content.trim());
+            }
+            else {
+                return new Handlebars.SafeString('<p></p>');
+            }
         },
          
     };

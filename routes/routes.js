@@ -7,7 +7,7 @@ module.exports = {
         console.log('Home URL');
         console.log(websiteURL);
 
-        db.query('SELECT * FROM media where mediaTypeID = 1 limit 8; SELECT * FROM news order by newID desc limit 4;',
+        db.query('SELECT * FROM media where mediaType = 1 limit 8; SELECT * FROM news order by newID desc limit 4;',
             function (err, results) {
                 //connection.release();
                 res.render('home', {
@@ -128,10 +128,10 @@ module.exports = {
 
         var index = req.params.index;
         var categoryType = req.params.type;
-        var max = index * 3;
-        var start = max - 3;
+        var max = index * 6;
+        var start = max - 6;
 
-        db.query('SELECT * FROM product where type = ' + categoryType + ' order by productID desc limit ' + start + ', 3 ; select count(*) as count from product where type = ' + categoryType +' ; select * from productType;',
+        db.query('SELECT * FROM product where type = ' + categoryType + ' order by productID desc limit ' + start + ', 6 ; select count(*) as count from product where type = ' + categoryType +' ; select * from productType;',
             function (err, results) {
                 //console.log(results[1]);
                 res.render('product', {
@@ -139,7 +139,7 @@ module.exports = {
                     data: {
                         product: results[0],
                         count: results[1][0].count,
-                        offset: 3,
+                        offset: 6,
                         current: index,
                         type: "product",
                         category: results[2],
@@ -260,6 +260,30 @@ module.exports = {
                 if (err) console.log(err);
             }
         );
+
+    },
+
+    adminProductDetails: function (req, res) {
+
+        //console.log("vao day");
+        //console.log(req.params.newid);
+        let select = 'select * from product where productID = ?; select * from productType;';
+        let query = mysql.format(select, [req.params.productID]);
+        db.query(query, function (err, result) {
+
+            console.log(result[0]);
+            console.log(result[1]);
+
+            res.render('admin/admin-productdetails', {
+                layout: 'admin-main',
+                data: {
+                    product: result[0][0],
+                    type: result[1]
+                },
+                websiteURL: websiteURL
+            });
+
+        });
 
     },
 
@@ -484,10 +508,8 @@ module.exports = {
 
     productUpdate: function (req, res) {
 
-        console.log('da vao update');
-
-        let updateQuery = 'update productType set name = ? where productTypeID = ?';
-        let query = mysql.format(updateQuery, [req.body.name, req.body.productTypeID]);
+        let updateQuery = 'update product set name = ?, type = ?, image = ?, description = ?, content = ?, thumb1 = ?, thumb2 = ?, thumb3 = ? where productID = ?';
+        let query = mysql.format(updateQuery, [req.body.name, req.body.type, req.body.image, req.body.description, req.body.content, req.body.tb1, req.body.tb2, req.body.tb3, req.body.productID]);
         db.query(query, (err, response) => {
             if (err) {
                 console.error(err);
@@ -500,8 +522,8 @@ module.exports = {
 
     productDelete: function (req, res) {
 
-        let deleteQuery = 'DELETE FROM productType where productTypeID = ?';
-        let query = mysql.format(deleteQuery, [req.body.typeid]);
+        let deleteQuery = 'DELETE FROM product where productID = ?';
+        let query = mysql.format(deleteQuery, [req.body.productID]);
         db.query(query, (err, response) => {
             if (err) {
                 console.error(err);
@@ -532,6 +554,21 @@ module.exports = {
 
         let deleteQuery = 'update contact set isRead = 1 where contactID = ?';
         let query = mysql.format(deleteQuery, [req.body.contactID]);
+        db.query(query, (err, response) => {
+            if (err) {
+                console.error(err);
+                return;
+            }
+        });
+
+        res.status(200).send(JSON.stringify({ status: "OK" }));
+
+    },
+
+    mediaInsert: function (req, res) {
+
+        let deleteQuery = 'insert into media (source, productID, mediaType) values (?,?,?)';
+        let query = mysql.format(deleteQuery, [req.body.source, req.body.productID, req.body.mediaType]);
         db.query(query, (err, response) => {
             if (err) {
                 console.error(err);

@@ -104,20 +104,20 @@
                 { type: "control", editButton: false, title: "Delete" }
             ],
             rowClick: function (idx) {
-                var url = "/admin/newsdetails/" + idx.item.newid;
+                var url = "/admin/productdetails/" + idx.item.productID;
                 console.log(url);
-                window.location = "/admin/newsdetails/" + idx.item.newid;
+                window.location = "/admin/productdetails/" + idx.item.productID;
 
             },
             onItemDeleting: function (args) {
 
-                console.log(args.item.newid);
+                console.log(args.item.productID);
                 $.ajax({
-                    url: "/newsDelete",
+                    url: "/productDelete",
                     type: "POST",
                     dataType: "json",
                     contentType: "application/json",
-                    data: JSON.stringify({ newid: args.item.newid }),
+                    data: JSON.stringify({ productID: args.item.productID }),
                     success: function (msg) {
 
                     }

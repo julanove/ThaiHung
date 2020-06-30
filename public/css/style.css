@@ -995,3 +995,7 @@ body {
     margin-left: -32px;
     margin-top: -32px;
 }
+
+.productImage {
+    width: 385px;
+}
