@@ -13,7 +13,7 @@ var register = function (Handlebars) {
             for (const key of content) {
                 if (i == 0) {
                     highlight += '<div class="highlight-news">';
-                    highlight += '<a href="/news-details/' + key.newid +'"><img class="w-100" src="/static/' + key.image + '"></a>';
+                    highlight += '<a href="/news-details/' + key.newid +'"><img class="home-news-img" src="/static/' + key.image + '"></a>';
                     highlight += '<div class="des">';
                     highlight += '<h4>' + key.title + '</h4>';
                     highlight += '<div class="news-date">' + formatDate(key.datetime) + '</div>';
@@ -22,7 +22,7 @@ var register = function (Handlebars) {
                 }
                 else {
                     smallnews += '<div class="small-news">';
-                    smallnews += '<a href="/news-details/' + key.newid +'"><img class="w-100" src="/static/'+ key.image + '"></a>';
+                    smallnews += '<a href="/news-details/' + key.newid +'"><img class="home-news-img" src="/static/'+ key.image + '"></a>';
                     smallnews += '<div class="des">';
                     smallnews += '<h5>' + key.title + '</h5>';
                     smallnews += '<span class="news-date">' + formatDate(key.datetime) + '</span>';

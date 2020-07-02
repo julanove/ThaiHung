@@ -506,10 +506,19 @@
     .facilites-page .index.factory, .facilites-page .full-width-gallery {
         margin: 5px 0 5px 0;
     }
+    .small-news {
+        height: unset;
+    }
+    .small-news a {
+        display: unset;
+    }
 }
 @media screen and (max-width: 480px) {
     h3 {
         font-size: 1.2em;
+    }
+    .logo {
+        width: 40%;
     }
     .about>.content {
         margin: 20px 0;
