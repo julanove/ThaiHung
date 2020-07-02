@@ -2,7 +2,7 @@ $(document).on("click", ".toiawase", function (e) {
 
     e.preventDefault();
     grecaptcha.ready(function () {
-        grecaptcha.execute('reCAPTCHA_site_key', { action: 'submit' }).then(function (token) {
+        grecaptcha.execute('6LfrYawZAAAAAA3LxPNto_hxdTHYkAaGWv-TpKU1', { action: 'submit' }).then(function (token) {
             console.log('OK');
         });
     });
