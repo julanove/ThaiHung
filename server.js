@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 var mysql = require('mysql');
 var session = require('express-session');
 var path = require('path');
+var cookieParser = require("cookie-parser");
 var app = express();
 
 //var busboyBodyParse = require('busboy-body-parser');
@@ -63,6 +64,7 @@ app.set('port', process.env.PORT || 3000);
 app.use('/static', express.static('public'))
 app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 app.use(bodyParser.json({ limit: '50mb' }));
+app.use(cookieParser());
 
 //app.use(busboyBodyParse());
 //app.use(busboy);
@@ -79,21 +81,29 @@ app.use(session({
 //const { getHomePage } = require('./routes/home');
 
 var allRouteFunction = require('./routes/routes');
+var isAuthenticated = require('./routes/isAuthen').isAuthenticated;
 
 //---------------------------------------------------------- Client Page
 
 app.post('/contact', allRouteFunction.contactFunction);
+
 app.get('/news', allRouteFunction.newsFunction);
+
 app.get('/news/:index', allRouteFunction.newsPagingFunction);
+
 app.get('/news-details/:newid', allRouteFunction.newsDetailsFunction);
+
 app.get('/product/:type/:index', allRouteFunction.productFunction);
+
 app.get('/product-details/:id', allRouteFunction.productDetailsFunction);
+
 app.get('/about', function (req, res, next) {
     res.render('about', {
         layout: 'main',
         websiteURL: websiteURL
     });
 });
+
 app.get('/facility', function (req, res, next) {
     res.render('facility', {
         layout: 'main',
@@ -108,7 +118,7 @@ app.get('/admin_login', function (request, response) {
     response.sendFile(path.join(__dirname + '/views/admin/login.html'));
 });
 
-app.get('/admin', function (request, response, next) {
+app.get('/admin', isAuthenticated,  function (request, response, next) {
     if (request.session.loggedin) {
         response.render('admin/admin-home', {
             layout: 'admin-main',
@@ -139,33 +149,38 @@ app.get('/admin/contactdetails/:contactID', allRouteFunction.adminContactDetails
 
 app.post('/auth', allRouteFunction.authen);
 
-app.post('/changePass', allRouteFunction.changePass); 
+app.post('/changePass', isAuthenticated, allRouteFunction.changePass); 
 
-app.post('/newsInsert', allRouteFunction.newsInsert);
+app.post('/newsInsert', isAuthenticated, allRouteFunction.newsInsert);
 
-app.post('/newsUpdate', allRouteFunction.newsUpdate);
+app.post('/newsUpdate', isAuthenticated, allRouteFunction.newsUpdate);
 
-app.post('/newsDelete', allRouteFunction.newsDelete);
+app.post('/newsDelete', isAuthenticated, allRouteFunction.newsDelete);
 
-app.post('/typeInsert', allRouteFunction.typeInsert);
+app.post('/typeInsert', isAuthenticated, allRouteFunction.typeInsert);
 
-app.post('/typeUpdate', allRouteFunction.typeUpdate);
+app.post('/typeUpdate', isAuthenticated, allRouteFunction.typeUpdate);
 
-app.post('/typeDelete', allRouteFunction.typeDelete);
+app.post('/typeDelete', isAuthenticated, allRouteFunction.typeDelete);
 
-app.post('/productInsert', allRouteFunction.productInsert);
+app.post('/productInsert', isAuthenticated, allRouteFunction.productInsert);
 
-app.post('/productSelect', allRouteFunction.productSelect);
+app.post('/productSelect', isAuthenticated, allRouteFunction.productSelect);
 
-app.post('/productUpdate', allRouteFunction.productUpdate);
+app.post('/productUpdate', isAuthenticated, allRouteFunction.productUpdate);
 
-app.post('/productDelete', allRouteFunction.productDelete);
+app.post('/productDelete', isAuthenticated, allRouteFunction.productDelete);
 
-app.post('/contactDelete', allRouteFunction.contactDelete);
+app.post('/contactDelete', isAuthenticated, allRouteFunction.contactDelete);
 
-app.post('/contactRead', allRouteFunction.contactRead);
+app.post('/contactRead', isAuthenticated, allRouteFunction.contactRead);
 
 // ---------------------------------------------------- TEST PAGE
+
+//app.get('/jwt', require('./routes/jwt'));
+app.get('/', allRouteFunction.homePageFunction);
+app.get('/', require('./routes/jwt'));
+
 
 var multer = require('multer');
 const filehelpers = require('./routes/filehelper');
@@ -181,7 +196,7 @@ var storage = multer.diskStorage({
     }
 });
 
-app.get('/', allRouteFunction.homePageFunction);
+
 
 app.post('/imageInsert',  (req, res) => {
 

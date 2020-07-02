@@ -1,4 +1,7 @@
 var mysql = require('mysql');
+var env = process.env.NODE_ENV || 'local';
+var config = require('../config/config')[env];
+const jwt = require('jsonwebtoken');
 
 
 module.exports = {
@@ -377,6 +380,7 @@ module.exports = {
     },
 
     authen: function (request, response) {
+        console.log(request.body);
         var username = request.body.username;
         var password = request.body.password;
         if (username && password) {
@@ -384,11 +388,31 @@ module.exports = {
                 if (results.length > 0) {
                     request.session.loggedin = true;
                     request.session.username = username;
-                    response.redirect('/admin');
+                    
+                    let token = jwt.sign({ "body": "stuff" }, config.secret, { algorithm: 'HS256' });
+
+                    // using cookie
+                    response.cookie("token", token, { maxAge: 600 * 1000 }, { httpOnly: true });
+
+                    // using author
+                    response.json({
+                        success: true,
+                        message: 'Authentication successul',
+                        //token: token,
+                        redirect: '/admin'
+                    });
+                    //response.redirect('/admin');
+                    //response.end();
+                    
                 } else {
-                    response.send('Incorrect Username and/or Password!');
+                    //response.json({
+                    //    success: false,
+                    //    message: 'Authentication failed',
+                    //    token: token
+                    //})
+                    response.status(401).end()
                 }
-                response.end();
+                //response.end();
             });
         } else {
             response.send('Please enter Username and Password!');
@@ -579,4 +603,20 @@ module.exports = {
         res.status(200).send(JSON.stringify({ status: "OK" }));
 
     },
+
+    errorHandle: function (err, req, res, next) {
+        if (typeof (err) === 'string') {
+            // custom application error
+            return res.status(400).json({ message: err });
+        }
+
+        if (err.name === 'UnauthorizedError') {
+            // jwt authentication error
+            return res.status(401).json({ message: 'Invalid Token' });
+        }
+
+        // default to 500 server error
+        return res.status(500).json({ message: err.message });
+    }
 }
+

@@ -43,6 +43,12 @@
     <Compile Include="models\mysqlconnection.js" />
     <Compile Include="public\js\db.js" />
     <Compile Include="routes\filehelper.js" />
+    <Compile Include="routes\isAuthen.js">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="routes\jwt.js">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="routes\routes.js" />
     <Compile Include="public\dist\js\adminlte.js" />
     <Compile Include="public\dist\js\adminlte.min.js" />
@@ -1975,6 +1981,7 @@
     <Content Include="public\scss\bootstrap\_variables.scss" />
     <Content Include="public\scss\style.scss" />
     <Content Include="README.md" />
+    <Content Include="views\401.handlebars" />
     <Content Include="views\admin\admin-home.handlebars" />
     <Content Include="views\admin\admin-contact.handlebars" />
     <Content Include="views\admin\admin-contactdetails.handlebars" />

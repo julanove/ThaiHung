@@ -4,12 +4,6 @@ var register = function (Handlebars) {
 
     var helpers = {
 
-        contact: function (content) {
-
-            
-
-        },
-
         homeNews: function (content) {
 
             var highlight = '';

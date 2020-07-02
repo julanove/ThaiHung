@@ -41,11 +41,39 @@
 <body>
     <div class="login-form">
         <h1>Thai Hung Admin Login Page</h1>
-        <form action="auth" method="POST">
-            <input type="text" name="username" placeholder="Username" required>
-            <input type="password" name="password" placeholder="Password" required>
-            <input type="submit">
-        </form>
+
+            <input id="username" type="text" name="username" placeholder="Username" required>
+            <input id="password" type="password" name="password" placeholder="Password" required>
+            <input type="button" id="submit" value="Submit"> 
     </div>
 </body>
 </html>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+<script>
+
+    $('#submit').on('click', function () {
+
+        $.ajax({
+            url: "/auth",
+            type: "POST",
+            data: JSON.stringify({
+                username: $('#username').val(),
+                password: $('#password').val()
+            }),
+            dataType: "json",
+            contentType: "application/json",
+            success: function (res) {
+
+                window.location = res.redirect;
+
+            },
+            error: function (err) {
+
+            }
+        });
+    })
+
+</script>
