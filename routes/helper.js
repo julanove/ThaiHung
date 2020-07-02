@@ -58,7 +58,7 @@ var register = function (Handlebars) {
                     highlight += '<span class="date">' + formatDate(key.datetime) +'</span>';
                     highlight += '<hr>';
                     highlight += '<div class="">' + key.description + '...</div>';
-                    highlight += '<div class="readmore"><a href="/news-details/' + key.newid +'">続きを読む</a><svg width="20" height="20"><path d="M2,10 L17,10 L10,5 M17,10 L10,15" ';
+                    highlight += '<div class="readmore" onclick="location.href=&#x27;/news-details/' + key.newid + '&#x27;">続きを読む<svg width="20" height="20"><path d="M2,10 L17,10 L10,5 M17,10 L10,15" ';
                     highlight += 'stroke-width="1" fill="none" stroke="var(--white)"></svg></div>';
                     highlight += '</div></div>';
                 }
@@ -69,7 +69,7 @@ var register = function (Handlebars) {
                     '<h4><a href="/news-details/' + key.newid +'">' + key.title +'</a></h4>' + 
                     '<span class="date">' + formatDate(key.datetime) +'</span>' + 
                     '<div class="">' + key.description + '...</div>' + 
-                    '<div class="readmore"><a href="/news-details/' + key.newid +'">続きを読む</a><svg width="20" height="20"><path d="M2,10 L17,10 L10,5 M17,10 L10,15" stroke-width="1" fill="none" stroke="var(--white)"></svg></div>' + 
+                    '<div class="readmore" onclick="location.href=&#x27;/news-details/' + key.newid + '&#x27;">続きを読む<svg width="20" height="20"><path d="M2,10 L17,10 L10,5 M17,10 L10,15" stroke-width="1" fill="none" stroke="var(--white)"></svg></div>' + 
                           '</div>' + 
                         '</div>';
                 }
