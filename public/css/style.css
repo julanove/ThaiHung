@@ -63,7 +63,7 @@ body {
     z-index: 99;
 }
 .head-slide {
-    background-image: url('/static/images/page/background-img.png');
+    background-image: url('/images/page/background-img.png');
     background-size: cover;
     background-attachment: fixed;
     width: 100%;

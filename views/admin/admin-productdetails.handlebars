@@ -33,7 +33,7 @@
                             <input type="file" id="imageFile" name="profile_pic">
                             <input type="hidden" value="{{data.product.image}}" id="imageFileURL" />
                         </div>
-                        <img src="/static/{{data.product.image}}" id="imageFileReview" style="width:277px;" />
+                        <img src="/{{data.product.image}}" id="imageFileReview" style="width:277px;" />
                     </div>
 
                     <div class="form-group">
@@ -53,7 +53,7 @@
                                 <input type="file" id="tb1" name="profile_pic">
                                 <input type="hidden" value="{{data.product.thumb1}}" id="tb1URL" />
                             </div>
-                            <img src="/static/{{data.product.thumb1}}" id="tb1Review" style="width:277px;" />
+                            <img src="/{{data.product.thumb1}}" id="tb1Review" style="width:277px;" />
                         </div>
 
                         <div class="col-md-4">
@@ -62,7 +62,7 @@
                                 <input type="file" id="tb2" name="profile_pic">
                                 <input type="hidden" value="{{data.product.thumb2}}" id="tb2URL" />
                             </div>
-                            <img src="/static/{{data.product.thumb2}}" id="tb2Review" style="width:277px;" />
+                            <img src="/{{data.product.thumb2}}" id="tb2Review" style="width:277px;" />
                         </div>
 
                         <div class="col-md-4">
@@ -71,7 +71,7 @@
                                 <input type="file" id="tb3" name="profile_pic">
                                 <input type="hidden" value="{{data.product.thumb3}}" id="tb3URL" />
                             </div>
-                            <img src="/static/{{data.product.thumb3}}" id="tb3Review" style="width:277px;" />
+                            <img src="/{{data.product.thumb3}}" id="tb3Review" style="width:277px;" />
                         </div>
                     </div>
 
@@ -117,11 +117,11 @@
     <input type="hidden" value="{{websiteURL}}" id="websiteURL" />
 </section>
 
-<script src="/static/plugins/summernote/summernote-bs4.min.js"></script>
-<!--<script src="/static/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>-->
-<link rel="stylesheet" href="/static/plugins/jsgrid/jsgrid.min.css">
-<link rel="stylesheet" href="/static/plugins/jsgrid/jsgrid-theme.min.css">
-<link rel="stylesheet" href="/static/plugins/summernote/summernote-bs4.css">
+<script src="/plugins/summernote/summernote-bs4.min.js"></script>
+<!--<script src="/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>-->
+<link rel="stylesheet" href="/plugins/jsgrid/jsgrid.min.css">
+<link rel="stylesheet" href="/plugins/jsgrid/jsgrid-theme.min.css">
+<link rel="stylesheet" href="/plugins/summernote/summernote-bs4.css">
 
 <script>
 
@@ -190,7 +190,7 @@
                     console.log(url);
                     var result = JSON.parse(url);
                     if (result.status == "OK") {
-                        $('#content').summernote('insertImage', '/static/images/' + result.filename)
+                        $('#content').summernote('insertImage', '/images/' + result.filename)
                     }
                 }
             });

@@ -42,7 +42,7 @@
                             <input type="file" id="imageFile" name="profile_pic">
                             <input type="hidden" value="{{data.news.image}}" id="imageURL" />
                         </div>
-                        <img src="/static/{{data.news.image}}" id="imagePreview" style="width:277px;" />
+                        <img src="/{{data.news.image}}" id="imagePreview" style="width:277px;" />
                     </div>
 
                     <!-- input states -->
@@ -99,11 +99,11 @@
     <input type="hidden" value="{{websiteURL}}" id="websiteURL" />
 </section>
 
-<script src="/static/plugins/summernote/summernote-bs4.min.js"></script>
-<!--<script src="/static/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>-->
-<link rel="stylesheet" href="/static/plugins/jsgrid/jsgrid.min.css">
-<link rel="stylesheet" href="/static/plugins/jsgrid/jsgrid-theme.min.css">
-<link rel="stylesheet" href="/static/plugins/summernote/summernote-bs4.css">
+<script src="/plugins/summernote/summernote-bs4.min.js"></script>
+<!--<script src="/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>-->
+<link rel="stylesheet" href="/plugins/jsgrid/jsgrid.min.css">
+<link rel="stylesheet" href="/plugins/jsgrid/jsgrid-theme.min.css">
+<link rel="stylesheet" href="/plugins/summernote/summernote-bs4.css">
 
 <script>
 
@@ -132,7 +132,7 @@
                     console.log(url);
                     var result = JSON.parse(url);
                     if (result.status == "OK") {
-                        $('.textarea').summernote('insertImage', '/static/images/' + result.filename)
+                        $('.textarea').summernote('insertImage', '/images/' + result.filename)
                     }
                 }
             });

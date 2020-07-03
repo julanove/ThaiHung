@@ -13,7 +13,7 @@ var register = function (Handlebars) {
             for (const key of content) {
                 if (i == 0) {
                     highlight += '<div class="highlight-news">';
-                    highlight += '<a href="/news-details/' + key.newid +'"><img class="home-news-img" src="/static/' + key.image + '"></a>';
+                    highlight += '<a href="/news-details/' + key.newid +'"><img class="home-news-img" src="/' + key.image + '"></a>';
                     highlight += '<div class="des">';
                     highlight += '<h4>' + key.title + '</h4>';
                     highlight += '<div class="news-date">' + formatDate(key.datetime) + '</div>';
@@ -22,7 +22,7 @@ var register = function (Handlebars) {
                 }
                 else {
                     smallnews += '<div class="small-news">';
-                    smallnews += '<a href="/news-details/' + key.newid +'"><img class="home-news-img" src="/static/'+ key.image + '"></a>';
+                    smallnews += '<a href="/news-details/' + key.newid +'"><img class="home-news-img" src="/'+ key.image + '"></a>';
                     smallnews += '<div class="des">';
                     smallnews += '<h5>' + key.title + '</h5>';
                     smallnews += '<span class="news-date">' + formatDate(key.datetime) + '</span>';
@@ -52,7 +52,7 @@ var register = function (Handlebars) {
                     console.log('go');
                     console.log(key.description.substring(30));
                     highlight += '<div class="highlight-news">';
-                    highlight += '<div class="new-image"><a href="/news-details/'+key.newid+'"><img class="w-100" src="/static/'+ key.image +'"></a></div>';
+                    highlight += '<div class="new-image"><a href="/news-details/'+key.newid+'"><img class="w-100" src="/'+ key.image +'"></a></div>';
                     highlight += '<div class="news-des">';
                     highlight += '<h3><a href="/news-details/' + key.newid +'">'+key.title+'</a></h3>';
                     highlight += '<span class="date">' + formatDate(key.datetime) +'</span>';
@@ -64,7 +64,7 @@ var register = function (Handlebars) {
                 }
                 else {
                 smallnews += '<div class="new-item">' + 
-                    '<div class="new-image"><a href="/news-details/' + key.newid +'"><img class="w-100" src="/static/'+key.image+'"></a></div>' + 
+                    '<div class="new-image"><a href="/news-details/' + key.newid +'"><img class="w-100" src="/'+key.image+'"></a></div>' + 
                      '<div class="news-des">' + 
                     '<h4><a href="/news-details/' + key.newid +'">' + key.title +'</a></h4>' + 
                     '<span class="date">' + formatDate(key.datetime) +'</span>' + 
@@ -139,7 +139,7 @@ var register = function (Handlebars) {
 
             for (const key of content) {
                 result += '<div class="product-item"> '+
-                          '<a href="/product-details/'+ key.productID +'"><img src="/static/'+key.image+'" ></a>'+
+                          '<a href="/product-details/'+ key.productID +'"><img src="/'+key.image+'" ></a>'+
                           '<div class="product-name">'+key.name+'</div>'+
                           '<div class="product-excerpt">'+  key.description + '</div>'+
                           '</div >'
