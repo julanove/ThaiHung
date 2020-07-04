@@ -38,24 +38,6 @@
 
         return false;
     }); // click() scroll top END
-    $(document).ready(function () {
-        var nav = $('nav[role="navigation"]');
-
-        // Mobile Navigation
-        $('.nav-toggle').on('click', function () {
-            $(this).toggleClass('close-nav');
-            nav.toggleClass('open');
-
-            return false;
-        });
-        $('.close').on('click', function () {
-            $('.mask').css('display', 'none')
-        });
-        nav.find('a').on('click', function () {
-            $('.nav-toggle').toggleClass('close-nav');
-            nav.toggleClass('open');
-        });
-    });
 </script>
 
 

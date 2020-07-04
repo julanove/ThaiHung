@@ -584,6 +584,9 @@
     .strong-point button {
         width: 100%;
     }
+    .our-service {
+        overflow: hidden;
+    }
     .our-service>img {
         height: 100%;
         width: auto;
