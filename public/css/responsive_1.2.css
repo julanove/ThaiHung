@@ -747,6 +747,9 @@
     .factory-img-md {
         display: none;
     }
+    .facilites-page .human-banner-img {
+        overflow: hidden;
+    }
     .facilites-page .factory__item {
         display: block;
     }
