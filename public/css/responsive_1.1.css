@@ -254,7 +254,7 @@
         display: none;
     }
     .strong-point {
-        background: linear-gradient(to bottom left, var(--light-blue) 75%, transparent), url('images/page/image-2.png');
+        background: linear-gradient(to bottom left, var(--light-blue) 75%, transparent), url('../images/page/image-2.png');
         background-position: bottom left;
         background-repeat: no-repeat;
     }
