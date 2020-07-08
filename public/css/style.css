@@ -398,6 +398,9 @@ body {
     color: white;
     border: none;
 }
+.header-menu button a, .header-menu button a:hover {
+    color: white;
+}
 .header-menu button:hover {
     background-color: var(--dark-blue);
 }
