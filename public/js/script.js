@@ -35,4 +35,19 @@ $(document).ready(function() {
         $('.nav-toggle').toggleClass('close-nav');
         nav.toggleClass('open');
     });
+    $('a[href*="#menu"]').bind('click', function(e) {
+        e.preventDefault(); // prevent hard jump, the default behavior
+
+        var target = $(this).attr("href"); // Set the target as variable
+
+        // perform animated scrolling by getting top-position of target-element and set it as scroll target
+        $('html, body').stop().animate({
+            scrollTop: $(target).offset().top - 100
+        }, 1000, function() {
+            location.hash = target; //attach the hash (#jumptarget) to the pageurl
+        });
+
+        return false;
+    });
+
 });

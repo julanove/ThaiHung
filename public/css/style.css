@@ -365,16 +365,54 @@ body {
     list-style: none;
     float: left;
 }
+.menu-active a {
+    color: var(--blue) !important;
+    font-weight: bold;
+}
+.menu-active:after {
+    content: '';
+    border: 1px solid var(--blue);
+    width: 100%;
+    height: 2px;
+    position: absolute;
+    bottom: 10px;
+}
 .header-menu ul, .header-menu li {
     height: 100%;
 }
-.header-menu li:hover {
-    background-color: #ddd;
-    transition-duration: 0.3s;
+.header-menu li {
+    position: relative;
     cursor: pointer;
 }
-.header-menu li:hover a, .header-menu li a {
+.header-menu li:hover {
+    /*background-color: #ddd;*/
+    transition-duration: 0.3s;
+    color: var(--blue);
+    font-weight: bold;
+}
+.header-menu li:hover:after {
+    content: '';
+    border: 1px solid var(--blue);
+    width: 100%;
+    height: 2px;
+    position: absolute;
+    bottom: 10px;
+}
+#scroll-contact {
+    padding: 0;
+    color: unset;
+    display: inline-block;
+}
+#scroll-contact:hover, #scroll-contact:focus {
+    text-decoration: none;
+}
+.header-menu li a {
     color: var(--charcoal);
+}
+.header-menu li:hover a {
+    color: var(--blue);
+}
+.header-menu li:hover a, .header-menu li a {
     text-decoration: none;
     height: 100%;
     display: flex;
