@@ -274,6 +274,13 @@
     .product-name {
         font-size: 1em;
     }
+    .product .product-excerpt {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
     .product-button {
         margin-top: 30px;
         margin-bottom: 40px;
@@ -435,7 +442,7 @@
         margin: 4px;
     }
     .paginator .skip {
-        width: auto !important;
+        /*width: auto !important;*/
         margin: 0;
     }
     .product-page .about .content {

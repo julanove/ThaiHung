@@ -385,7 +385,6 @@ body {
     cursor: pointer;
 }
 .header-menu li:hover {
-    /*background-color: #ddd;*/
     transition-duration: 0.3s;
     color: var(--blue);
     font-weight: bold;
