@@ -89,18 +89,17 @@ var register = function (Handlebars) {
 
             console.log('' + category);
             var cate = category == 0 ? '' : (category + '/');
-
             var maxPage = Math.ceil( count / offset);
 
             //if (current == 1)
             result += '<div class="paginator-container">' +
                 '<div class="paginator" >' +
-                '<a class="skip" href="/' + type + cate +'/1"> &lt;&lt; </a>' +
-                '<a class="skip" href="/' + type + '/' + cate + (current - 1) +'"> &lt; </a>' +
+                '<a class="skip" href="/' + type  +'/' + cate + '1' + '"> &lt;&lt; </a>' +
+                ((parseInt(current) - 1) != 0 ? '<a class="skip" href="/' + type + '/' + cate + (parseInt(current) - 1) + '"> &lt; </a>' : '') + 
                 '<a class="active" href="/' + type + '/' + cate + current+'">' + current+'</a>' +
                     //'<a href="/news/2">2</a>' +
                 (maxPage == current ? '' : ('<a href="/'+type+ '/' + cate + maxPage +'">' + maxPage+'</a>')) +
-                '<a class="skip" href="/' + type + '/' + cate + (parseInt(current) + 1) + '"> &gt; </a>' +
+                ((parseInt(current) + 1) <= maxPage ? '<a class="skip" href="/' + type + '/' + cate + (parseInt(current) + 1) + '"> &gt; </a>' : '') +
                 '<a class="skip" href="/' + type + '/' + cate + maxPage +'"> &gt;&gt; </a>' +
                     '</div >' +
                 '</div >';
