@@ -235,6 +235,9 @@
     .about-us .text-container {
         padding-left: 28px;
     }
+    .modal-content {
+        width: 100%;
+    }
     .main h1 {
         font-size: 2em;
     }

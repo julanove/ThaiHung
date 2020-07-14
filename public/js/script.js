@@ -18,6 +18,10 @@ $(scrollTop).click(function() {
 
     return false;
 }); // click() scroll top END
+function openPretty (index, src) {
+    $('#myModal').css('display', 'block');
+    $('#pretty').attr('src', src);
+}
 $(document).ready(function() {
     var nav = $('nav[role="navigation"]');
 
@@ -49,5 +53,8 @@ $(document).ready(function() {
 
         return false;
     });
-
+    $('.modalClose').on('click', function() {
+        $('#myModal').css('display', 'none');
+    });
 });
+
