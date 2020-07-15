@@ -101,6 +101,7 @@ app.get('/product-details/:id', allRouteFunction.productDetailsFunction);
 
 app.get('/about', function (req, res, next) {
     res.render('about', {
+        page_name: 'about',
         layout: 'main',
         websiteURL: websiteURL
     });
@@ -108,6 +109,7 @@ app.get('/about', function (req, res, next) {
 
 app.get('/facility', function (req, res, next) {
     res.render('facility', {
+        page_name: 'facility',
         layout: 'main',
         websiteURL: websiteURL
     });

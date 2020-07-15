@@ -14,6 +14,7 @@ module.exports = {
             function (err, results) {
                 //connection.release();
                 res.render('home', {
+                    page_name: 'home',
                     layout: 'main',
                     data: {
                         media: results[0],
@@ -56,6 +57,7 @@ module.exports = {
             function (err, results) {
                 //console.log(results[1][0].count);
                 res.render('news', {
+                    page_name: 'news',
                     layout: 'main',
                     data: {
                         news: results[0],
@@ -140,6 +142,7 @@ module.exports = {
                 res.render('product', {
                     layout: 'main',
                     data: {
+                        page_name: 'product',
                         product: results[0],
                         count: results[1][0].count,
                         offset: 6,
