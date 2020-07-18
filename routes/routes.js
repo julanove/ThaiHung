@@ -269,6 +269,24 @@ module.exports = {
 
     },
 
+    adminProductAdd: function (req, res) {
+
+        let select = 'select * from productType;';
+        let query = mysql.format(select, null);
+        db.query(query, function (err, result) {
+
+            res.render('admin/admin-productadd', {
+                layout: 'admin-main',
+                data: {
+                    type: result
+                },
+                websiteURL: websiteURL
+            });
+
+        });
+
+    },
+
     adminProductDetails: function (req, res) {
 
         //console.log("vao day");
@@ -395,7 +413,7 @@ module.exports = {
                     let token = jwt.sign({ "body": "stuff" }, config.secret, { algorithm: 'HS256' });
 
                     // using cookie
-                    response.cookie("token", token, { maxAge: 600 * 1000 }, { httpOnly: true });
+                    response.cookie("token", token, { maxAge: 365 * 24 * 60 * 60 * 1000 }, { httpOnly: true });
 
                     // using author
                     response.json({
@@ -506,8 +524,8 @@ module.exports = {
 
     productInsert: function (req, res) {
 
-        let insertQuery = 'INSERT INTO productType (name) VALUES(?)';
-        let query = mysql.format(insertQuery, [req.body.name]);
+        let insertQuery = 'INSERT INTO product (content, description, image, name, thumb1, thumb2, thumb3, type) VALUES (?, ?, ?, ? , ?, ?, ?, ?)';
+        let query = mysql.format(insertQuery, [req.body.content, req.body.description, req.body.image, req.body.name, req.body.tb1, req.body.tb2, req.body.tb3, req.body.type]);
         db.query(query, (err, response) => {
             if (err) {
                 console.error(err);

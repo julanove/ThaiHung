@@ -3,7 +3,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>ニュースリスト</h1>
+                <h1>List News</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -18,14 +18,14 @@
 <section class="content">
     <div class="card card-primary">
         <div class="card-header">
-            <h3 class="card-title">ニュース</h3>
+            <h3 class="card-title">News</h3>
         </div>
         <!-- /.card-header -->
         <div class="card-body">
             <div id="jsGrid1"></div>
         </div>
         <div class="card-footer">
-            <button type="button" onclick="location.href='/admin/newsadd'" class="btn btn-primary insert">追加</button>
+            <button type="button" onclick="location.href='/admin/newsadd'" class="btn btn-primary insert">Add</button>
             <!--<button type="button" class="btn btn-primary update">削除</button>-->
         </div>
     </div>
@@ -66,8 +66,8 @@
         fields: [
             { name: "newid", type: "text", width: 50, title: "ID" },
             //{ name: "image", type: "text", width: 200, title: "Thumbnail" },
-            { name: "title", type: "text", width: 200, title: "タイトル" },
-            { name: "description", type: "text", width: 300, title: "記述" },
+            { name: "title", type: "text", width: 200, title: "Title" },
+            { name: "description", type: "text", width: 300, title: "Description" },
             { name: "date", type: "datetime", width: 150, title: "Date" } ,
                 //{ name: "Age2", type: "number", width: 50 },
                 //{ name: "Country2", type: "select", items: db.countries, valueField: "Id", textField: "Name" },

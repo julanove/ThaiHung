@@ -3,7 +3,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>>商品タイプリスト</h1>
+                <h1>Product Category</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -18,7 +18,7 @@
 <section class="content">
     <div class="card card-primary">
         <div class="card-header">
-            <h3 class="card-title">商品タイプ</h3>
+            <h3 class="card-title">Category</h3>
         </div>
         <!-- /.card-header -->
         <div class="card-body">
@@ -39,6 +39,15 @@
 <link rel="stylesheet" href="/plugins/jsgrid/jsgrid-theme.min.css">
 
 <script>
+
+    window.onload = function () {
+		console.log('reload');
+		var reloading = sessionStorage.getItem("reloading");
+		if (reloading) {
+			sessionStorage.removeItem("reloading");
+			myFunction();
+		}
+	}
 
     $(document).ready(function () {
 
@@ -62,7 +71,7 @@
 
         fields: [
             //{ name: "productTypeID", type: "text", width: 50, title: "ID" },
-            { name: "name", type: "text", width: 300, title: "商品タイプ" },
+            { name: "name", type: "text", width: 300, title: "Product Category" },
             { type: "control", title: "Edit/ Delete" }],
             rowClick: function (idx) {
                 //var url = "/admin/newsdetails/" + idx.item.newid;

@@ -143,6 +143,8 @@ app.get('/admin/type', allRouteFunction.adminType);
 
 app.get('/admin/product', allRouteFunction.adminProduct);
 
+app.get('/admin/productadd', allRouteFunction.adminProductAdd);
+
 app.get('/admin/productdetails/:productID', allRouteFunction.adminProductDetails);
 
 app.get('/admin/contact', allRouteFunction.adminContact);

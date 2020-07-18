@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>News Editors</h1>
+                <h1>商品詳細</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -21,42 +21,76 @@
 
                 <!--<form action="newsInsert" method="post" enctype="multipart/form-data">-->
                 <div class="card-header">
-                    ニュースリスト
+                    New Product Information
                 </div>
-                        <!-- tools box -->
+                <!-- tools box -->
                 <div class="card-body">
 
                     <div class="form-group">
-                        <label>タイトル</label>
-                        <input type="text" id="title" name="title" class="form-control" placeholder="Enter ...">
-                    </div>
-
-                    <div class="form-group">
-                        <label>記述</label>
-                        <input type="text" id="description" name="description" class="form-control" placeholder="Enter ...">
-                    </div>
-
-                    <div class="form-group">
-                        <label>サムネ</label>
+                        <label>Avatar</label>
                         <div>
                             <input type="file" id="imageFile" name="profile_pic">
-                            <input type="hidden" value="" id="imageURL" />
+                            <input type="hidden" value="" id="imageFileURL" />
                         </div>
-                        <img src="" id="imagePreview" style="width:277px;" />
+                        <img src="" id="imageFileReview" style="width:277px;" />
                     </div>
 
-                    <!-- input states -->
-                    <!--<div class="form-group">
-    <label class="col-form-label" for="inputSuccess">
-        <i class="fas fa-check"></i> Input with success
-    </label>
-    <input type="text" class="form-control is-valid" id="inputSuccess" placeholder="Enter ...">
-    </div>-->
+                    <div class="form-group">
+                        <label>Category:</label>
+
+                        <select class="form-control" style="width:300px;" id="type">
+                            {{#each data.type}}
+                            <option value="{{productTypeID}}">{{name}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>Thumbnails</label>
+                            <div>
+                                <input type="file" id="tb1" name="profile_pic">
+                                <input type="hidden" value="" id="tb1URL" />
+                            </div>
+                            <img src="" id="tb1Review" style="width:277px;" />
+                        </div>
+
+                        <div class="col-md-4">
+                            <label>Thumbnails</label>
+                            <div>
+                                <input type="file" id="tb2" name="profile_pic">
+                                <input type="hidden" value="" id="tb2URL" />
+                            </div>
+                            <img src="" id="tb2Review" style="width:277px;" />
+                        </div>
+
+                        <div class="col-md-4">
+                            <label>Thumbnails</label>
+                            <div>
+                                <input type="file" id="tb3" name="profile_pic">
+                                <input type="hidden" value="" id="tb3URL" />
+                            </div>
+                            <img src="" id="tb3Review" style="width:277px;" />
+                        </div>
+                    </div>
+
 
                     <div class="form-group">
-                        <label>内容</label>
+                        <label>Title</label>
+                        <input type="text" id="name" name="name" value="" class="form-control" placeholder="Enter ...">
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea id="description" class="form-control" name="description" rows="3" placeholder="Enter ..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Content</label>
                         <textarea id="content" class="textarea" name="content" placeholder="Place some text here"
-                                  style="width: 100%; height: 500px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                                  style="width: 100%; height: 500px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
+                        </textarea>
                     </div>
 
                 </div>
@@ -64,21 +98,6 @@
                     <button id="updateNews" class="btn btn-primary">Submit</button>
                 </div>
 
-                        <!-- /.card-body -->
-                        <!--<div class="card-tools">
-                <button type="button" class="btn btn-tool btn-sm" data-card-widget="collapse" data-toggle="tooltip"
-                        title="Collapse">
-                    <i class="fas fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-tool btn-sm" data-card-widget="remove" data-toggle="tooltip"
-                        title="Remove">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>-->
-                        <!-- /. tools -->
-                    
-                <!--</form>-->
-                <!-- /.card-header -->
                 <div class="card-body pad">
                     <div class="mb-3">
 
@@ -105,10 +124,48 @@
 
 <script>
 
+    $('#updateNews').on('click', function () {
+
+        var name = $('#name').val();
+        var image = $('#imageFileURL').val().startsWith('images/') ? $('#imageFileURL').val() : ('images/' + $('#imageFileURL').val());
+        var content = $('#content').val();
+        var description = $('#description').val();
+        var type = $('#type option:selected').val();
+
+        var tb1 = $('#tb1URL').val().startsWith('images/') ? $('#tb1URL').val() : ('images/' + $('#tb1URL').val());
+        var tb2 = $('#tb2URL').val().startsWith('images/') ? $('#tb2URL').val() : ('images/' + $('#tb2URL').val());
+        var tb3 = $('#tb3URL').val().startsWith('images/') ? $('#tb3URL').val() : ('images/' + $('#tb3URL').val());
+
+        $.ajax({
+			url: "/productInsert",
+            type: "POST",
+            data: JSON.stringify({
+                name: name,
+                type: type,
+                image: image,
+                content: content,
+                description: description,
+                tb1: tb1,
+                tb2: tb2,
+                tb3: tb3
+            }),
+            dataType: "json",
+            contentType: "application/json",
+            success: function (msg) {
+                console.log(msg);
+                location.href = '/admin/product';
+            },
+            error: function () {
+
+            }
+        });
+
+    })
+
     $(document).ready(function () {
 
-        $('.textarea').summernote({
-            height: 500,
+        $('#content').summernote({
+            height: 400,
             callbacks: {
                 onImageUpload: function (files, editor, welEditable) {
                     sendFile(files[0], editor, welEditable);
@@ -119,7 +176,6 @@
         function sendFile(file, editor, welEditable) {
             data = new FormData();
             data.append("profile_pic", file);
-            debugger;
             $.ajax({
                 data: data,
                 type: "POST",
@@ -130,44 +186,35 @@
                 success: function (url) {
                     console.log(url);
                     var result = JSON.parse(url);
-                    debugger;
                     if (result.status == "OK") {
-                        $('.textarea').summernote('insertImage', '/images/' + result.filename)
+                        $('#content').summernote('insertImage', '/images/' + result.filename)
                     }
-                    //editor.insertImage(welEditable, url);
-                    //$('#summernote').summernote('insertImage', url, filename);
-                    
                 }
             });
         }
-        
 
-        $('#imageFile').on('change', function () {
+        $('#content').summernote('pasteHTML', '{{safeString data.product.content}}');
+        //$('#content').summernote('pasteHTML', null);
+
+        $('#imageFile,#tb1,#tb2,#tb3').on('change', function (e) {
+
+            var elementID = this.getAttribute("id");
 
             if (this.files && this.files[0]) {
                 var reader = new FileReader();
 
                 reader.onload = function (e) {
-                    $('#imagePreview').attr('src', e.target.result);
+                    $('#' + elementID + 'Review').attr('src', e.target.result);
                 }
 
                 reader.readAsDataURL(this.files[0]); // convert to base64 string
             }
 
-            console.log($('#imageFile').val());
-
+            //console.log($('#imageFile').val());
             // -----------------------
 
-            const websiteURL = $('#websiteURL').val();
-            var apiURL = websiteURL + 'newsInsert';
             var data = new FormData();
-            //jQuery.each(jQuery('#imageFile')[0].files, function (i, file) {
-            //    data.append('file-' + i, file);
-            //});
-            data.append('profile_pic', $('#imageFile')[0].files[0]); 
-
-            console.log('READY TO SEND');
-            console.log(data);
+            data.append('profile_pic', $('#' + elementID)[0].files[0]);
 
             $.ajax({
                 url: "/imageInsert",
@@ -184,7 +231,7 @@
 
                     if (result.status == "OK") {
                         console.log(result.filename);
-                        $('#imageURL').val(result.filename);
+                        $('#' + elementID + 'URL').val(result.filename);
                     }
                     else {
                         //document.getElementById("imagePreview").src = '';
@@ -194,36 +241,6 @@
 
         })
 
-        $('#updateNews').on('click', function () {
 
-            var title = $('#title').val();
-            var image = 'images/' + $('#imageURL').val();
-            var content = $('#content').val();
-            var description = $('#description').val();
-
-            $.ajax({
-                url: "/newsInsert",
-                type: "POST",
-                data: JSON.stringify({ title: title, image: image, content: content, description: description }),
-                dataType: "json",
-                contentType: "application/json",
-                success: function (msg) {
-                    console.log(msg);
-                    //var result = JSON.parse(msg);
-                    if (msg.status == "OK") {
-                        alert('OK');
-                        $('#title').val('');
-                        $('#imageFile').val('')
-                        $('#content').summernote("reset")
-                        $('#imagePreview').attr('src', '');
-                        $('#description').val('');
-                    }
-                },
-                error: function () {
-
-                }
-            });
-
-        })
     });
 </script>
