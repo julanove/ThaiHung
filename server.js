@@ -99,13 +99,7 @@ app.get('/product/:type/:index', allRouteFunction.productFunction);
 
 app.get('/product-details/:id', allRouteFunction.productDetailsFunction);
 
-app.get('/about', function (req, res, next) {
-    res.render('about', {
-        page_name: 'about',
-        layout: 'main',
-        websiteURL: websiteURL
-    });
-});
+app.get('/about', allRouteFunction.aboutFunction);
 
 app.get('/facility', function (req, res, next) {
     res.render('facility', {
@@ -151,6 +145,8 @@ app.get('/admin/contact', allRouteFunction.adminContact);
 
 app.get('/admin/contactdetails/:contactID', allRouteFunction.adminContactDetails);
 
+app.get('/admin/about', allRouteFunction.adminAbout);
+
 //---------------------------------------------------------- Admin API
 
 app.post('/auth', allRouteFunction.authen);
@@ -179,7 +175,9 @@ app.post('/productDelete', isAuthenticated, allRouteFunction.productDelete);
 
 app.post('/contactDelete', isAuthenticated, allRouteFunction.contactDelete);
 
-app.post('/contactRead', isAuthenticated, allRouteFunction.contactRead);
+app.post('/contactRead', isAuthenticated, allRouteFunction.contactRead); 
+
+app.post('/aboutUpdate', isAuthenticated, allRouteFunction.aboutUpdate);
 
 // ---------------------------------------------------- TEST PAGE
 

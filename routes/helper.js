@@ -162,6 +162,16 @@ var register = function (Handlebars) {
                 return new Handlebars.SafeString('<p></p>');
             }
         },
+
+        brSpace: function (content) {
+            if (content) {
+                return new Handlebars.SafeString(content.trim().replace(/\n/g, "<br />"));
+            }
+            else {
+                return new Handlebars.SafeString('<p></p>');
+            }
+            //return content.replace(/\n/g, "<br />");
+        },
          
     };
 

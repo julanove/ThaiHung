@@ -182,6 +182,30 @@ module.exports = {
 
     },
 
+
+    aboutFunction: function (req, res) {
+
+        let selectQuery = 'SELECT * FROM about';
+        let query = mysql.format(selectQuery, null);
+
+        console.log('ABOUT');
+
+        db.query(query, (err, results) => {
+
+            console.log(results);
+            res.render('about', {
+                layout: 'main',
+                data: {
+                    about: results[0]
+                },
+                websiteURL: websiteURL
+            });
+            if (err) console.log(err);
+        }
+        );
+
+    },
+
     // SERVER
 
     adminNews: function (req, res) {
@@ -326,6 +350,25 @@ module.exports = {
             }
         );
 
+    },
+
+    adminAbout: function (req, res) {
+
+        db.query('select * from about;',
+            function (err, results) {
+
+                console.log(results);
+
+                res.render('admin/admin-about', {
+                    layout: 'admin-main',
+                    data: {
+                        about: results[0],
+                    },
+                    websiteURL: websiteURL
+                });
+                if (err) console.log(err);
+            }
+        );
     },
 
     adminContactDetails: function (req, res) {
@@ -623,6 +666,21 @@ module.exports = {
 
         res.status(200).send(JSON.stringify({ status: "OK" }));
 
+    },
+
+    aboutUpdate: function (req, res) {
+
+        console.error('Update About');
+        let updateQuery = 'update about set about = ?, daihyou = ?, gyoumu = ?, honsha_location = ?, image = ?, insu = ?, koujou = ?, renrakusaki = ?, shamei = ?, shihon = ?, strongpoint = ?, video = ?';
+        let query = mysql.format(updateQuery, [req.body.about, req.body.daihyou, req.body.gyoumu, req.body.honsha_location, req.body.image, req.body.insu, req.body.koujou, req.body.renrakusaki, req.body.shamei, req.body.shihon, req.body.strongpoint, req.body.video]);
+        db.query(query, (err, response) => {
+            if (err) {
+                console.error(err);
+                return;
+            }
+        });
+
+        res.status(200).send(JSON.stringify({ status: "OK" }));
     },
 
     errorHandle: function (err, req, res, next) {

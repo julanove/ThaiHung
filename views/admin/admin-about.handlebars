@@ -1,0 +1,240 @@
+﻿<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>News Editors</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Text Editors</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-outline card-info">
+
+                <!--<form action="newsInsert" method="post" enctype="multipart/form-data">-->
+                <div class="card-header">
+                    ThaiHung Information
+                </div>
+                <!-- tools box -->
+                <div class="card-body">
+                    <div class="form-group">
+                        <label>About us</label>
+                        <textarea id="about" class="form-control" name="about" rows="3" placeholder="Enter ...">{{data.about.about}}</textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Image</label>
+                        <div>
+                            <input type="file" id="imageFile" name="profile_pic">
+                            <input type="hidden" value="{{data.about.image}}" id="imageURL" />
+                        </div>
+                        <img src="/{{data.about.image}}" id="imagePreview" style="width:277px;" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>社名</label>
+                        <input type="text" id="shamei" name="shamei" value="{{data.about.shamei}}" class="form-control" placeholder="Enter ...">
+                    </div>
+                    <div class="form-group">
+                        <label>本社住所</label>
+                        <textarea id="honsha_location" class="form-control" name="honsha_location" rows="2" placeholder="Enter ...">{{data.about.honsha_location}}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>工場</label>
+                        <textarea id="koujou" class="form-control" name="koujou" rows="2" placeholder="Enter ...">{{data.about.koujou}}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>連絡先</label>
+                        <textarea id="renrakusaki" class="form-control" name="renrakusaki" rows="2" placeholder="Enter ...">{{data.about.renrakusaki}}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>代表者</label>
+                        <textarea id="daihyou" class="form-control" name="daihyou" rows="2" placeholder="Enter ...">{{data.about.daihyou}}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>資本金</label>
+                        <textarea id="shihon" class="form-control" name="shihon" rows="2" placeholder="Enter ...">{{data.about.shihon}}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>従業員数</label>
+                        <textarea id="insu" class="form-control" name="insu" rows="2" placeholder="Enter ...">{{data.about.insu}}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>業務内容</label>
+                        <textarea id="gyoumu" class="form-control" name="gyoumu" rows="2" placeholder="Enter ...">{{data.about.gyoumu}}</textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Video</label>
+                        <input type="text" id="video" name="video" value="{{data.about.video}}" class="form-control" placeholder="Enter ...">
+                    </div>
+
+                    <div class="form-group">
+                        <label>OUR STRONG POINT</label>
+                        <textarea id="strongpoint" class="form-control" name="strongpoint" rows="3" placeholder="Enter ...">{{data.about.strongpoint}}</textarea>
+                    </div>
+
+                </div>
+                <div class="card-footer">
+                    <button id="updateNews" class="btn btn-primary">Submit</button>
+                </div>
+
+                <!-- /.card-body -->
+                <!--<div class="card-tools">
+                    <button type="button" class="btn btn-tool btn-sm" data-card-widget="collapse" data-toggle="tooltip"
+                            title="Collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool btn-sm" data-card-widget="remove" data-toggle="tooltip"
+                            title="Remove">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>-->
+                <!-- /. tools -->
+                <!--</form>-->
+                <!-- /.card-header -->
+                <div class="card-body pad">
+                    <div class="mb-3">
+
+                    </div>
+                    <p class="text-sm mb-0">
+                        Editor <a href="https://github.com/summernote/summernote">
+                            Documentation and license information.
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!-- /.col-->
+    </div>
+    <!-- ./row -->
+    <input type="hidden" value="{{websiteURL}}" id="websiteURL" />
+</section>
+
+<script src="/plugins/summernote/summernote-bs4.min.js"></script>
+<!--<script src="/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>-->
+<link rel="stylesheet" href="/plugins/jsgrid/jsgrid.min.css">
+<link rel="stylesheet" href="/plugins/jsgrid/jsgrid-theme.min.css">
+<link rel="stylesheet" href="/plugins/summernote/summernote-bs4.css">
+
+<script>
+
+    $(document).ready(function () {
+
+        function sendFile(file, editor, welEditable) {
+            data = new FormData();
+            data.append("profile_pic", file);
+            $.ajax({
+                data: data,
+                type: "POST",
+                url: "/imageInsert",
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (url) {
+                    console.log(url);
+                    var result = JSON.parse(url);
+                    if (result.status == "OK") {
+                        $('.textarea').summernote('insertImage', '/images/' + result.filename)
+                    }
+                }
+            });
+        }
+
+        $('#imageFile').on('change', function () {
+
+            if (this.files && this.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#imagePreview').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(this.files[0]); // convert to base64 string
+            }
+
+            console.log($('#imageFile').val());
+
+            // -----------------------
+            var data = new FormData();
+            data.append('profile_pic', $('#imageFile')[0].files[0]);
+
+            $.ajax({
+                url: "/imageInsert",
+                type: "POST",
+                method: "POST",
+                data: data,
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function (msg) {
+                    console.log(msg);
+
+                    var result = jQuery.parseJSON(msg);
+
+                    if (result.status == "OK") {
+                        console.log(result.filename);
+                        $('#imageURL').val(result.filename);
+                    }
+                    else {
+                        //document.getElementById("imagePreview").src = '';
+                    }
+                }
+            });
+
+        })
+
+        $('#updateNews').on('click', function () {
+
+            var about = $('#about').val();
+            var image = $('#imageURL').val().startsWith('images/') ? $('#imageURL').val() : ('images/' + $('#imageURL').val());
+			var shamei = $('#shamei').val();
+			var honsha_location = $('#honsha_location').val();
+			var koujou = $('#koujou').val();
+			var renrakusaki = $('#renrakusaki').val();
+			var daihyou = $('#daihyou').val();
+			var shihon = $('#shihon').val();
+			var insu = $('#insu').val();
+			var gyoumu = $('#gyoumu').val();
+            var video = $('#video').val();
+			var strongpoint = $('#strongpoint').val();
+
+            $.ajax({
+				url: "/aboutUpdate",
+                type: "POST",
+                data: JSON.stringify({
+                    about: about,
+                    image: image,
+                    shamei: shamei,
+                    honsha_location: honsha_location,
+                    koujou: koujou,
+					renrakusaki: renrakusaki,
+					daihyou: daihyou,
+                    shihon: shihon,
+					insu: insu,
+					gyoumu: gyoumu,
+                    video: video,
+					strongpoint: strongpoint
+                }),
+                dataType: "json",
+                contentType: "application/json",
+                success: function (msg) {
+                    console.log(msg);
+                    location.href = '/admin/';
+                },
+                error: function () {
+
+                }
+            });
+
+        })
+    });
+</script>

@@ -14,9 +14,9 @@
         </div>
         <div class="content container w-100">
             <div class="container">
-                Thai Hung Investment＆Production Co.、Ltd（THAIHUNGPRO Co.、Ltd）は、梱包材、工業用印刷製品、ロール、ナイロンフィルム、ナイロンバッグの分野で事業を展開しています。 業界。 近年、同社の評判とブランド名は、タンロン工業団地、タンロンII、クアンミン工業団地、ケボ工業団地などの北部工業地帯の工場の信頼と協力によって確認されています。 -バクニン、ノイバイ工業団地...
+                {{data.about.about}}
             </div>
-            <img src="/images/page/image-8.png">
+            <img src="/{{data.about.image}}">
         </div>
     </div>
 
@@ -24,44 +24,43 @@
         <table class="company-info">
             <tr>
                 <th>社名</th>
-                <td>Thai Hung Production And Investment Company Limited. </td>
+                <td>
+                    {{data.about.shamei}}
+                </td>
             </tr>
             <tr>
                 <th>本社住所</th>
                 <td>
-                    本社：1B / 19/9 Kim Dong、Giap Bat、Hoang Mai、Hanoi<br />
-                    トランザクションオフィス：19/168 Kim Đong、Giap Bat、Hoang Mai、Hanoi
+                    {{brSpace data.about.honsha_location}}
                 </td>
             </tr>
             <tr>
                 <th>工場</th>
                 <td>
-                    [North Factory] Cum Cong nghiep Hoa Man, Tri Hoa, Thuan Thanh, Bac Ninh<br />
-                    [South Factory] Ap Tan Cang, Phuoc Tan, Bien Hoa, Dong Nai
+                    {{brSpace data.about.koujou}}
                 </td>
             </tr>
             <tr>
                 <th>連絡先</th>
                 <td class="highlight-info">
-                    Mrs. Thoan - 0986 019 870 <br />
-                    Mr. Hoan - 0968 011 238
+                    {{brSpace data.about.renrakusaki}}
                 </td>
             </tr>
             <tr>
                 <th>代表者</th>
-                <td class="highlight-info">Mrs. Tran Thi Thoan</td>
+                <td class="highlight-info">{{brSpace data.about.daihyou}}</td>
             </tr>
             <tr>
                 <th>資本金</th>
-                <td>5.000.000.000 VND (約2500万円)</td>
+                <td>{{brSpace data.about.shihon}}</td>
             </tr>
             <tr>
                 <th>従業員数</th>
-                <td>約50人</td>
+                <td>{{brSpace data.about.insu}}</td>
             </tr>
             <tr>
                 <th>業務内容</th>
-                <td>各種袋（PP.PE）、ストレッチフィルム、緩衝材シート</td>
+                <td>{{brSpace data.about.gyoumu}}</td>
             </tr>
         </table>
     </div>
@@ -124,7 +123,7 @@
     <div class="container">
         <div class="demo-vid">
             <div class="video">
-                <iframe src="https://www.youtube.com/embed/1juIFmPyG-Y" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/MLgrTPoYbkU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
             <div class="product-img">
                 <img src="/images/news/news-1.png">
@@ -143,7 +142,7 @@
                     <h3 class="color-blue">Our strong point</h3>
                 </div>
                 <div class="content">
-                    直接輸入された原材料の利点、市場で競争するのに良い価格で、同社は技術、機械システムを継続的に改善し、トレーニングコースを持つ労働者のスキルを改善しています。 短期および長期の技術的専門知識、労働安全を創出し、産業衛生を確保します。 私たちは、品質、数量、納期に関するお客様のすべての要件を満たす製品を提供できると確信しています。
+                    {{data.about.strongpoint}}
                     <div class="w-100 factory-strong-img">
                         <div class="">
                             <img class="w-100" src="/images/page/image-13.png">
