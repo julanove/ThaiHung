@@ -111,7 +111,7 @@
     <div class="full-width-gallery">
 
         {{#each data.media}}
-        <div class="">
+        <div class="gallery-div">
             <a onclick="openPretty({{@index}}, '/{{this.source}}')" id="galleryImg-{{@index}}"><img class="w-100" src="/{{this.source}}"></a>
         </div>
         {{/each}}
