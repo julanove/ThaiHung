@@ -136,6 +136,16 @@
         var tb2 = $('#tb2URL').val().startsWith('images/') ? $('#tb2URL').val() : ('images/' + $('#tb2URL').val());
         var tb3 = $('#tb3URL').val().startsWith('images/') ? $('#tb3URL').val() : ('images/' + $('#tb3URL').val());
 
+        if (!image) {
+            alert("You need to upload image for this product");
+            return;
+        }
+		if (!tb1 || !tb2 || !tb3) {
+			alert("You need to upload thumbnails for this product");
+			return;
+        }
+
+
         $.ajax({
 			url: "/productInsert",
             type: "POST",
