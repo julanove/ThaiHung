@@ -32,6 +32,12 @@ $(document).ready(function() {
 
         return false;
     });
+    $('.gallery-div').click(function (event) {
+        event.stopPropagation()
+    })
+    $(window).on('click', () => {
+        $('#myModal').css('display', 'none');
+    })
     $('.close').on('click', function() {
         $('.mask').css('display', 'none')
     });
