@@ -36,7 +36,7 @@
                             <input type="file" id="imageFile" name="profile_pic">
                             <input type="hidden" value="{{data.about.image}}" id="imageURL" />
                         </div>
-                        <img src="/{{data.about.image}}" id="imagePreview" style="width:277px;" />
+                        <img src="/{{data.about.image}}" id="imageFileReview" style="width:277px;" />
                     </div>
 
                     <div class="form-group">
@@ -80,6 +80,76 @@
                     <div class="form-group">
                         <label>OUR STRONG POINT</label>
                         <textarea id="strongpoint" class="form-control" name="strongpoint" rows="3" placeholder="Enter ...">{{data.about.strongpoint}}</textarea>
+                    </div>
+
+
+
+
+
+                    <div class="form-group">
+                        <label>Represent 1</label>
+                        <div>
+                            <input type="file" id="tb1" name="profile_pic">
+                            <input type="hidden" value="{{data.about.imageRep1}}" id="tb1URL" />
+                        </div>
+                        <img src="/{{data.about.imageRep1}}" id="tb1Review" style="width:277px;" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" id="rep1Name" name="rep1Name" value="{{data.about.repName1}}" class="form-control" placeholder="Enter ...">
+                    </div>
+                    <div class="form-group">
+                        <label>Position</label>
+                        <input type="text" id="rep1Pos" name="rep1Pos" value="{{data.about.repPos1}}" class="form-control" placeholder="Enter ...">
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea id="rep1Des" class="form-control" name="rep1Des" rows="2" placeholder="Enter ...">{{data.about.repDes1}}</textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Represent 2</label>
+                        <div>
+                            <input type="file" id="tb2" name="profile_pic">
+                            <input type="hidden" value="{{data.about.imageRep2}}" id="tb2URL" />
+                        </div>
+                        <img src="/{{data.about.imageRep2}}" id="tb2Review" style="width:277px;" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" id="rep2Name" name="rep2Name" value="{{data.about.repName2}}" class="form-control" placeholder="Enter ...">
+                    </div>
+                    <div class="form-group">
+                        <label>Position</label>
+                        <input type="text" id="rep2Pos" name="rep2Pos" value="{{data.about.repPos2}}" class="form-control" placeholder="Enter ...">
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea id="rep2Des" class="form-control" name="rep2Des" rows="2" placeholder="Enter ...">{{data.about.repDes2}}</textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Represent 3</label>
+                        <div>
+                            <input type="file" id="tb3" name="profile_pic">
+                            <input type="hidden" value="{{data.about.imageRep3}}" id="tb3URL" />
+                        </div>
+                        <img src="/{{data.about.imageRep3}}" id="tb3Review" style="width:277px;" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" id="rep3Name" name="rep3Name" value="{{data.about.repName3}}" class="form-control" placeholder="Enter ...">
+                    </div>
+                    <div class="form-group">
+                        <label>Position</label>
+                        <input type="text" id="rep3Pos" name="rep3Pos" value="{{data.about.repPos3}}" class="form-control" placeholder="Enter ...">
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea id="rep3Des" class="form-control" name="rep3Des" rows="2" placeholder="Enter ...">{{data.about.repDes3}}</textarea>
                     </div>
 
                 </div>
@@ -149,48 +219,50 @@
             });
         }
 
-        $('#imageFile').on('change', function () {
+		$('#imageFile,#tb1,#tb2,#tb3').on('change', function (e) {
 
-            if (this.files && this.files[0]) {
-                var reader = new FileReader();
+			var elementID = this.getAttribute("id");
 
-                reader.onload = function (e) {
-                    $('#imagePreview').attr('src', e.target.result);
-                }
+			if (this.files && this.files[0]) {
+				var reader = new FileReader();
 
-                reader.readAsDataURL(this.files[0]); // convert to base64 string
-            }
+				reader.onload = function (e) {
+					$('#' + elementID + 'Review').attr('src', e.target.result);
+				}
 
-            console.log($('#imageFile').val());
+				reader.readAsDataURL(this.files[0]); // convert to base64 string
+			}
 
-            // -----------------------
-            var data = new FormData();
-            data.append('profile_pic', $('#imageFile')[0].files[0]);
+			//console.log($('#imageFile').val());
+			// -----------------------
 
-            $.ajax({
-                url: "/imageInsert",
-                type: "POST",
-                method: "POST",
-                data: data,
-                contentType: false,
-                cache: false,
-                processData: false,
-                success: function (msg) {
-                    console.log(msg);
+			var data = new FormData();
+			data.append('profile_pic', $('#' + elementID)[0].files[0]);
 
-                    var result = jQuery.parseJSON(msg);
+			$.ajax({
+				url: "/imageInsert",
+				type: "POST",
+				method: "POST",
+				data: data,
+				contentType: false,
+				cache: false,
+				processData: false,
+				success: function (msg) {
+					console.log(msg);
 
-                    if (result.status == "OK") {
-                        console.log(result.filename);
-                        $('#imageURL').val(result.filename);
-                    }
-                    else {
-                        //document.getElementById("imagePreview").src = '';
-                    }
-                }
-            });
+					var result = jQuery.parseJSON(msg);
 
-        })
+					if (result.status == "OK") {
+						console.log(result.filename);
+						$('#' + elementID + 'URL').val(result.filename);
+					}
+					else {
+						//document.getElementById("imagePreview").src = '';
+					}
+				}
+			});
+
+		})
 
         $('#updateNews').on('click', function () {
 
@@ -205,8 +277,23 @@
 			var insu = $('#insu').val();
 			var gyoumu = $('#gyoumu').val();
             var video = $('#video').val();
-			var strongpoint = $('#strongpoint').val();
+            var strongpoint = $('#strongpoint').val();
 
+			var imageRep1 = $('#tb1URL').val().startsWith('images/') ? $('#tb1URL').val() : ('images/' + $('#tb1URL').val());
+			var rep1Name = $('#rep1Name').val();
+			var rep1Pos = $('#rep1Pos').val();
+			var rep1Des = $('#rep1Des').val();
+
+			var imageRep2 = $('#tb2URL').val().startsWith('images/') ? $('#tb2URL').val() : ('images/' + $('#tb2URL').val());
+			var rep2Name = $('#rep2Name').val();
+			var rep2Pos = $('#rep2Pos').val();
+			var rep2Des = $('#rep2Des').val();
+
+			var imageRep3 = $('#tb3URL').val().startsWith('images/') ? $('#tb3URL').val() : ('images/' + $('#tb3URL').val());
+			var rep3Name = $('#rep3Name').val();
+			var rep3Pos = $('#rep3Pos').val();
+			var rep3Des = $('#rep3Des').val();
+            debugger;
             $.ajax({
 				url: "/aboutUpdate",
                 type: "POST",
@@ -222,7 +309,19 @@
 					insu: insu,
 					gyoumu: gyoumu,
                     video: video,
-					strongpoint: strongpoint
+                    strongpoint: strongpoint,
+                    imageRep1: imageRep1,
+                    rep1Name: rep1Name,
+                    rep1Pos: rep1Pos,
+					rep1Des:rep1Des,
+                    imageRep2: imageRep2,
+                    rep2Name: rep2Name,
+                    rep2Pos: rep2Pos,
+					rep2Des: rep2Des,
+                    imageRep3: imageRep3,
+                    rep3Name: rep3Name,
+                    rep3Pos: rep3Pos,
+					rep3Des: rep3Des
                 }),
                 dataType: "json",
                 contentType: "application/json",

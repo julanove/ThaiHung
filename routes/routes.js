@@ -10,15 +10,17 @@ module.exports = {
         console.log('Home URL');
         console.log(websiteURL);
 
-        db.query('SELECT * FROM media where mediaType = 1 limit 8; SELECT * FROM news order by newID desc limit 4;',
+        db.query('SELECT * FROM media where mediaType = 1 limit 8; SELECT * FROM news order by newID desc limit 4;select about from about;',
             function (err, results) {
                 //connection.release();
+                console.log(results[2][0].about);
                 res.render('home', {
                     page_name: 'home',
                     layout: 'main',
                     data: {
                         media: results[0],
                         news: results[1],
+                        about: results[2][0].about,
                     },
                     websiteURL: websiteURL
                 });
@@ -671,8 +673,8 @@ module.exports = {
     aboutUpdate: function (req, res) {
 
         console.error('Update About');
-        let updateQuery = 'update about set about = ?, daihyou = ?, gyoumu = ?, honsha_location = ?, image = ?, insu = ?, koujou = ?, renrakusaki = ?, shamei = ?, shihon = ?, strongpoint = ?, video = ?';
-        let query = mysql.format(updateQuery, [req.body.about, req.body.daihyou, req.body.gyoumu, req.body.honsha_location, req.body.image, req.body.insu, req.body.koujou, req.body.renrakusaki, req.body.shamei, req.body.shihon, req.body.strongpoint, req.body.video]);
+        let updateQuery = 'update about set about = ?, daihyou = ?, gyoumu = ?, honsha_location = ?, image = ?, insu = ?, koujou = ?, renrakusaki = ?, shamei = ?, shihon = ?, strongpoint = ?, video = ?, imageRep1 = ?, repName1 = ?, repPos1 = ?, repDes1 = ?, imageRep2 = ?, repName2 = ?, repPos2 = ?, repDes2 = ?, imageRep3 = ?, repName3 = ?, repPos3 = ?, repDes3 = ?';
+        let query = mysql.format(updateQuery, [req.body.about, req.body.daihyou, req.body.gyoumu, req.body.honsha_location, req.body.image, req.body.insu, req.body.koujou, req.body.renrakusaki, req.body.shamei, req.body.shihon, req.body.strongpoint, req.body.video, req.body.imageRep1, req.body.rep1Name, req.body.rep1Pos, req.body.rep1Des, req.body.imageRep2, req.body.rep2Name, req.body.rep2Pos, req.body.rep2Des, req.body.imageRep3, req.body.rep3Name, req.body.rep3Pos, req.body.rep3Des]);
         db.query(query, (err, response) => {
             if (err) {
                 console.error(err);
