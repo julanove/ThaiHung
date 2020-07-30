@@ -2,7 +2,7 @@ $(document).on("click", ".toiawase", function (e) {
 
     e.preventDefault();
     grecaptcha.ready(function () {
-        grecaptcha.execute('6LfrYawZAAAAAA3LxPNto_hxdTHYkAaGWv-TpKU1', { action: 'submit' }).then(function (token) {
+        grecaptcha.execute('reCAPTCHA_6LfrYawZAAAAAA3LxPNto_hxdTHYkAaGWv-TpKU1', { action: 'submit' }).then(function (token) {
 
 
             var company = $('#company').val();
