@@ -4,11 +4,11 @@ $(document).on("click", ".toiawase", function (e) {
     var name = $('#name').val();
     var country = $('#country').val();
     var content = $('#content').val();
-    //var checkbox = $('#checkbox').val();
+    var checkbox = $('#checkbox').val();
 
 
     console.log("----2");
-    //console.log(checkbox);
+    console.log(checkbox);
 
     var websiteURL = $('#websiteURL').val() + '/contact';
     $('#gif').css('visibility', 'visible');
