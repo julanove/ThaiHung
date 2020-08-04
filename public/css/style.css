@@ -22,7 +22,7 @@
     font-weight: 500;
 }
 h1 {
-    font-family: 'Noto Serif JP';
+    font-family: 'MS PGothic';
     font-weight: 500;
 }
 :root {
@@ -453,6 +453,7 @@ body {
     color: var(--blue);
     font-weight: bold;
     padding-right: 24px;
+    float: left;
 }
 .footer-menu a {
     color: white;
@@ -575,6 +576,7 @@ body {
 }
 .about-page .content img {
     padding: 40px 0 40px 0;
+    max-width: 100%;
 }
 .information-table {
     padding: 100px;
@@ -625,19 +627,23 @@ body {
     margin: 0 0 32px 0;
 }
 .marketing {
-    display: grid;
+/*    display: grid;
     grid-template-columns: 1fr 1fr;
     justify-content: center;
-    align-items: center;
+    align-items: center;*/
     margin: 60px 10vw 215px 10vw;
 }
-.marketer:nth-of-type(odd) {
+/*.marketer:nth-of-type(odd) {
     float: right;
     margin-right: 16px;
 }
 .marketer:nth-of-type(even) {
     float: left;
     margin-left: 16px;
+}*/
+.marketer {
+    max-width: 40%;
+    margin: 0 auto;
 }
 .marketer img {
     width: 100%;

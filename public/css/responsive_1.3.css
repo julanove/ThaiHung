@@ -522,6 +522,12 @@
     .small-news a {
         display: unset;
     }
+    .marketing {
+        margin: 40px 10vw 100px 10vw;
+    }
+    .marketer {
+        max-width: 60%;
+    }
 }
 @media screen and (max-width: 480px) {
     h3 {
@@ -546,6 +552,8 @@
     .header-tel {
         padding-right: 0;
         font-size: 1em;
+        font-size: 10px;
+        line-height: 20px;
     }
     .header-contact button {
         display: none;
@@ -595,7 +603,7 @@
         width: 100%;
     }
     .our-service {
-        overflow: hidden;
+        /*overflow: hidden;*/
     }
     .our-service>img {
         height: 100%;
@@ -695,11 +703,11 @@
     }
     .marketing {
         grid-template-columns: 1fr;
-        margin-bottom: 100px;
+        /*margin-bottom: 100px;*/
+        margin: 40px 10vw 100px 10vw;
     }
     .marketer {
-        margin-right: 0 !important;
-        margin-left: 0 !important;
+        max-width: 80%;
     }
     .human p {
         line-height: 1.7em;
