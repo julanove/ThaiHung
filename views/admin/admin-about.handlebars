@@ -34,7 +34,7 @@
                         <label>Image</label>
                         <div>
                             <input type="file" id="imageFile" name="profile_pic">
-                            <input type="hidden" value="{{data.about.image}}" id="imageURL" />
+                            <input type="hidden" value="{{data.about.image}}" id="imageFileURL" />
                         </div>
                         <img src="/{{data.about.image}}" id="imageFileReview" style="width:277px;" />
                     </div>
@@ -253,7 +253,8 @@
 					var result = jQuery.parseJSON(msg);
 
 					if (result.status == "OK") {
-						console.log(result.filename);
+                        console.log(result.filename);
+						console.log(elementID);
 						$('#' + elementID + 'URL').val(result.filename);
 					}
 					else {
@@ -267,7 +268,7 @@
         $('#updateNews').on('click', function () {
 
             var about = $('#about').val();
-            var image = $('#imageURL').val().startsWith('images/') ? $('#imageURL').val() : ('images/' + $('#imageURL').val());
+			var image = $('#imageFileURL').val().startsWith('images/') ? $('#imageFileURL').val() : ('images/' + $('#imageFileURL').val());
 			var shamei = $('#shamei').val();
 			var honsha_location = $('#honsha_location').val();
 			var koujou = $('#koujou').val();
