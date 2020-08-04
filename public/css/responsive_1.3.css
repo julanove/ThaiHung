@@ -344,7 +344,7 @@
         padding-bottom: 40px;
     }
     .contact-box {
-        padding: 30px 40px 30px 40px;
+        padding: 30px 10px 30px 10px;
         margin-bottom: 25px;
     }
     .tel {
@@ -645,7 +645,7 @@
         grid-template-columns: unset
     }
     .tel {
-        font-size: 1.7em;
+        font-size: 0.9em;
     }
     .contact-form {
         padding: 20px;
