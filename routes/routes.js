@@ -12,8 +12,9 @@ module.exports = {
 
         db.query('SELECT * FROM media where mediaType = 1 limit 8; SELECT * FROM news order by newID desc limit 4;select about from about;',
             function (err, results) {
-                //connection.release();
-                console.log(results[2][0].about);
+                console.log("=================x===========");
+                //console.log(results[2].about);
+                //console.log(results[2][0].about);
                 res.render('home', {
                     page_name: 'home',
                     layout: 'main',
@@ -39,8 +40,8 @@ module.exports = {
 
         console.log("status: " + req.body.company);
 
-        let insertQuery = 'INSERT INTO contact (company, content, country, date, isRead, name) VALUES(?, ?, ?, now(), 0, ?)';
-        let query = mysql.format(insertQuery, [req.body.company, req.body.content, req.body.country, req.body.name]);
+        let insertQuery = 'INSERT INTO contact (company, content, country, date, isRead, name, phone, email) VALUES(?, ?, ?, now(), 0, ?, ?, ?)';
+        let query = mysql.format(insertQuery, [req.body.company, req.body.content, req.body.country, req.body.name, req.body.phone, req.body.email]);
         db.query(query, (err, response) => {
             if (err) {
                 console.error(err);
@@ -673,8 +674,8 @@ module.exports = {
     aboutUpdate: function (req, res) {
 
         console.error('Update About');
-        let updateQuery = 'update about set about = ?, daihyou = ?, gyoumu = ?, honsha_location = ?, image = ?, insu = ?, koujou = ?, renrakusaki = ?, shamei = ?, shihon = ?, strongpoint = ?, video = ?, imageRep1 = ?, repName1 = ?, repPos1 = ?, repDes1 = ?, imageRep2 = ?, repName2 = ?, repPos2 = ?, repDes2 = ?, imageRep3 = ?, repName3 = ?, repPos3 = ?, repDes3 = ?';
-        let query = mysql.format(updateQuery, [req.body.about, req.body.daihyou, req.body.gyoumu, req.body.honsha_location, req.body.image, req.body.insu, req.body.koujou, req.body.renrakusaki, req.body.shamei, req.body.shihon, req.body.strongpoint, req.body.video, req.body.imageRep1, req.body.rep1Name, req.body.rep1Pos, req.body.rep1Des, req.body.imageRep2, req.body.rep2Name, req.body.rep2Pos, req.body.rep2Des, req.body.imageRep3, req.body.rep3Name, req.body.rep3Pos, req.body.rep3Des]);
+        let updateQuery = 'update about set about = ?, daihyou = ?, gyoumu = ?, honsha_location = ?, image = ?, insu = ?, koujou = ?, renrakusaki = ?, shamei = ?, shihon = ?, strongpoint = ?, video = ?, imageRep1 = ?, repName1 = ?, repPos1 = ?, repDes1 = ?, imageRep3 = ?, repName3 = ?, repPos3 = ?, repDes3 = ?';
+        let query = mysql.format(updateQuery, [req.body.about, req.body.daihyou, req.body.gyoumu, req.body.honsha_location, req.body.image, req.body.insu, req.body.koujou, req.body.renrakusaki, req.body.shamei, req.body.shihon, req.body.strongpoint, req.body.video, req.body.imageRep1, req.body.rep1Name, req.body.rep1Pos, req.body.rep1Des, req.body.imageRep3, req.body.rep3Name, req.body.rep3Pos, req.body.rep3Des]);
         db.query(query, (err, response) => {
             if (err) {
                 console.error(err);

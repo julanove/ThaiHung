@@ -21,7 +21,7 @@ AdminBro.registerAdapter(AdminBroMongoose)
 const adminBro = new AdminBro({
       rootPath: '/admin',
       resources: [
-          {hapha
+          {
                resource: User,
               options: {
                   parent: userParent,

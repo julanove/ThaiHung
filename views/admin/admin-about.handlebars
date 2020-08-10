@@ -27,7 +27,7 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label>About us</label>
-                        <textarea id="about" class="form-control" name="about" rows="3" placeholder="Enter ...">{{data.about.about}}</textarea>
+                        <textarea id="about" class="form-control" name="about" rows="4" placeholder="Enter ...">{{data.about.about}}</textarea>
                     </div>
 
                     <div class="form-group">
@@ -72,6 +72,8 @@
                         <textarea id="gyoumu" class="form-control" name="gyoumu" rows="2" placeholder="Enter ...">{{data.about.gyoumu}}</textarea>
                     </div>
 
+                    <!---------------------->
+
                     <div class="form-group">
                         <label>Video</label>
                         <input type="text" id="video" name="video" value="{{data.about.video}}" class="form-control" placeholder="Enter ...">
@@ -79,7 +81,7 @@
 
                     <div class="form-group">
                         <label>OUR STRONG POINT</label>
-                        <textarea id="strongpoint" class="form-control" name="strongpoint" rows="3" placeholder="Enter ...">{{data.about.strongpoint}}</textarea>
+                        <textarea id="strongpoint" class="form-control" name="strongpoint" rows="6" placeholder="Enter ...">{{data.about.strongpoint}}</textarea>
                     </div>
 
 
@@ -108,7 +110,7 @@
                         <textarea id="rep1Des" class="form-control" name="rep1Des" rows="2" placeholder="Enter ...">{{data.about.repDes1}}</textarea>
                     </div>
 
-                    <div class="form-group">
+                    <!--<div class="form-group">
                         <label>Represent 2</label>
                         <div>
                             <input type="file" id="tb2" name="profile_pic">
@@ -128,7 +130,7 @@
                     <div class="form-group">
                         <label>Description</label>
                         <textarea id="rep2Des" class="form-control" name="rep2Des" rows="2" placeholder="Enter ...">{{data.about.repDes2}}</textarea>
-                    </div>
+                    </div>-->
 
                     <div class="form-group">
                         <label>Represent 3</label>
@@ -285,10 +287,10 @@
 			var rep1Pos = $('#rep1Pos').val();
 			var rep1Des = $('#rep1Des').val();
 
-			var imageRep2 = $('#tb2URL').val().startsWith('images/') ? $('#tb2URL').val() : ('images/' + $('#tb2URL').val());
-			var rep2Name = $('#rep2Name').val();
-			var rep2Pos = $('#rep2Pos').val();
-			var rep2Des = $('#rep2Des').val();
+			//var imageRep2 = $('#tb2URL').val().startsWith('images/') ? $('#tb2URL').val() : ('images/' + $('#tb2URL').val());
+			//var rep2Name = $('#rep2Name').val();
+			//var rep2Pos = $('#rep2Pos').val();
+			//var rep2Des = $('#rep2Des').val();
 
 			var imageRep3 = $('#tb3URL').val().startsWith('images/') ? $('#tb3URL').val() : ('images/' + $('#tb3URL').val());
 			var rep3Name = $('#rep3Name').val();
@@ -315,10 +317,10 @@
                     rep1Name: rep1Name,
                     rep1Pos: rep1Pos,
 					rep1Des:rep1Des,
-                    imageRep2: imageRep2,
-                    rep2Name: rep2Name,
-                    rep2Pos: rep2Pos,
-					rep2Des: rep2Des,
+     //               imageRep2: imageRep2,
+     //               rep2Name: rep2Name,
+     //               rep2Pos: rep2Pos,
+					//rep2Des: rep2Des,
                     imageRep3: imageRep3,
                     rep3Name: rep3Name,
                     rep3Pos: rep3Pos,

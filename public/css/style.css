@@ -506,6 +506,12 @@ body {
 .lastname {
     grid-area: lastname;
 }
+.email {
+    grid-area: email;
+}
+.phone {
+    grid-area: phone;
+}
 .address {
     grid-area: address;
 }
@@ -518,6 +524,7 @@ body {
 .contact-form {
     display: grid;
     grid-template-areas: "firstname lastname"
+    "email phone"
     "address address"
     "contentmess contentmess"
     "captcha captcha"
