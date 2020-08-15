@@ -1,4 +1,4 @@
-$(document).on("click", ".toiawase", function (e) {
+ï»¿$(document).on("click", ".toiawase", function (e) {
 
     var company = $('#company').val();
     var name = $('#name').val();
@@ -29,7 +29,7 @@ $(document).on("click", ".toiawase", function (e) {
         dataType: "json",
         contentType: "application/json",
         success: function (result) {
-            alert("‚¨–â‚¢‡‚í‚¹‚ ‚è‚ª‚Æ‚¤‚²‚´‚¢‚Ü‚·BÜ‚è•Ô‚µ‚²˜A—‚¢‚½‚µ‚Ü‚·B");
+            alert("ãŠå•ã„åˆã‚ã›ã‚ã‚ŠãŒã¨ã†ã”ã–ã„ã¾ã™ã€‚æŠ˜ã‚Šè¿”ã—ã”é€£çµ¡ã„ãŸã—ã¾ã™ã€‚");
             $('#company').val("");
             $('#name').val("");
             $('#country').val("");
