@@ -29,7 +29,7 @@ $(document).on("click", ".toiawase", function (e) {
         dataType: "json",
         contentType: "application/json",
         success: function (result) {
-            alert("OK");
+            alert("Ç®ñ‚Ç¢çáÇÌÇπÇ†ÇËÇ™Ç∆Ç§Ç≤Ç¥Ç¢Ç‹Ç∑ÅBê‹ÇËï‘ÇµÇ≤òAóçÇ¢ÇΩÇµÇ‹Ç∑ÅB");
             $('#company').val("");
             $('#name').val("");
             $('#country').val("");
