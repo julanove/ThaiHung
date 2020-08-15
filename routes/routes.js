@@ -209,6 +209,27 @@ module.exports = {
 
     },
 
+    facilityFunction: function (req, res) {
+
+        let selectQuery = 'SELECT video FROM about';
+        let query = mysql.format(selectQuery, null);
+
+        db.query(query, (err, results) => {
+
+            console.log(results);
+            res.render('facility', {
+                layout: 'main',
+                data: {
+                    about: results[0]
+                },
+                websiteURL: websiteURL
+            });
+            if (err) console.log(err);
+        }
+        );
+
+    },
+
     // SERVER
 
     adminNews: function (req, res) {
@@ -674,8 +695,8 @@ module.exports = {
     aboutUpdate: function (req, res) {
 
         console.error('Update About');
-        let updateQuery = 'update about set about = ?, daihyou = ?, gyoumu = ?, honsha_location = ?, image = ?, insu = ?, koujou = ?, renrakusaki = ?, shamei = ?, shihon = ?, strongpoint = ?, video = ?, imageRep1 = ?, repName1 = ?, repPos1 = ?, repDes1 = ?, imageRep3 = ?, repName3 = ?, repPos3 = ?, repDes3 = ?';
-        let query = mysql.format(updateQuery, [req.body.about, req.body.daihyou, req.body.gyoumu, req.body.honsha_location, req.body.image, req.body.insu, req.body.koujou, req.body.renrakusaki, req.body.shamei, req.body.shihon, req.body.strongpoint, req.body.video, req.body.imageRep1, req.body.rep1Name, req.body.rep1Pos, req.body.rep1Des, req.body.imageRep3, req.body.rep3Name, req.body.rep3Pos, req.body.rep3Des]);
+        let updateQuery = 'update about set about = ?, daihyou = ?, gyoumu = ?, honsha_location = ?, image = ?, insu = ?, koujou = ?, renrakusaki = ?, shamei = ?, shihon = ?, strongpoint = ?, video = ?, imageRep1 = ?, repName1 = ?, repPos1 = ?, repDes1 = ?, imageRep3 = ?, repName3 = ?, repPos3 = ?, repDes3 = ?, middleBanner = ?, roundBanner = ?, footerImage1 = ?, footerImage2 = ?';
+        let query = mysql.format(updateQuery, [req.body.about, req.body.daihyou, req.body.gyoumu, req.body.honsha_location, req.body.image, req.body.insu, req.body.koujou, req.body.renrakusaki, req.body.shamei, req.body.shihon, req.body.strongpoint, req.body.video, req.body.imageRep1, req.body.rep1Name, req.body.rep1Pos, req.body.rep1Des, req.body.imageRep3, req.body.rep3Name, req.body.rep3Pos, req.body.rep3Des, req.body.middleBanner, req.body.roundBanner, req.body.footerImage1, req.body.footerImage2]);
         db.query(query, (err, response) => {
             if (err) {
                 console.error(err);

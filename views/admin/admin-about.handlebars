@@ -36,12 +36,13 @@
                             <input type="file" id="imageFile" name="profile_pic">
                             <input type="hidden" value="{{data.about.image}}" id="imageFileURL" />
                         </div>
-                        <img src="/{{data.about.image}}" id="imageFileReview" style="width:277px;" />
+                        <img src="/{{data.about.image}}" id="imageFileReview" style="width:800px;" />
                     </div>
 
                     <div class="form-group">
                         <label>社名</label>
-                        <input type="text" id="shamei" name="shamei" value="{{data.about.shamei}}" class="form-control" placeholder="Enter ...">
+                        <!--<input type="text" id="shamei" name="shamei" value="{{data.about.shamei}}" class="form-control" placeholder="Enter ...">-->
+                        <textarea id="shamei" class="form-control" name="shamei" rows="2" placeholder="Enter ...">{{data.about.shamei}}</textarea>
                     </div>
                     <div class="form-group">
                         <label>本社住所</label>
@@ -75,16 +76,15 @@
                     <!---------------------->
 
                     <div class="form-group">
-                        <label>Video</label>
-                        <input type="text" id="video" name="video" value="{{data.about.video}}" class="form-control" placeholder="Enter ...">
+                        <label>Middle Banner</label>
+                        <div>
+                            <input type="file" id="middleBanner" name="profile_pic">
+                            <input type="hidden" value="{{data.about.middleBanner}}" id="middleBannerURL" />
+                        </div>
+                        <img src="/{{data.about.middleBanner}}" id="middleBannerReview" style="width:800px;" />
                     </div>
 
-                    <div class="form-group">
-                        <label>OUR STRONG POINT</label>
-                        <textarea id="strongpoint" class="form-control" name="strongpoint" rows="6" placeholder="Enter ...">{{data.about.strongpoint}}</textarea>
-                    </div>
-
-
+                    <!---------------------->
 
 
 
@@ -111,26 +111,26 @@
                     </div>
 
                     <!--<div class="form-group">
-                        <label>Represent 2</label>
-                        <div>
-                            <input type="file" id="tb2" name="profile_pic">
-                            <input type="hidden" value="{{data.about.imageRep2}}" id="tb2URL" />
-                        </div>
-                        <img src="/{{data.about.imageRep2}}" id="tb2Review" style="width:277px;" />
-                    </div>
+        <label>Represent 2</label>
+        <div>
+            <input type="file" id="tb2" name="profile_pic">
+            <input type="hidden" value="{{data.about.imageRep2}}" id="tb2URL" />
+        </div>
+        <img src="/{{data.about.imageRep2}}" id="tb2Review" style="width:277px;" />
+    </div>
 
-                    <div class="form-group">
-                        <label>Name</label>
-                        <input type="text" id="rep2Name" name="rep2Name" value="{{data.about.repName2}}" class="form-control" placeholder="Enter ...">
-                    </div>
-                    <div class="form-group">
-                        <label>Position</label>
-                        <input type="text" id="rep2Pos" name="rep2Pos" value="{{data.about.repPos2}}" class="form-control" placeholder="Enter ...">
-                    </div>
-                    <div class="form-group">
-                        <label>Description</label>
-                        <textarea id="rep2Des" class="form-control" name="rep2Des" rows="2" placeholder="Enter ...">{{data.about.repDes2}}</textarea>
-                    </div>-->
+    <div class="form-group">
+        <label>Name</label>
+        <input type="text" id="rep2Name" name="rep2Name" value="{{data.about.repName2}}" class="form-control" placeholder="Enter ...">
+    </div>
+    <div class="form-group">
+        <label>Position</label>
+        <input type="text" id="rep2Pos" name="rep2Pos" value="{{data.about.repPos2}}" class="form-control" placeholder="Enter ...">
+    </div>
+    <div class="form-group">
+        <label>Description</label>
+        <textarea id="rep2Des" class="form-control" name="rep2Des" rows="2" placeholder="Enter ...">{{data.about.repDes2}}</textarea>
+    </div>-->
 
                     <div class="form-group">
                         <label>Represent 3</label>
@@ -153,6 +153,53 @@
                         <label>Description</label>
                         <textarea id="rep3Des" class="form-control" name="rep3Des" rows="2" placeholder="Enter ...">{{data.about.repDes3}}</textarea>
                     </div>
+
+                    <!---------------------->
+
+                    <div class="form-group">
+                        <label>Round Banner</label>
+                        <div>
+                            <input type="file" id="roundBanner" name="profile_pic">
+                            <input type="hidden" value="{{data.about.roundBanner}}" id="roundBannerURL" />
+                        </div>
+                        <img src="/{{data.about.roundBanner}}" id="roundBannerReview" style="width:277px;" />
+                    </div>
+
+                    <!---------------------->
+
+                    <div class="form-group">
+                        <label>Video</label>
+                        <input type="text" id="video" name="video" value="{{data.about.video}}" class="form-control" placeholder="Enter ...">
+                    </div>
+
+                    <div class="form-group">
+                        <label>OUR STRONG POINT</label>
+                        <textarea id="strongpoint" class="form-control" name="strongpoint" rows="6" placeholder="Enter ...">{{data.about.strongpoint}}</textarea>
+                    </div>
+
+                    <!---------------------->
+
+                    <div class="form-group">
+                        <label>Footer Image 1</label>
+                        <div>
+                            <input type="file" id="footerImage1" name="profile_pic">
+                            <input type="hidden" value="{{data.about.footerImage1}}" id="footerImage1URL" />
+                        </div>
+                        <img src="/{{data.about.footerImage1}}" id="footerImage1Review" style="width:277px;" />
+                    </div>
+
+                    <!---------------------->
+
+                    <div class="form-group">
+                        <label>Footer Image 2</label>
+                        <div>
+                            <input type="file" id="footerImage2" name="profile_pic">
+                            <input type="hidden" value="{{data.about.footerImage2}}" id="footerImage2URL" />
+                        </div>
+                        <img src="/{{data.about.footerImage2}}" id="footerImage2Review" style="width:277px;" />
+                    </div>
+
+                    <!---------------------->
 
                 </div>
                 <div class="card-footer">
@@ -221,7 +268,7 @@
             });
         }
 
-		$('#imageFile,#tb1,#tb2,#tb3').on('change', function (e) {
+		$('#imageFile,#tb1,#tb2,#tb3,#middleBanner,#roundBanner,#footerImage2,#footerImage1').on('change', function (e) {
 
 			var elementID = this.getAttribute("id");
 
@@ -296,7 +343,13 @@
 			var rep3Name = $('#rep3Name').val();
 			var rep3Pos = $('#rep3Pos').val();
 			var rep3Des = $('#rep3Des').val();
-            debugger;
+
+			var middleBanner = $('#middleBannerURL').val().startsWith('images/') ? $('#middleBannerURL').val() : ('images/' + $('#middleBannerURL').val());
+            var roundBanner = $('#roundBannerURL').val().startsWith('images/') ? $('#roundBannerURL').val() : ('images/' + $('#roundBannerURL').val());
+
+			var footerImage1 = $('#footerImage1URL').val().startsWith('images/') ? $('#footerImage1URL').val() : ('images/' + $('#footerImage1URL').val());
+			var footerImage2 = $('#footerImage2URL').val().startsWith('images/') ? $('#footerImage2URL').val() : ('images/' + $('#footerImage2URL').val());
+
             $.ajax({
 				url: "/aboutUpdate",
                 type: "POST",
@@ -324,7 +377,11 @@
                     imageRep3: imageRep3,
                     rep3Name: rep3Name,
                     rep3Pos: rep3Pos,
-					rep3Des: rep3Des
+                    rep3Des: rep3Des,
+                    middleBanner: middleBanner,
+                    roundBanner: roundBanner,
+					footerImage1: footerImage1,
+					footerImage2: footerImage2
                 }),
                 dataType: "json",
                 contentType: "application/json",

@@ -101,13 +101,15 @@ app.get('/product-details/:id', allRouteFunction.productDetailsFunction);
 
 app.get('/about', allRouteFunction.aboutFunction);
 
-app.get('/facility', function (req, res, next) {
-    res.render('facility', {
-        page_name: 'facility',
-        layout: 'main',
-        websiteURL: websiteURL
-    });
-});
+app.get('/facility', allRouteFunction.facilityFunction);
+
+//app.get('/facility', function (req, res, next) {
+//    res.render('facility', {
+//        page_name: 'facility',
+//        layout: 'main',
+//        websiteURL: websiteURL
+//    });
+//});
 
 //---------------------------------------------------------- Admin ROUTE 
 
