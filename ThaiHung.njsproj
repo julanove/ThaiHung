@@ -911,6 +911,7 @@
     <Content Include="public\fonts\NotoSerifJP-Regular.otf" />
     <Content Include="public\fonts\NotoSerifJP-SemiBold.otf" />
     <Content Include="public\fonts\OFL.txt" />
+    <Content Include="favicon.ico" />
     <Content Include="public\images\gallery\gallery-1.png" />
     <Content Include="public\images\gallery\gallery-2.png" />
     <Content Include="public\images\gallery\gallery-3.png" />

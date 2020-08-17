@@ -58,6 +58,12 @@ app.set('view engine', 'handlebars');
 
 // ------------------------
 
+const favicon = require('express-favicon');
+app.use(favicon('favicon.ico'));
+
+// ------------------------
+
+
 
 app.set('port', process.env.PORT || 3000);
 //app.use(express.static(__dirname + 'public'));
