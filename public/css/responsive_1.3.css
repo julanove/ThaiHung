@@ -438,6 +438,9 @@
         grid-template-columns: 1fr;
         padding: 20px;
     }
+    .product-item a {
+        height: 150px;
+    }
     .paginator a {
         width: 32px;
         height: 32px;
@@ -532,6 +535,9 @@
 @media screen and (max-width: 480px) {
     h3 {
         font-size: 1.2em;
+    }
+    .product-item a {
+        height: 110px;
     }
     .logo {
         width: 40%;
