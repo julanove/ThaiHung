@@ -25,7 +25,7 @@ function openPretty (index, src) {
 $(document).ready(function() {
     var nav = $('nav[role="navigation"]');
 
-        // Mobile Navigation
+    // Mobile Navigation
     $('.nav-toggle').on('click', function() {
         $(this).toggleClass('close-nav');
         nav.toggleClass('open');

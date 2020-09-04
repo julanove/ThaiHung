@@ -211,7 +211,9 @@ module.exports = {
 
     facilityFunction: function (req, res) {
 
-        let selectQuery = 'SELECT video FROM about;SELECT * FROM facility';
+
+        let selectQuery = 'SELECT video FROM about;SELECT * FROM facility;SELECT * FROM media where mediaType = 1 limit 8;';
+
         let query = mysql.format(selectQuery, null);
 
         db.query(query, (err, results) => {
@@ -222,7 +224,8 @@ module.exports = {
                 layout: 'main',
                 data: {
                     about: results[0][0],
-                    facility: results[1][0]
+                    facility: results[1][0],
+                    media: results[2]
                 },
                 websiteURL: websiteURL
             });
