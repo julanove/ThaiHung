@@ -172,6 +172,14 @@ var register = function (Handlebars) {
             }
             //return content.replace(/\n/g, "<br />");
         },
+
+        checkBox: function (content) {
+            var result = "";
+            if (content == true) {
+                result = "checked";
+            }
+            return result;
+        },
          
     };
 

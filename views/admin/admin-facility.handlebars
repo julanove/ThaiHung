@@ -1,0 +1,269 @@
+﻿<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Facilities Information</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <!--<li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Text Editors</li>-->
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-outline card-info">
+
+                <!--<form action="newsInsert" method="post" enctype="multipart/form-data">-->
+                <div class="card-header">
+                    Facility Information
+                </div>
+                <!-- tools box -->
+                <div class="card-body">
+                    <div class="form-group">
+                        <label>Our factories</label>
+                        <textarea id="about" class="form-control" name="about" rows="4" placeholder="Enter ...">{{data.about.about}}</textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Factory 1</label>
+                        <input type="text" id="fac1" name="fac1" value="{{data.about.fac1}}" class="form-control" placeholder="Enter ...">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Image</label>
+                        <div>
+                            <input type="file" id="image1File" name="profile_pic">
+                            <input type="hidden" value="{{data.about.image1}}" id="image1FileURL" />
+                        </div>
+                        <img src="/{{data.about.image1}}" id="image1FileReview" style="height:300px;" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>製品</label>
+                        <input type="text" id="f11" name="f11" value="{{data.about.f11}}" class="form-control" placeholder="Enter ...">
+                    </div>
+                    <div class="form-group">
+                        <label>ブロー成形機（PP、PP)</label>
+                        <input type="text" id="f12" name="f12" value="{{data.about.f12}}" class="form-control" placeholder="Enter ...">
+                    </div>
+                    <div class="form-group">
+                        <label>断裁機 (PP,PE)</label>
+                        <input type="text" id="f13" name="f13" value="{{data.about.f13}}" class="form-control" placeholder="Enter ...">
+                    </div>
+                    <div class="form-group">
+                        <label>ラミネート加工機</label>
+                        <input type="text" id="f14" name="f14" value="{{data.about.f14}}" class="form-control" placeholder="Enter ...">
+                    </div>
+                    <div class="form-group">
+                        <label>印刷機</label>
+                        <input type="text" id="f15" name="f15" value="{{data.about.f15}}" class="form-control" placeholder="Enter ...">
+                    </div>
+                    <div class="form-group">
+                        <label>貼り付け加工機</label>
+                        <input type="text" id="f16" name="f16" value="{{data.about.f16}}" class="form-control" placeholder="Enter ...">
+                    </div>
+
+                    <!------------Factory 2---------->
+
+                    <div class="form-group">
+                        <label>Factory 2</label>
+                        <input type="text" id="fac2" name="fac2" value="{{data.about.fac2}}" class="form-control" placeholder="Enter ...">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Image</label>
+                        <div>
+                            <input type="file" id="image2File" name="profile_pic">
+                            <input type="hidden" value="{{data.about.image2}}" id="image2FileURL" />
+                        </div>
+                        <img src="/{{data.about.image2}}" id="image2FileReview" style="height:300px;" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>製品</label>
+                        <input type="text" id="f21" name="f21" value="{{data.about.f21}}" class="form-control" placeholder="Enter ...">
+                    </div>
+                    <div class="form-group">
+                        <label>ブロー成形機（PP、PP)</label>
+                        <input type="text" id="f22" name="f22" value="{{data.about.f22}}" class="form-control" placeholder="Enter ...">
+                    </div>
+                    <div class="form-group">
+                        <label>断裁機 (PP,PE)</label>
+                        <input type="text" id="f23" name="f23" value="{{data.about.f23}}" class="form-control" placeholder="Enter ...">
+                    </div>
+                    <div class="form-group">
+                        <label>ラミネート加工機</label>
+                        <input type="text" id="f24" name="f24" value="{{data.about.f24}}" class="form-control" placeholder="Enter ...">
+                    </div>
+                    <div class="form-group">
+                        <label>印刷機</label>
+                        <input type="text" id="f25" name="f25" value="{{data.about.f25}}" class="form-control" placeholder="Enter ...">
+                    </div>
+                    <div class="form-group">
+                        <label>貼り付け加工機</label>
+                        <input type="text" id="f26" name="f26" value="{{data.about.f26}}" class="form-control" placeholder="Enter ...">
+                    </div>
+
+
+                </div>
+                <div class="card-footer">
+                    <button id="updateNews" class="btn btn-primary">Submit</button>
+                </div>
+
+                <!-- /.card-body -->
+                <!--<div class="card-tools">
+                    <button type="button" class="btn btn-tool btn-sm" data-card-widget="collapse" data-toggle="tooltip"
+                            title="Collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool btn-sm" data-card-widget="remove" data-toggle="tooltip"
+                            title="Remove">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>-->
+                <!-- /. tools -->
+                <!--</form>-->
+                <!-- /.card-header -->
+                <div class="card-body pad">
+                    <div class="mb-3">
+
+                    </div>
+                    <p class="text-sm mb-0">
+                        Editor <a href="https://github.com/summernote/summernote">
+                            Documentation and license information.
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!-- /.col-->
+    </div>
+    <!-- ./row -->
+    <input type="hidden" value="{{websiteURL}}" id="websiteURL" />
+</section>
+
+<script src="/plugins/summernote/summernote-bs4.min.js"></script>
+<!--<script src="/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>-->
+<link rel="stylesheet" href="/plugins/jsgrid/jsgrid.min.css">
+<link rel="stylesheet" href="/plugins/jsgrid/jsgrid-theme.min.css">
+<link rel="stylesheet" href="/plugins/summernote/summernote-bs4.css">
+
+<script>
+
+    $(document).ready(function () {
+
+        function sendFile(file, editor, welEditable) {
+            data = new FormData();
+            data.append("profile_pic", file);
+            $.ajax({
+                data: data,
+                type: "POST",
+                url: "/imageInsert",
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (url) {
+                    console.log(url);
+                    var result = JSON.parse(url);
+                    if (result.status == "OK") {
+                        $('.textarea').summernote('insertImage', '/images/' + result.filename)
+                    }
+                }
+            });
+        }
+
+		$('#image1File,#image2File').on('change', function (e) {
+
+			var elementID = this.getAttribute("id");
+
+			if (this.files && this.files[0]) {
+				var reader = new FileReader();
+
+				reader.onload = function (e) {
+					$('#' + elementID + 'Review').attr('src', e.target.result);
+				}
+
+				reader.readAsDataURL(this.files[0]); // convert to base64 string
+			}
+
+			//console.log($('#imageFile').val());
+			// -----------------------
+
+			var data = new FormData();
+			data.append('profile_pic', $('#' + elementID)[0].files[0]);
+
+			$.ajax({
+				url: "/imageInsert",
+				type: "POST",
+				method: "POST",
+				data: data,
+				contentType: false,
+				cache: false,
+				processData: false,
+				success: function (msg) {
+					console.log(msg);
+
+					var result = jQuery.parseJSON(msg);
+
+					if (result.status == "OK") {
+                        console.log(result.filename);
+						console.log(elementID);
+						$('#' + elementID + 'URL').val(result.filename);
+					}
+					else {
+						//document.getElementById("imagePreview").src = '';
+					}
+				}
+			});
+
+		})
+
+        $('#updateNews').on('click', function () {
+
+            var about = $('#about').val();
+            var image1 = $('#image1FileURL').val().startsWith('images/') ? $('#image1FileURL').val() : ('images/' + $('#image1FileURL').val());
+			var image2 = $('#image2FileURL').val().startsWith('images/') ? $('#image2FileURL').val() : ('images/' + $('#image2FileURL').val());
+    
+
+            $.ajax({
+				url: "/facilityUpdate",
+                type: "POST",
+                data: JSON.stringify({
+                    about: about,
+					image1: image1,
+                    image2: image2,
+					fac1: $('#fac1').val(),
+					f11: $('#f11').val(),
+					f12: $('#f12').val(),
+					f13: $('#f13').val(),
+					f14: $('#f14').val(),
+					f15: $('#f15').val(),
+                    f16: $('#f16').val(),
+					fac2: $('#fac2').val(),
+					f21: $('#f21').val(),
+					f22: $('#f22').val(),
+					f23: $('#f23').val(),
+					f24: $('#f24').val(),
+					f25: $('#f25').val(),
+					f26: $('#f26').val(),
+                }),
+                dataType: "json",
+                contentType: "application/json",
+                success: function (msg) {
+                    console.log(msg);
+                    location.href = '/admin/';
+                },
+                error: function () {
+
+                }
+            });
+
+        })
+    });
+</script>

@@ -155,6 +155,8 @@ app.get('/admin/contactdetails/:contactID', allRouteFunction.adminContactDetails
 
 app.get('/admin/about', allRouteFunction.adminAbout);
 
+app.get('/admin/facility', allRouteFunction.adminFacility);
+
 //---------------------------------------------------------- Admin API
 
 app.post('/auth', allRouteFunction.authen);
@@ -186,6 +188,8 @@ app.post('/contactDelete', isAuthenticated, allRouteFunction.contactDelete);
 app.post('/contactRead', isAuthenticated, allRouteFunction.contactRead); 
 
 app.post('/aboutUpdate', isAuthenticated, allRouteFunction.aboutUpdate);
+
+app.post('/facilityUpdate', isAuthenticated, allRouteFunction.facilityUpdate);
 
 // ---------------------------------------------------- TEST PAGE
 

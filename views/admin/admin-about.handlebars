@@ -77,10 +77,15 @@
 
                     <div class="form-group">
                         <label>Middle Banner</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="middleBannerD" name="middleBannerD" {{checkBox data.about.middleBannerD}}>
+                            <label class="form-check-label" for="middleBannerD">Hide Middle Banner</label>
+                        </div>
                         <div>
                             <input type="file" id="middleBanner" name="profile_pic">
                             <input type="hidden" value="{{data.about.middleBanner}}" id="middleBannerURL" />
                         </div>
+
                         <img src="/{{data.about.middleBanner}}" id="middleBannerReview" style="width:800px;" />
                     </div>
 
@@ -350,6 +355,8 @@
 			var footerImage1 = $('#footerImage1URL').val().startsWith('images/') ? $('#footerImage1URL').val() : ('images/' + $('#footerImage1URL').val());
 			var footerImage2 = $('#footerImage2URL').val().startsWith('images/') ? $('#footerImage2URL').val() : ('images/' + $('#footerImage2URL').val());
 
+            var middleBannerD = $('#middleBannerD').prop('checked');
+
             $.ajax({
 				url: "/aboutUpdate",
                 type: "POST",
@@ -379,6 +386,7 @@
                     rep3Pos: rep3Pos,
                     rep3Des: rep3Des,
                     middleBanner: middleBanner,
+					middleBannerD: middleBannerD,
                     roundBanner: roundBanner,
 					footerImage1: footerImage1,
 					footerImage2: footerImage2

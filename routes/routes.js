@@ -195,7 +195,7 @@ module.exports = {
 
         db.query(query, (err, results) => {
 
-            console.log(results);
+            console.log(results[0]);
             res.render('about', {
                 layout: 'main',
                 data: {
@@ -211,16 +211,18 @@ module.exports = {
 
     facilityFunction: function (req, res) {
 
-        let selectQuery = 'SELECT video FROM about';
+        let selectQuery = 'SELECT video FROM about;SELECT * FROM facility';
         let query = mysql.format(selectQuery, null);
 
         db.query(query, (err, results) => {
 
-            console.log(results);
+            console.log(results[0]);
+            console.log(results[1]);
             res.render('facility', {
                 layout: 'main',
                 data: {
-                    about: results[0]
+                    about: results[0][0],
+                    facility: results[1][0]
                 },
                 websiteURL: websiteURL
             });
@@ -384,6 +386,25 @@ module.exports = {
                 console.log(results);
 
                 res.render('admin/admin-about', {
+                    layout: 'admin-main',
+                    data: {
+                        about: results[0],
+                    },
+                    websiteURL: websiteURL
+                });
+                if (err) console.log(err);
+            }
+        );
+    },
+
+    adminFacility: function (req, res) {
+
+        db.query('select * from facility;',
+            function (err, results) {
+
+                console.log(results);
+
+                res.render('admin/admin-facility', {
                     layout: 'admin-main',
                     data: {
                         about: results[0],
@@ -694,9 +715,9 @@ module.exports = {
 
     aboutUpdate: function (req, res) {
 
-        console.error('Update About');
-        let updateQuery = 'update about set about = ?, daihyou = ?, gyoumu = ?, honsha_location = ?, image = ?, insu = ?, koujou = ?, renrakusaki = ?, shamei = ?, shihon = ?, strongpoint = ?, video = ?, imageRep1 = ?, repName1 = ?, repPos1 = ?, repDes1 = ?, imageRep3 = ?, repName3 = ?, repPos3 = ?, repDes3 = ?, middleBanner = ?, roundBanner = ?, footerImage1 = ?, footerImage2 = ?';
-        let query = mysql.format(updateQuery, [req.body.about, req.body.daihyou, req.body.gyoumu, req.body.honsha_location, req.body.image, req.body.insu, req.body.koujou, req.body.renrakusaki, req.body.shamei, req.body.shihon, req.body.strongpoint, req.body.video, req.body.imageRep1, req.body.rep1Name, req.body.rep1Pos, req.body.rep1Des, req.body.imageRep3, req.body.rep3Name, req.body.rep3Pos, req.body.rep3Des, req.body.middleBanner, req.body.roundBanner, req.body.footerImage1, req.body.footerImage2]);
+ 
+        let updateQuery = 'update about set about = ?, daihyou = ?, gyoumu = ?, honsha_location = ?, image = ?, insu = ?, koujou = ?, renrakusaki = ?, shamei = ?, shihon = ?, strongpoint = ?, video = ?, imageRep1 = ?, repName1 = ?, repPos1 = ?, repDes1 = ?, imageRep3 = ?, repName3 = ?, repPos3 = ?, repDes3 = ?, middleBanner = ?, roundBanner = ?, footerImage1 = ?, footerImage2 = ?, middleBannerD = ?';
+        let query = mysql.format(updateQuery, [req.body.about, req.body.daihyou, req.body.gyoumu, req.body.honsha_location, req.body.image, req.body.insu, req.body.koujou, req.body.renrakusaki, req.body.shamei, req.body.shihon, req.body.strongpoint, req.body.video, req.body.imageRep1, req.body.rep1Name, req.body.rep1Pos, req.body.rep1Des, req.body.imageRep3, req.body.rep3Name, req.body.rep3Pos, req.body.rep3Des, req.body.middleBanner, req.body.roundBanner, req.body.footerImage1, req.body.footerImage2, req.body.middleBannerD]);
         db.query(query, (err, response) => {
             if (err) {
                 console.error(err);
@@ -705,6 +726,30 @@ module.exports = {
         });
 
         res.status(200).send(JSON.stringify({ status: "OK" }));
+    },
+
+    facilityUpdate: function (req, res) {
+
+        try {
+
+            console.log('Update Facility');
+            console.log(req.body);
+            let updateQuery = 'update facility set about = ?, fac1 = ?, image1 = ?, f11 = ?, f12 = ?, f13 = ?, f14 = ?, f15 = ?, f16 = ?, fac2 = ?, image2 = ?, f21 = ?, f22 = ?, f23 = ?, f24 = ?, f25 = ?, f26 = ?';
+            let query = mysql.format(updateQuery, [req.body.about, req.body.fac1, req.body.image1, req.body.f11, req.body.f12, req.body.f13, req.body.f14, req.body.f15, req.body.f16, req.body.fac2, req.body.image2, req.body.f21, req.body.f22, req.body.f23, req.body.f24, req.body.f25, req.body.f26]);
+            console.log(query);
+            db.query(query, (err, response) => {
+                if (err) {
+                    console.error(err);
+                    return;
+                }
+                console.log('UPDATE OK');
+            });
+
+            res.status(200).send(JSON.stringify({ status: "OK" }));
+        }
+        catch (ex) {
+            console.error(ex);
+        }
     },
 
     errorHandle: function (err, req, res, next) {
