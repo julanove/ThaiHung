@@ -1,14 +1,14 @@
 ﻿var config = {
   local: {
 
-    url: "http://localhost:1337/",
+    url: "http://localhost:3000/",
 
     database: {
-      host: "localhost:3306",
-        user: 'tha38223_thaihung',
-        password: '@_Thaihung2',
-        database: 'tha38223_thaihung2',
-        multipleStatements: true
+      host: "localhost",
+      user: 'root',
+      password: 'admin01',
+      database: 'tha38223_thaihung',
+      multipleStatements: true
     },
 
     secret: "BNMLOCALBNM",
@@ -33,7 +33,7 @@ production: {
 
     database: {
         host: "localhost:3306",
-        user: 'tha38223_thaihung',
+        user: 'tha38223_thaihung2',
         password: '@_Thaihung2',
         database: 'tha38223_thaihung2',
         multipleStatements: true

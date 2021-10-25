@@ -12,7 +12,7 @@ module.exports = {
 
         db.query('SELECT * FROM media where mediaType = 1 limit 8; SELECT * FROM news order by newID desc limit 4;select about from about;',
             function (err, results) {
-                console.log("=================x===========");
+                console.log("=================x==========="); 
                 //console.log(results[2].about);
                 //console.log(results[2][0].about);
                 res.render('home', {
@@ -139,7 +139,7 @@ module.exports = {
         var max = index * 6;
         var start = max - 6;
 
-        db.query('SELECT * FROM product where type = ' + categoryType + ' order by productID desc limit ' + start + ', 6 ; select count(*) as count from product where type = ' + categoryType +' ; select * from productType;',
+        db.query('SELECT * FROM product where type = ' + categoryType + ' order by productID desc limit ' + start + ', 6 ; select count(*) as count from product where type = ' + categoryType +' ; select * from producttype;',
             function (err, results) {
                 //console.log(results[1]);
                 res.render('product', {
@@ -201,7 +201,7 @@ module.exports = {
                 data: {
                     about: results[0]
                 },
-                websiteURL: websiteURL
+                websiteURL: websiteURL 
             });
             if (err) console.log(err);
         }
@@ -218,9 +218,9 @@ module.exports = {
 
         db.query(query, (err, results) => {
 
-            console.log(results[0]);
+            console.log(results[0]); 
             console.log(results[1]);
-            res.render('facility', {
+            res.render('facility', { 
                 layout: 'main',
                 data: {
                     about: results[0][0],
@@ -307,7 +307,7 @@ module.exports = {
 
     adminProduct: function (req, res) {
 
-        db.query('SELECT * FROM productType;',
+        db.query('SELECT * FROM producttype;',
             function (err, results) {
                 res.render('admin/admin-product', {
                     layout: 'admin-main',
@@ -324,7 +324,7 @@ module.exports = {
 
     adminProductAdd: function (req, res) {
 
-        let select = 'select * from productType;';
+        let select = 'select * from producttype;';
         let query = mysql.format(select, null);
         db.query(query, function (err, result) {
 
@@ -344,7 +344,7 @@ module.exports = {
 
         //console.log("vao day");
         //console.log(req.params.newid);
-        let select = 'select * from product where productID = ?; select * from productType;';
+        let select = 'select * from product where productID = ?; select * from producttype;';
         let query = mysql.format(select, [req.params.productID]);
         db.query(query, function (err, result) {
 
@@ -570,7 +570,7 @@ module.exports = {
 
     typeInsert: function (req, res) {
 
-        let insertQuery = 'INSERT INTO productType (name) VALUES(?)';
+        let insertQuery = 'INSERT INTO producttype (name) VALUES(?)';
         let query = mysql.format(insertQuery, [req.body.name]);
         db.query(query, (err, response) => {
             if (err) {
@@ -586,7 +586,7 @@ module.exports = {
 
         console.log('da vao update');
 
-        let updateQuery = 'update productType set name = ? where productTypeID = ?';
+        let updateQuery = 'update producttype set name = ? where productTypeID = ?';
         let query = mysql.format(updateQuery, [req.body.name, req.body.productTypeID]);
         db.query(query, (err, response) => {
             if (err) {
@@ -600,7 +600,7 @@ module.exports = {
 
     typeDelete: function (req, res) {
 
-        let deleteQuery = 'DELETE FROM productType where productTypeID = ?';
+        let deleteQuery = 'DELETE FROM producttype where productTypeID = ?';
         let query = mysql.format(deleteQuery, [req.body.typeid]);
         db.query(query, (err, response) => {
             if (err) {
