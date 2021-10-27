@@ -256,11 +256,11 @@
                 dataType: "json",
                 contentType: "application/json",
                 success: function (msg) {
-                    console.log(msg);
-                    location.href = '/admin/';
+                    alert('Update Successfully');
                 },
-                error: function () {
-
+                error: function (request) {
+                    alert('Error: ' + request.responseJSON.status.sqlMessage);
+                    console.log(request);
                 }
             });
 

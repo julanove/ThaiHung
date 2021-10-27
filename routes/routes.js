@@ -7,8 +7,8 @@ const jwt = require('jsonwebtoken');
 module.exports = {
     homePageFunction: function (req, res) {
 
-        console.log('Home URL');
-        console.log(websiteURL);
+       /*  console.log('Home URL');
+        console.log(websiteURL); */
 
         db.query('SELECT * FROM media where mediaType = 1 limit 8; SELECT * FROM news order by newID desc limit 4;select about from about;',
             function (err, results) {
@@ -138,27 +138,33 @@ module.exports = {
         var categoryType = req.params.type;
         var max = index * 6;
         var start = max - 6;
-
-        db.query('SELECT * FROM product where type = ' + categoryType + ' order by productID desc limit ' + start + ', 6 ; select count(*) as count from product where type = ' + categoryType +' ; select * from producttype;',
-            function (err, results) {
-                //console.log(results[1]);
-                res.render('product', {
-                    layout: 'main',
-                    data: {
-                        page_name: 'product',
-                        product: results[0],
-                        count: results[1][0].count,
-                        offset: 6,
-                        current: index,
-                        type: "product",
-                        category: results[2],
-                        categoryType: categoryType
-                    },
-                    websiteURL: websiteURL
-                });
-                if (err) console.log(err);
-            }
-        );
+        console.log('Product');
+        console.log(categoryType);
+        try {
+            db.query('SELECT * FROM product where type = ' + categoryType + ' order by productID desc limit ' + start + ', 6 ; select count(*) as count from product where type = ' + categoryType +' ; select * from producttype;',
+                function (err, results) {
+                    //console.log(results[1]);
+                    res.render('product', {
+                        layout: 'main',
+                        data: {
+                            page_name: 'product',
+                            product: results[0],
+                            count: results[1][0].count,
+                            offset: 6,
+                            current: index,
+                            type: "product",
+                            category: results[2],
+                            categoryType: categoryType
+                        },
+                        websiteURL: websiteURL
+                    });
+                    if (err) console.log(err);
+                }
+            );
+        }
+        catch(err) {
+            console.log(err);
+        }
 
     },
 
@@ -291,11 +297,11 @@ module.exports = {
     adminType: function (req, res) {
 
         db.query('SELECT * FROM producttype;',
-            function (err, results) {
-                res.render('admin/admin-type', {
+            function (err, results) { 
+                res.render('admin/admin-type', { 
                     layout: 'admin-main',
                     data: {
-                        type: results,
+                        type: results, 
                     },
                     websiteURL: websiteURL
                 });
@@ -306,6 +312,8 @@ module.exports = {
     },
 
     adminProduct: function (req, res) {
+
+        console.log('TYPE');
 
         db.query('SELECT * FROM producttype;',
             function (err, results) {
@@ -451,13 +459,15 @@ module.exports = {
         let insertQuery = 'INSERT INTO news (title, content, date, image, description) VALUES(?, ?, now(), ?, ?)';
         let query = mysql.format(insertQuery, [req.body.title, req.body.content, req.body.image, req.body.description]);
         db.query(query, (err, response) => {
-            if (err) {
-                console.error(err);
+            if (!err) {
+                res.status(200).send(JSON.stringify({ status: "OK" }));
+            }
+            else {
+                res.status(500).send(JSON.stringify({ status: err }));
                 return;
             }
         });
 
-        res.status(200).send(JSON.stringify({ status: "OK" }));
     },
 
     newsUpdate: function (req, res) {
@@ -465,13 +475,15 @@ module.exports = {
         let updateQuery = 'update news set title = ?, content = ?, date = now(), image = ?, description = ? where newid = ?';
         let query = mysql.format(updateQuery, [req.body.title, req.body.content, req.body.image, req.body.description, req.body.newid]);
         db.query(query, (err, response) => {
-            if (err) {
-                console.error(err);
+            if (!err) {
+                res.status(200).send(JSON.stringify({ status: "OK" }));
+            }
+            else {
+                res.status(500).send(JSON.stringify({ status: err }));
                 return;
             }
         });
 
-        res.status(200).send(JSON.stringify({ status: "OK" }));
     },
 
     newsDelete: function (req, res) {
@@ -481,13 +493,15 @@ module.exports = {
         let deleteQuery = 'DELETE FROM news WHERE newid = ?';
         let query = mysql.format(deleteQuery, [req.body.newid]);
         db.query(query, (err, response) => {
-            if (err) {
-                console.error(err);
+            if (!err) {
+                res.status(200).send(JSON.stringify({ status: "OK" }));
+            }
+            else {
+                res.status(500).send(JSON.stringify({ status: err }));
                 return;
             }
         });
 
-        res.status(200).send(JSON.stringify({ status: "OK" }));
 
     },
 
@@ -573,13 +587,15 @@ module.exports = {
         let insertQuery = 'INSERT INTO producttype (name) VALUES(?)';
         let query = mysql.format(insertQuery, [req.body.name]);
         db.query(query, (err, response) => {
-            if (err) {
-                console.error(err);
+            if (!err) {
+                res.status(200).send(JSON.stringify({ status: "OK" }));
+            }
+            else {
+                res.status(500).send(JSON.stringify({ status: err }));
                 return;
             }
         });
 
-        res.status(200).send(JSON.stringify({ status: "OK" }));
     },
 
     typeUpdate: function (req, res) {
@@ -589,13 +605,15 @@ module.exports = {
         let updateQuery = 'update producttype set name = ? where productTypeID = ?';
         let query = mysql.format(updateQuery, [req.body.name, req.body.productTypeID]);
         db.query(query, (err, response) => {
-            if (err) {
-                console.error(err);
+            if (!err) {
+                res.status(200).send(JSON.stringify({ status: "OK" }));
+            }
+            else {
+                res.status(500).send(JSON.stringify({ status: err }));
                 return;
             }
         });
 
-        res.status(200).send(JSON.stringify({ status: "OK" }));
     },
 
     typeDelete: function (req, res) {
@@ -603,13 +621,15 @@ module.exports = {
         let deleteQuery = 'DELETE FROM producttype where productTypeID = ?';
         let query = mysql.format(deleteQuery, [req.body.typeid]);
         db.query(query, (err, response) => {
-            if (err) {
-                console.error(err);
+            if (!err) {
+                res.status(200).send(JSON.stringify({ status: "OK" }));
+            }
+            else {
+                res.status(500).send(JSON.stringify({ status: err }));
                 return;
             }
         });
 
-        res.status(200).send(JSON.stringify({ status: "OK" }));
 
     },
 
@@ -618,25 +638,32 @@ module.exports = {
         let insertQuery = 'INSERT INTO product (content, description, image, name, thumb1, thumb2, thumb3, type) VALUES (?, ?, ?, ? , ?, ?, ?, ?)';
         let query = mysql.format(insertQuery, [req.body.content, req.body.description, req.body.image, req.body.name, req.body.tb1, req.body.tb2, req.body.tb3, req.body.type]);
         db.query(query, (err, response) => {
-            if (err) {
-                console.error(err);
+            if (!err) {
+                res.status(200).send(JSON.stringify({ status: "OK" }));
+            }
+            else {
+                res.status(500).send(JSON.stringify({ status: err }));
                 return;
             }
         });
 
-        res.status(200).send(JSON.stringify({ status: "OK" }));
     },
 
     productSelect: function (req, res) {
 
+        console.log('GET PRODUCT');
+
         let selectQuery = 'select productID, name, description from product where type = ? order by productID desc';
         let query = mysql.format(selectQuery, [req.body.type]);
         db.query(query, (err, result) => {
-            if (err) {
-                console.error(err);
+            if (!err) {
+                res.status(200).send(JSON.stringify({ product: result }));
+            }
+            else {
+                res.status(500).send(JSON.stringify({ status: err }));
                 return;
             }
-            res.status(200).send(JSON.stringify({ product: result }));
+            
         });
 
         
@@ -647,13 +674,15 @@ module.exports = {
         let updateQuery = 'update product set name = ?, type = ?, image = ?, description = ?, content = ?, thumb1 = ?, thumb2 = ?, thumb3 = ? where productID = ?';
         let query = mysql.format(updateQuery, [req.body.name, req.body.type, req.body.image, req.body.description, req.body.content, req.body.tb1, req.body.tb2, req.body.tb3, req.body.productID]);
         db.query(query, (err, response) => {
-            if (err) {
-                console.error(err);
+            if (!err) {
+                res.status(200).send(JSON.stringify({ status: "OK" }));
+            }
+            else {
+                res.status(500).send(JSON.stringify({ status: err }));
                 return;
             }
         });
 
-        res.status(200).send(JSON.stringify({ status: "OK" }));
     },
 
     productDelete: function (req, res) {
@@ -661,13 +690,15 @@ module.exports = {
         let deleteQuery = 'DELETE FROM product where productID = ?';
         let query = mysql.format(deleteQuery, [req.body.productID]);
         db.query(query, (err, response) => {
-            if (err) {
-                console.error(err);
+            if (!err) {
+                res.status(200).send(JSON.stringify({ status: "OK" }));
+            }
+            else {
+                res.status(500).send(JSON.stringify({ status: err }));
                 return;
             }
         });
 
-        res.status(200).send(JSON.stringify({ status: "OK" }));
 
     },
 
@@ -676,13 +707,15 @@ module.exports = {
         let deleteQuery = 'DELETE FROM contact where contactID = ?';
         let query = mysql.format(deleteQuery, [req.body.contactID]);
         db.query(query, (err, response) => {
-            if (err) {
-                console.error(err);
+            if (!err) {
+                res.status(200).send(JSON.stringify({ status: "OK" }));
+            }
+            else {
+                res.status(500).send(JSON.stringify({ status: err }));
                 return;
             }
         });
 
-        res.status(200).send(JSON.stringify({ status: "OK" }));
 
     },
 
@@ -691,13 +724,15 @@ module.exports = {
         let deleteQuery = 'update contact set isRead = 1 where contactID = ?';
         let query = mysql.format(deleteQuery, [req.body.contactID]);
         db.query(query, (err, response) => {
-            if (err) {
-                console.error(err);
+            if (!err) {
+                res.status(200).send(JSON.stringify({ status: "OK" }));
+            }
+            else {
+                res.status(500).send(JSON.stringify({ status: err }));
                 return;
             }
         });
 
-        res.status(200).send(JSON.stringify({ status: "OK" }));
 
     },
 
@@ -706,13 +741,15 @@ module.exports = {
         let deleteQuery = 'insert into media (source, productID, mediaType) values (?,?,?)';
         let query = mysql.format(deleteQuery, [req.body.source, req.body.productID, req.body.mediaType]);
         db.query(query, (err, response) => {
-            if (err) {
-                console.error(err);
+            if (!err) {
+                res.status(200).send(JSON.stringify({ status: "OK" }));
+            }
+            else {
+                res.status(500).send(JSON.stringify({ status: err }));
                 return;
             }
         });
 
-        res.status(200).send(JSON.stringify({ status: "OK" }));
 
     },
 
@@ -722,33 +759,36 @@ module.exports = {
         let updateQuery = 'update about set about = ?, daihyou = ?, gyoumu = ?, honsha_location = ?, image = ?, insu = ?, koujou = ?, renrakusaki = ?, shamei = ?, shihon = ?, strongpoint = ?, video = ?, imageRep1 = ?, repName1 = ?, repPos1 = ?, repDes1 = ?, imageRep3 = ?, repName3 = ?, repPos3 = ?, repDes3 = ?, middleBanner = ?, roundBanner = ?, footerImage1 = ?, footerImage2 = ?, middleBannerD = ?';
         let query = mysql.format(updateQuery, [req.body.about, req.body.daihyou, req.body.gyoumu, req.body.honsha_location, req.body.image, req.body.insu, req.body.koujou, req.body.renrakusaki, req.body.shamei, req.body.shihon, req.body.strongpoint, req.body.video, req.body.imageRep1, req.body.rep1Name, req.body.rep1Pos, req.body.rep1Des, req.body.imageRep3, req.body.rep3Name, req.body.rep3Pos, req.body.rep3Des, req.body.middleBanner, req.body.roundBanner, req.body.footerImage1, req.body.footerImage2, req.body.middleBannerD]);
         db.query(query, (err, response) => {
-            if (err) {
-                console.error(err);
+            if (!err) {
+                res.status(200).send(JSON.stringify({ status: "OK" }));
+            }
+            else {
+                res.status(500).send(JSON.stringify({ status: err }));
                 return;
             }
         });
 
-        res.status(200).send(JSON.stringify({ status: "OK" }));
     },
 
     facilityUpdate: function (req, res) {
 
         try {
 
-            console.log('Update Facility');
-            console.log(req.body);
+            console.log('Update Facility'); 
+            console.log(req.body);  
             let updateQuery = 'update facility set about = ?, fac1 = ?, image1 = ?, f11 = ?, f12 = ?, f13 = ?, f14 = ?, f15 = ?, f16 = ?, fac2 = ?, image2 = ?, f21 = ?, f22 = ?, f23 = ?, f24 = ?, f25 = ?, f26 = ?';
             let query = mysql.format(updateQuery, [req.body.about, req.body.fac1, req.body.image1, req.body.f11, req.body.f12, req.body.f13, req.body.f14, req.body.f15, req.body.f16, req.body.fac2, req.body.image2, req.body.f21, req.body.f22, req.body.f23, req.body.f24, req.body.f25, req.body.f26]);
             console.log(query);
             db.query(query, (err, response) => {
-                if (err) {
-                    console.error(err);
+                if (!err) {
+                    res.status(200).send(JSON.stringify({ status: "OK" }));
+                }
+                else {
+                    res.status(500).send(JSON.stringify({ status: err }));
                     return;
                 }
-                console.log('UPDATE OK');
             });
-
-            res.status(200).send(JSON.stringify({ status: "OK" }));
+            
         }
         catch (ex) {
             console.error(ex);

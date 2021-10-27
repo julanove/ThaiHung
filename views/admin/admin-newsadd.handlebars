@@ -137,6 +137,10 @@
                     //editor.insertImage(welEditable, url);
                     //$('#summernote').summernote('insertImage', url, filename);
                     
+                },
+                error: function (request) {
+                    alert('Error: ' + request.responseJSON.status.sqlMessage);
+                    console.log(request);
                 }
             });
         }
@@ -189,6 +193,10 @@
                     else {
                         //document.getElementById("imagePreview").src = '';
                     }
+                },
+                error: function (request) {
+                    alert('Error: ' + request.responseJSON.status.sqlMessage);
+                    console.log(request);
                 }
             });
 
@@ -219,9 +227,11 @@
                         $('#description').val('');
                     }
                 },
-                error: function () {
-
+                error: function (request) {
+                    alert('Error: ' + request.responseJSON.status.sqlMessage);
+                    console.log(request);
                 }
+                
             });
 
         })

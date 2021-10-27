@@ -90,7 +90,11 @@
                     contentType: "application/json",
                     data: JSON.stringify({ newid: args.item.newid }),
                     success: function (msg) {
-
+                        alert('Update Successfully');
+                    },
+                    error: function (request) {
+                        alert('Error: ' + request.responseJSON.status.sqlMessage);
+                        console.log(request);
                     }
                 })
             },

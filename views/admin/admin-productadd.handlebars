@@ -165,8 +165,9 @@
                 console.log(msg);
                 location.href = '/admin/product';
             },
-            error: function () {
-
+            error: function (request) {
+                alert('Error: ' + request.responseJSON.status.sqlMessage);
+                console.log(request);
             }
         });
 
