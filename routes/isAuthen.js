@@ -21,7 +21,7 @@ module.exports = {
         else {
             var token = req.cookies["token"];
             if (!token) {
-                return res.status(401).end()
+                return res.status(401).end() 
             }
 
             jwt.verify(token, secret, { algorithm: "HS256" }, (err, user) => {

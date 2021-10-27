@@ -307,14 +307,16 @@
 					var result = jQuery.parseJSON(msg);
 
 					if (result.status == "OK") {
-                        console.log(result.filename);
-						console.log(elementID);
 						$('#' + elementID + 'URL').val(result.filename);
 					}
 					else {
 						//document.getElementById("imagePreview").src = '';
 					}
-				}
+				},
+                error: function (request) {
+                    alert('Error: ' + request.responseJSON.status.sqlMessage);
+                    console.log(request);
+                }
 			});
 
 		})

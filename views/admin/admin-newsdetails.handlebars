@@ -134,6 +134,10 @@
                     if (result.status == "OK") {
                         $('.textarea').summernote('insertImage', '/images/' + result.filename)
                     }
+                },
+                error: function (request) {
+                    alert('Error: ' + request.responseJSON.status.sqlMessage);
+                    console.log(request);
                 }
             });
         }
@@ -186,6 +190,10 @@
                     else {
                         //document.getElementById("imagePreview").src = '';
                     }
+                },
+                error: function (request) {
+                    alert('Error: ' + request.responseJSON.status.sqlMessage);
+                    console.log(request);
                 }
             });
 
@@ -209,8 +217,9 @@
                     console.log(msg);
                     location.href = '/admin/news';
                 },
-                error: function () {
-
+                error: function (request) {
+                    alert('Error: ' + request.responseJSON.status.sqlMessage);
+                    console.log(request);
                 }
             });
 
