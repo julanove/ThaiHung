@@ -4,10 +4,10 @@
     url: "http://localhost:3000/",
 
     database: {
-      host: "localhost",
-      user: 'root',
-      password: 'admin01',
-      database: 'tha38223_thaihung',
+      host: "nsy.cbhua0eomxih.ap-southeast-1.rds.amazonaws.com",
+      user: 'admin',
+      password: '12345678',
+      database: 'tha38223_thaihung2',
       multipleStatements: true
     },
 
@@ -18,10 +18,10 @@
     url: "https://thaihung.herokuapp.com/",
    
     database: {
-          host: "18.178.72.199",
-          user: 'yukina',
-          password: 'yukina@123',
-          database: 'yukina',
+          host: "nsy.cbhua0eomxih.ap-southeast-1.rds.amazonaws.com",
+          user: 'admin',
+          password: '12345678',
+          database: 'tha38223_thaihung2',
           multipleStatements: true
       },
     secret: "BNMDEVBNM",
@@ -32,11 +32,11 @@ production: {
     url: "https://thaihung.herokuapp.com/",
 
     database: {
-        host: "localhost:3306",
-        user: 'tha38223_thaihung2',
-        password: '@_Thaihung2',
-        database: 'tha38223_thaihung2',
-        multipleStatements: true
+      host: "nsy.cbhua0eomxih.ap-southeast-1.rds.amazonaws.com",
+      user: 'admin',
+      password: '12345678',
+      database: 'tha38223_thaihung2',
+      multipleStatements: true
     },
     secret: "BNMPRDBNM",
 }
