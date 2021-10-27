@@ -1,7 +1,7 @@
 ﻿var config = {
   local: {
 
-    url: "http://localhost:3000/",
+    url: "https://thaihung.herokuapp.com/",
 
     database: {
       host: "nsy.cbhua0eomxih.ap-southeast-1.rds.amazonaws.com",

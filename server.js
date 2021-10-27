@@ -29,6 +29,7 @@ const db = mysql.createConnection({
     multipleStatements: config.database.multipleStatements
 });
 
+console.log(config.database.host);
 
 db.connect((err) => {
     if (err) {
@@ -59,7 +60,7 @@ app.set('view engine', 'handlebars');
 // ------------------------
 
 const favicon = require('express-favicon');
-app.use(favicon('favicon.ico'));
+//app.use(favicon('favicon.ico')); //TEST
 
 // ------------------------
 
