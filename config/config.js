@@ -1,13 +1,13 @@
 ﻿var config = {
   local: {
 
-    url: "https://thaihung.herokuapp.com/",
+    url: "http://localhost",
 
     database: {
-      host: "nsy.cbhua0eomxih.ap-southeast-1.rds.amazonaws.com",
-      user: 'admin',
-      password: '12345678',
-      database: 'tha38223_thaihung2',
+      host: "localhost",
+      user: 'root',
+      password: 'admin01',
+      database: 'tha38223_thaihung',
       multipleStatements: true
     },
 
@@ -15,13 +15,13 @@
   },
   development: {
   
-    url: "https://thaihung.herokuapp.com/",
+    url: "http://localhost",
    
     database: {
-          host: "nsy.cbhua0eomxih.ap-southeast-1.rds.amazonaws.com",
-          user: 'admin',
-          password: '12345678',
-          database: 'tha38223_thaihung2',
+          host: "localhost",
+          user: 'root',
+          password: 'admin01',
+          database: 'tha38223_thaihung',
           multipleStatements: true
       },
     secret: "BNMDEVBNM",
@@ -32,10 +32,10 @@ production: {
     url: "https://thaihung.herokuapp.com/",
 
     database: {
-      host: "nsy.cbhua0eomxih.ap-southeast-1.rds.amazonaws.com",
-      user: 'admin',
-      password: '12345678',
-      database: 'tha38223_thaihung2',
+      host: "localhost",
+      user: 'root',
+      password: 'admin01',
+      database: 'tha38223_thaihung',
       multipleStatements: true
     },
     secret: "BNMPRDBNM",

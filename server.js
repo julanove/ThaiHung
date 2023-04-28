@@ -15,7 +15,6 @@ var app = express();
 var env = process.env.NODE_ENV || 'local';
 var config = require('./config/config')[env];
 
-console.log("----");
 global.websiteURL = config.url;
 // create connection to database
 // the mysql.createConnection function takes in a configuration object which contains host, user, 
@@ -39,13 +38,6 @@ db.connect((err) => {
 });
 global.db = db;
 
-//2. Mongoose
-//var mongoDB = 'mongodb+srv://yukina:MzogglXhHVRtPKYF@cluster0-ilzuw.mongodb.net/ThaiHung?retryWrites=true&w=majority';
-//mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
-//var db = mongoose.connection;
-//db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-
-// ------------------------
 
 var handlebars = require('express-handlebars').create({
     defaultLayout: 'main',
@@ -66,7 +58,7 @@ const favicon = require('express-favicon');
 
 
 
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 3001);
 //app.use(express.static(__dirname + 'public'));
 app.use(express.static('public'));
 //app.use('/static', express.static('public'))
@@ -97,6 +89,11 @@ var isAuthenticated = require('./routes/isAuthen').isAuthenticated;
 app.post('/contact', allRouteFunction.contactFunction);
 
 app.get('/news', allRouteFunction.newsFunction);
+
+app.get('/test', (req, res) => {
+    //select * 
+    //res.send(rs)
+})
 
 app.get('/news/:index', allRouteFunction.newsPagingFunction);
 
@@ -201,6 +198,7 @@ app.get('/', require('./routes/jwt'));
 
 var multer = require('multer');
 const filehelpers = require('./routes/filehelper');
+const { response } = require('express');
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
